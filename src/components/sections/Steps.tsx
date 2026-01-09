@@ -101,7 +101,7 @@ const STEPS = [
 export const Steps = () => {
     return (
         <section className="py-24 px-4 font-sans">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-5xl mx-auto">
                 <div className="text-center max-w-2xl mx-auto mb-8">
                     <BlurFade delay={0.1}>
                         <h2 className="text-5xl sm:text-6xl font-bold text-black tracking-tighter leading-[1.1]">
