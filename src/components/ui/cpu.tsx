@@ -1,7 +1,7 @@
 "use client";
 
-import type { Transition, Variants } from "motion/react";
-import { motion, useAnimation } from "motion/react";
+import type { Transition, Variants } from "framer-motion";
+import { m, useAnimation } from "framer-motion";
 import type { HTMLAttributes } from "react";
 import { forwardRef, useCallback, useImperativeHandle, useRef, useEffect } from "react";
 
@@ -93,9 +93,11 @@ const CpuIcon = forwardRef<CpuIconHandle, CpuIconProps>(
         onMouseLeave={handleMouseLeave}
         {...props}
       >
-        <svg
+        <m.svg
+          animate={controls}
           fill="none"
           height={size}
+          initial="normal"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -104,57 +106,63 @@ const CpuIcon = forwardRef<CpuIconHandle, CpuIconProps>(
           width={size}
           xmlns="http://www.w3.org/2000/svg"
         >
-          <rect height="16" rx="2" width="16" x="4" y="4" />
-          <rect height="6" rx="1" width="6" x="9" y="9" />
-          <motion.path
-            animate={controls}
-            d="M15 2v2"
-            transition={TRANSITION}
-            variants={Y_VARIANTS}
+          <m.rect
+            height="16"
+            rx="2"
+            width="16"
+            x="4"
+            y="4"
           />
-          <motion.path
-            animate={controls}
-            d="M15 20v2"
-            transition={TRANSITION}
-            variants={Y_VARIANTS}
-          />
-          <motion.path
-            animate={controls}
-            d="M2 15h2"
-            transition={TRANSITION}
-            variants={X_VARIANTS}
-          />
-          <motion.path
-            animate={controls}
-            d="M2 9h2"
-            transition={TRANSITION}
-            variants={X_VARIANTS}
-          />
-          <motion.path
-            animate={controls}
-            d="M20 15h2"
-            transition={TRANSITION}
-            variants={X_VARIANTS}
-          />
-          <motion.path
-            animate={controls}
-            d="M20 9h2"
-            transition={TRANSITION}
-            variants={X_VARIANTS}
-          />
-          <motion.path
+          <m.path
             animate={controls}
             d="M9 2v2"
             transition={TRANSITION}
             variants={Y_VARIANTS}
           />
-          <motion.path
+          <m.path
             animate={controls}
             d="M9 20v2"
             transition={TRANSITION}
             variants={Y_VARIANTS}
           />
-        </svg>
+          <m.path
+            animate={controls}
+            d="M15 2v2"
+            transition={TRANSITION}
+            variants={Y_VARIANTS}
+          />
+          <m.path
+            animate={controls}
+            d="M15 20v2"
+            transition={TRANSITION}
+            variants={Y_VARIANTS}
+          />
+          <m.path
+            animate={controls}
+            d="M2 9h2"
+            transition={TRANSITION}
+            variants={X_VARIANTS}
+          />
+          <m.path
+            animate={controls}
+            d="M2 15h2"
+            transition={TRANSITION}
+            variants={X_VARIANTS}
+          />
+          <m.path
+            animate={controls}
+            d="M20 9h2"
+            transition={TRANSITION}
+            variants={X_VARIANTS}
+          />
+          <m.path
+            animate={controls}
+            d="M20 15h2"
+            transition={TRANSITION}
+            variants={X_VARIANTS}
+          />
+          <m.rect height="6" rx="1" width="6" x="9" y="9" />
+        </m.svg>
       </div>
     );
   }

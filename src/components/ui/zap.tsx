@@ -1,7 +1,7 @@
 "use client";
 
-import type { Variants } from "motion/react";
-import { motion, useAnimation } from "motion/react";
+import type { Variants } from "framer-motion";
+import { m, useAnimation } from "framer-motion";
 import type { HTMLAttributes } from "react";
 import { forwardRef, useCallback, useImperativeHandle, useRef, useEffect } from "react";
 
@@ -85,9 +85,11 @@ const ZapIcon = forwardRef<ZapHandle, ZapProps>(
         onMouseLeave={handleMouseLeave}
         {...props}
       >
-        <svg
+        <m.svg
+          animate={controls}
           fill="none"
           height={size}
+          initial="normal"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -96,12 +98,11 @@ const ZapIcon = forwardRef<ZapHandle, ZapProps>(
           width={size}
           xmlns="http://www.w3.org/2000/svg"
         >
-          <motion.path
-            animate={controls}
-            d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
+          <m.path
+            d="M13 2L3 14H12L11 22L21 10H12L13 2Z"
             variants={PATH_VARIANTS}
           />
-        </svg>
+        </m.svg>
       </div>
     );
   }

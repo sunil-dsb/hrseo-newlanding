@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useAnimation } from "motion/react";
+import type { Variants } from "framer-motion";
+import { m, useAnimation } from "framer-motion";
 import type { HTMLAttributes } from "react";
 import { forwardRef, useCallback, useImperativeHandle, useRef, useEffect } from "react";
 
@@ -62,7 +63,7 @@ export const BotMessageSquareIcon = forwardRef<
       onMouseLeave={handleMouseLeave}
       {...props}
     >
-      <motion.svg
+      <m.svg
         animate={controls}
         fill="none"
         height={size}
@@ -91,7 +92,7 @@ export const BotMessageSquareIcon = forwardRef<
         <path d="M12 6V2H8" />
         <path d="M2 12h2" />
         <path d="M20 12h2" />
-        <motion.path
+        <m.path
           d="M20 16a2 2 0 0 1-2 2H8.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 4 20.286V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"
           variants={{
             normal: { scale: 1, originX: 0.5, originY: 0.5 },
@@ -105,7 +106,7 @@ export const BotMessageSquareIcon = forwardRef<
             },
           }}
         />
-        <motion.path
+        <m.path
           d="M9 11v2"
           variants={{
             normal: { scaleY: 1, originY: 0.5 },
@@ -115,7 +116,7 @@ export const BotMessageSquareIcon = forwardRef<
             },
           }}
         />
-        <motion.path
+        <m.path
           d="M15 11v2"
           variants={{
             normal: { scaleY: 1, originY: 0.5 },
@@ -125,7 +126,7 @@ export const BotMessageSquareIcon = forwardRef<
             },
           }}
         />
-        <motion.circle
+        <m.circle
           cx="10"
           cy="18"
           r="0.5"
@@ -141,7 +142,7 @@ export const BotMessageSquareIcon = forwardRef<
             },
           }}
         />
-        <motion.circle
+        <m.circle
           cx="12"
           cy="18"
           r="0.5"
@@ -157,7 +158,7 @@ export const BotMessageSquareIcon = forwardRef<
             },
           }}
         />
-        <motion.circle
+        <m.circle
           cx="14"
           cy="18"
           r="0.5"
@@ -173,7 +174,7 @@ export const BotMessageSquareIcon = forwardRef<
             },
           }}
         />
-      </motion.svg>
+      </m.svg>
     </div>
   );
 });

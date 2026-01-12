@@ -1,7 +1,7 @@
 "use client";
 
-import type { Variants } from "motion/react";
-import { motion, useAnimation } from "motion/react";
+import type { Variants } from "framer-motion";
+import { m, useAnimation } from "framer-motion";
 import type { HTMLAttributes } from "react";
 import { forwardRef, useCallback, useImperativeHandle, useRef, useEffect } from "react";
 
@@ -105,7 +105,7 @@ const ChartBarIncreasingIcon = forwardRef<
       onMouseLeave={handleMouseLeave}
       {...props}
     >
-      <svg
+      <m.svg
         fill="none"
         height={size}
         stroke="currentColor"
@@ -117,28 +117,28 @@ const ChartBarIncreasingIcon = forwardRef<
         xmlns="http://www.w3.org/2000/svg"
       >
         <path d="M3 3v16a2 2 0 0 0 2 2h16" />
-        <motion.path
+        <m.path
           animate={controls}
           custom={1}
           d="M7 11h8"
           initial="visible"
           variants={LINE_VARIANTS}
         />
-        <motion.path
+        <m.path
           animate={controls}
           custom={2}
           d="M7 16h12"
           initial="visible"
           variants={LINE_VARIANTS}
         />
-        <motion.path
+        <m.path
           animate={controls}
           custom={0}
           d="M7 6h3"
           initial="visible"
           variants={LINE_VARIANTS}
         />
-      </svg>
+      </m.svg>
     </div>
   );
 });

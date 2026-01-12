@@ -1,7 +1,7 @@
 "use client";
 
-import type { Variants } from "motion/react";
-import { motion, useAnimation } from "motion/react";
+import type { Variants } from "framer-motion";
+import { m, useAnimation } from "framer-motion";
 import type { HTMLAttributes } from "react";
 import { forwardRef, useCallback, useImperativeHandle, useRef, useEffect } from "react";
 
@@ -122,7 +122,7 @@ const TrendingUpIcon = forwardRef<TrendingUpIconHandle, TrendingUpIconProps>(
         onMouseLeave={handleMouseLeave}
         {...props}
       >
-        <motion.svg
+        <m.svg
           animate={controls}
           fill="none"
           height={size}
@@ -136,19 +136,19 @@ const TrendingUpIcon = forwardRef<TrendingUpIconHandle, TrendingUpIconProps>(
           width={size}
           xmlns="http://www.w3.org/2000/svg"
         >
-          <motion.polyline
+          <m.polyline
             animate={controls}
             initial="normal"
             points="22 7 13.5 15.5 8.5 10.5 2 17"
             variants={PATH_VARIANTS}
           />
-          <motion.polyline
+          <m.polyline
             animate={controls}
             initial="normal"
             points="16 7 22 7 22 13"
             variants={ARROW_VARIANTS}
           />
-        </motion.svg>
+        </m.svg>
       </div>
     );
   }

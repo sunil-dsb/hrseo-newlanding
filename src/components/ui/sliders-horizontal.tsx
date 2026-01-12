@@ -1,7 +1,7 @@
 "use client";
 
-import type { Transition } from "motion/react";
-import { motion, useAnimation } from "motion/react";
+import type { Transition } from "framer-motion";
+import { m, useAnimation } from "framer-motion";
 import type { HTMLAttributes } from "react";
 import { forwardRef, useCallback, useImperativeHandle, useRef, useEffect } from "react";
 
@@ -87,7 +87,7 @@ const SlidersHorizontalIcon = forwardRef<
         width={size}
         xmlns="http://www.w3.org/2000/svg"
       >
-        <motion.line
+        <m.line
           animate={controls}
           initial="normal"
           transition={DEFAULT_TRANSITION}
@@ -100,7 +100,7 @@ const SlidersHorizontalIcon = forwardRef<
           y1={4}
           y2={4}
         />
-        <motion.line
+        <m.line
           animate={controls}
           initial="normal"
           transition={DEFAULT_TRANSITION}
@@ -114,7 +114,7 @@ const SlidersHorizontalIcon = forwardRef<
           y2={4}
         />
 
-        <motion.line
+        <m.line
           animate={controls}
           initial="normal"
           transition={DEFAULT_TRANSITION}
@@ -128,7 +128,7 @@ const SlidersHorizontalIcon = forwardRef<
           y2={12}
         />
 
-        <motion.line
+        <m.line
           animate={controls}
           initial="normal"
           transition={DEFAULT_TRANSITION}
@@ -142,7 +142,7 @@ const SlidersHorizontalIcon = forwardRef<
           y2={12}
         />
 
-        <motion.line
+        <m.line
           animate={controls}
           initial="normal"
           transition={DEFAULT_TRANSITION}
@@ -156,7 +156,7 @@ const SlidersHorizontalIcon = forwardRef<
           y2={20}
         />
 
-        <motion.line
+        <m.line
           animate={controls}
           initial="normal"
           transition={DEFAULT_TRANSITION}
@@ -170,7 +170,7 @@ const SlidersHorizontalIcon = forwardRef<
           y2={20}
         />
 
-        <motion.line
+        <m.line
           animate={controls}
           initial="normal"
           transition={DEFAULT_TRANSITION}
@@ -184,7 +184,7 @@ const SlidersHorizontalIcon = forwardRef<
           y2={6}
         />
 
-        <motion.line
+        <m.line
           animate={controls}
           initial="normal"
           transition={DEFAULT_TRANSITION}
@@ -198,7 +198,7 @@ const SlidersHorizontalIcon = forwardRef<
           y2={14}
         />
 
-        <motion.line
+        <m.line
           animate={controls}
           initial="normal"
           transition={DEFAULT_TRANSITION}

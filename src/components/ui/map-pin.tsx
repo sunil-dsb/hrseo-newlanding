@@ -1,7 +1,7 @@
 "use client";
 
-import type { Variants } from "motion/react";
-import { motion, useAnimation } from "motion/react";
+import type { Variants } from "framer-motion";
+import { m, useAnimation } from "framer-motion";
 import type { HTMLAttributes } from "react";
 import { forwardRef, useCallback, useImperativeHandle, useRef, useEffect } from "react";
 
@@ -97,7 +97,7 @@ const MapPinIcon = forwardRef<MapPinIconHandle, MapPinIconProps>(
         onMouseLeave={handleMouseLeave}
         {...props}
       >
-        <motion.svg
+        <m.svg
           animate={controls}
           fill="none"
           height={size}
@@ -112,7 +112,7 @@ const MapPinIcon = forwardRef<MapPinIconHandle, MapPinIconProps>(
           xmlns="http://www.w3.org/2000/svg"
         >
           <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
-          <motion.circle
+          <m.circle
             animate={controls}
             cx="12"
             cy="10"
@@ -120,7 +120,7 @@ const MapPinIcon = forwardRef<MapPinIconHandle, MapPinIconProps>(
             r="3"
             variants={CIRCLE_VARIANTS}
           />
-        </motion.svg>
+        </m.svg>
       </div>
     );
   }

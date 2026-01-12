@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useAnimation } from "motion/react";
+import { m, useAnimation } from "framer-motion";
 import type { HTMLAttributes } from "react";
 import { forwardRef, useCallback, useImperativeHandle, useRef, useEffect } from "react";
 
@@ -69,7 +69,7 @@ const LayoutPanelTopIcon = forwardRef<
       onMouseLeave={handleMouseLeave}
       {...props}
     >
-      <svg
+      <m.svg
         fill="none"
         height={size}
         stroke="currentColor"
@@ -80,7 +80,7 @@ const LayoutPanelTopIcon = forwardRef<
         width={size}
         xmlns="http://www.w3.org/2000/svg"
       >
-        <motion.rect
+        <m.rect
           animate={controls}
           height="7"
           initial="normal"
@@ -100,7 +100,7 @@ const LayoutPanelTopIcon = forwardRef<
           x="3"
           y="3"
         />
-        <motion.rect
+        <m.rect
           animate={controls}
           height="7"
           initial="normal"
@@ -121,7 +121,7 @@ const LayoutPanelTopIcon = forwardRef<
           x="3"
           y="14"
         />
-        <motion.rect
+        <m.rect
           animate={controls}
           height="7"
           initial="normal"
@@ -142,7 +142,7 @@ const LayoutPanelTopIcon = forwardRef<
           x="14"
           y="14"
         />
-      </svg>
+      </m.svg>
     </div>
   );
 });
