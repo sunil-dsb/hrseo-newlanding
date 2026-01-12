@@ -50,7 +50,7 @@ export const FAQ = () => {
 
     return (
         <section className="py-24 overflow-hidden">
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-5xl 2xl:max-w-7xl mx-auto">
                 {/* Header Section */}
                 <div className="flex flex-col items-center text-center mb-20 space-y-6">
                     <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-black">

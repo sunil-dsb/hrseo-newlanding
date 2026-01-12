@@ -30,14 +30,14 @@ export function Navbar() {
         <m.header
             variants={{
                 visible: { y: 0, opacity: 1 },
-                hidden: { y: '-100%', opacity: 0 }, // Moves it completely out of view
+                hidden: { y: '-100%', opacity: 0 },
             }}
             initial="visible"
             animate={hidden ? "hidden" : "visible"}
-            transition={{ duration: 0.35, ease: "easeInOut" }} // Snappy scroll transition
+            transition={{ duration: 0.35, ease: "easeInOut" }}
             className="fixed top-6 left-0 w-full flex justify-center z-50 pointer-events-none px-4"
         >
-            <div className="w-full max-w-5xl flex items-center justify-between gap-2 pointer-events-auto">
+            <div className="w-full max-w-[87%] flex items-center justify-between gap-2 pointer-events-auto">
                 {/* Main Navbar Section */}
                 <m.div
                     initial={{ y: -20, opacity: 0 }}

@@ -31,7 +31,7 @@ const LINKS = {
 
 export const FooterNav = () => {
     return (
-        <div className='max-w-5xl mx-auto px-6 relative z-10'>
+        <div className='max-w-5xl 2xl:max-w-7xl mx-auto px-6 relative z-10'>
             <div className="flex flex-col justify-between gap-10 lg:flex-row">
                 <nav className="flex max-w-[600px] flex-1 flex-wrap gap-10 md:justify-between md:gap-8 lg:flex-nowrap">
                     {/* Products Column */}
@@ -109,7 +109,7 @@ export const FooterNav = () => {
                     >
                         <div className="relative h-[80px] w-[108px] shrink-0 overflow-hidden rounded bg-zinc-100">
                             <Image
-                                src="https://framerusercontent.com/images/YONjKj76nkanVkusPMgvv81A.jpg?width=2160&height=1110"
+                                src="/assets/demo-thumbnail.jpg"
                                 alt="Demo"
                                 fill
                                 className="object-cover transition-transform duration-300 group-hover:scale-105"

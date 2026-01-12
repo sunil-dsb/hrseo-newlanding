@@ -33,7 +33,7 @@ export default function Pricing() {
 
     return (
         <section className='py-24 px-6 relative' id="pricing">
-            <div className='max-w-5xl mx-auto w-full'>
+            <div className='max-w-5xl 2xl:max-w-7xl mx-auto w-full'>
                 <div className="text-center mb-16 space-y-4">
                     {/* Laurel Badge */}
                     <div className="flex items-center justify-center gap-1 mb-6">

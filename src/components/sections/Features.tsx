@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
+import { m, AnimatePresence } from "framer-motion";
 import { SearchIcon } from "@/components/ui/search";
 import { TrendingUpIcon } from "@/components/ui/trending-up";
 import { SlidersHorizontalIcon } from "@/components/ui/sliders-horizontal";
@@ -82,6 +83,42 @@ const features = [
     },
 ];
 
+// Typing animation component
+const TypeWriter = ({ text, className }: { text: string; className?: string }) => {
+    const [displayText, setDisplayText] = useState("");
+    const [isTyping, setIsTyping] = useState(true);
+
+    useEffect(() => {
+        setDisplayText("");
+        setIsTyping(true);
+        let index = 0;
+        const timer = setInterval(() => {
+            if (index < text.length) {
+                setDisplayText(text.slice(0, index + 1));
+                index++;
+            } else {
+                setIsTyping(false);
+                clearInterval(timer);
+            }
+        }, 40); // Speed of typing
+
+        return () => clearInterval(timer);
+    }, [text]);
+
+    return (
+        <span className={className}>
+            {displayText}
+            {isTyping && (
+                <m.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.5, repeat: Infinity }}
+                    className="inline-block w-[3px] h-[1em] bg-[#F15A29] ml-1 align-middle"
+                />
+            )}
+        </span>
+    );
+};
+
 const Features = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const [activeTitle, setActiveTitle] = useState("dominate search algorithms.");
@@ -125,22 +162,56 @@ const Features = () => {
         });
 
         return () => observer.disconnect();
-    }, [features]);
+    }, []);
 
     return (
         <section ref={sectionRef} className="relative py-24 font-sans">
-            <div className="max-w-5xl mx-auto px-4 md:px-6 relative">
+            <div className="max-w-5xl 2xl:max-w-7xl mx-auto px-4 md:px-6 relative">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
                     {/* Left column - Sticky */}
                     <div className="lg:col-span-6 lg:sticky lg:top-32 h-fit pb-10">
                         <div className="transition-all duration-300">
+                            {/* Progress Indicator - Top Left */}
+                            <BlurFade delay={0.1}>
+                                <div className="hidden lg:flex items-center gap-2 mb-6">
+                                    <div className="flex gap-1">
+                                        {features.map((_, idx) => (
+                                            <m.div
+                                                key={idx}
+                                                className="relative cursor-pointer"
+                                                onClick={() => {
+                                                    cardRefs.current[idx]?.scrollIntoView({ behavior: "smooth", block: "center" });
+                                                }}
+                                            >
+                                                <m.div
+                                                    className="w-4 h-1 rounded-full bg-zinc-100 overflow-hidden"
+                                                    whileHover={{ scale: 1.1 }}
+                                                >
+                                                    <m.div
+                                                        className="h-full bg-[#F15A29]/40 rounded-full origin-left"
+                                                        initial={{ scaleX: 0 }}
+                                                        animate={{
+                                                            scaleX: idx === activeIndex ? 1 : 0,
+                                                        }}
+                                                        transition={{ duration: 0.3, ease: "easeOut" }}
+                                                        style={{ width: "100%" }}
+                                                    />
+                                                </m.div>
+                                            </m.div>
+                                        ))}
+                                    </div>
+                                    <div className="text-[10px] text-zinc-300 font-medium">
+                                        <span className="text-[#F15A29]/60">{String(activeIndex + 1).padStart(2, '0')}</span>
+                                        <span className="mx-0.5">/</span>
+                                        <span>{String(features.length).padStart(2, '0')}</span>
+                                    </div>
+                                </div>
+                            </BlurFade>
+
                             <BlurFade delay={0.2}>
                                 <h2 className="text-4xl md:text-5xl font-bold text-zinc-600 tracking-tighter mb-8 leading-[1.1]">
                                     <TextHighlight className="text-black">Everything</TextHighlight> you need to{" "}
-                                    <span
-                                        key={activeTitle}
-                                        className="block text-black animate-in fade-in slide-in-from-bottom-2 duration-500"
-                                    >
+                                    <span className="block text-black">
                                         {activeTitle}
                                     </span>
                                 </h2>
@@ -170,39 +241,47 @@ const Features = () => {
                     {/* Right column - Feature Cards */}
                     <div className="lg:col-span-6 space-y-6">
                         {features.map((feature, index) => (
-                            <Link
+                            <div
                                 key={feature.href}
-                                href={feature.href}
-                                ref={(el) => setCardRef(el, index)}
-                                data-index={index}
-                                className={`group block bg-white border p-8 rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-black/5 hover:border-[#F15A29]/30 ${index === activeIndex
+                            >
+                                <Link
+                                    href={feature.href}
+                                    ref={(el) => setCardRef(el, index)}
+                                    data-index={index}
+                                    className={`group block bg-white border p-8 rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-black/5 hover:border-[#F15A29]/30 ${index === activeIndex
                                         ? "border-[#F15A29]/30 shadow-xl shadow-black/5"
                                         : "border-zinc-200"
-                                    }`}
-                            >
-                                <div className="flex items-start gap-6">
-                                    {/* Icon - Consistent with ToolsGrid */}
-                                    <div className="shrink-0 w-12 h-12 rounded-lg bg-zinc-100 flex items-center justify-center text-[#F15A29]">
-                                        <feature.icon size={24} />
-                                    </div>
+                                        }`}
+                                >
+                                    <div className="flex items-start gap-6">
+                                        {/* Icon - Consistent with ToolsGrid */}
+                                        <m.div
+                                            className={`shrink-0 w-12 h-12 rounded-lg flex items-center justify-center transition-colors duration-300 ${index === activeIndex ? "bg-[#F15A29]/10 text-[#F15A29]" : "bg-zinc-100 text-[#F15A29]"
+                                                }`}
+                                            animate={{ scale: index === activeIndex ? 1.1 : 1 }}
+                                            transition={{ type: "spring", stiffness: 300 }}
+                                        >
+                                            <feature.icon size={24} />
+                                        </m.div>
 
-                                    {/* Content */}
-                                    <div className="flex-1">
-                                        <h3 className="text-xl font-bold text-[#222] mb-2 tracking-tight">
-                                            {feature.title}
-                                        </h3>
-                                        <p className="text-zinc-500 leading-relaxed text-sm mb-4 font-light">
-                                            {feature.description}
-                                        </p>
+                                        {/* Content */}
+                                        <div className="flex-1">
+                                            <h3 className="text-xl font-bold text-[#222] mb-2 tracking-tight">
+                                                {feature.title}
+                                            </h3>
+                                            <p className="text-zinc-500 leading-relaxed text-sm mb-4 font-light">
+                                                {feature.description}
+                                            </p>
 
-                                        {/* Learn More - Cleaner arrow interaction */}
-                                        <div className="flex items-center gap-2 text-zinc-600 font-medium text-sm opacity-80 group-hover:opacity-100 transition-opacity">
-                                            <span className="group-hover:underline">Learn more</span>
-                                            <FiArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                                            {/* Learn More - Cleaner arrow interaction */}
+                                            <div className="flex items-center gap-2 text-zinc-600 font-medium text-sm opacity-80 group-hover:opacity-100 transition-opacity">
+                                                <span className="group-hover:underline">Learn more</span>
+                                                <FiArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Link>
+                                </Link>
+                            </div>
                         ))}
                     </div>
                 </div>

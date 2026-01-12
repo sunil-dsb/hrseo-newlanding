@@ -1,9 +1,14 @@
-import { Hero, Pricing, TrustCTA } from "@/components/sections";
-import { FAQ } from "@/components/sections/FAQ";
-import { Testimonials } from "@/components/sections/Testimonials";
-import Features from "@/components/sections/Features";
-import { Steps } from "@/components/sections/Steps";
-import { ToolsGrid } from "@/components/sections/ToolsGrid";
+import dynamic from 'next/dynamic';
+import Hero from "@/components/sections/Hero"; // Static for LCP
+import { ToolsGrid } from "@/components/sections/ToolsGrid"; // Static for LCP
+
+// Dynamic imports for below-the-fold sections
+const Features = dynamic(() => import("@/components/sections/Features"));
+const Steps = dynamic(() => import("@/components/sections/Steps").then(mod => mod.Steps));
+const TrustCTA = dynamic(() => import("@/components/sections/TrustCTA"));
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials").then(mod => mod.Testimonials));
+const Pricing = dynamic(() => import("@/components/sections/Pricing"));
+const FAQ = dynamic(() => import("@/components/sections/FAQ").then(mod => mod.FAQ));
 
 export default function Home() {
   return (

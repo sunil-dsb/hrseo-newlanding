@@ -53,11 +53,19 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const startTimeRef = useRef<number>(0);
     const lastFlipTimeRef = useRef<number>(0);
-    const scrambleCharsRef = useRef<string[]>(
-        text ? generateGibberishPreservingSpaces(text, charset).split("") : [],
-    );
+    const [isMounted, setIsMounted] = useState(false);
+    const scrambleCharsRef = useRef<string[]>([]);
+
+    // Initialize plain text on mount to match server, then scramble
+    useEffect(() => {
+        setIsMounted(true);
+        if (text) {
+            scrambleCharsRef.current = generateGibberishPreservingSpaces(text, charset).split("");
+        }
+    }, [text, charset]);
 
     const startAnimation = () => {
+        if (!isMounted) return;
         const initial = text
             ? generateGibberishPreservingSpaces(text, charset)
             : "";
@@ -142,8 +150,8 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
                     ? char
                     : char === " "
                         ? " "
-                        : (scrambleCharsRef.current[index] ??
-                            generateRandomCharacter(charset));
+                        : (!isMounted ? char : (scrambleCharsRef.current[index] ??
+                            generateRandomCharacter(charset)));
 
                 return (
                     <span

@@ -8,6 +8,8 @@ import { EncryptedText } from '@/components/ui/EncryptedText';
 import { HiLightningBolt } from 'react-icons/hi';
 import { TrendingUpIcon } from '@/components/ui/trending-up';
 import { FaStar } from 'react-icons/fa';
+import { MdKeyboardArrowRight } from 'react-icons/md';
+import { IoMdArrowForward } from 'react-icons/io';
 import Image from 'next/image';
 import { ButtonSlide } from '@/components/ui/ButtonSlide';
 
@@ -20,7 +22,7 @@ export default function Hero() {
 
     return (
         <section className='relative flex items-center pt-48 pb-20 px-6'>
-            <div className='max-w-5xl mx-auto w-full px-4'>
+            <div className='max-w-5xl 2xl:max-w-7xl mx-auto w-full px-4'>
                 <BlurFade delay={0.1}>
                     <p className='text-2xl text-black mb-6'>
                         You don&apos;t need <EncryptedText
@@ -80,11 +82,11 @@ export default function Hero() {
                         <div className='flex items-center gap-4'>
                             <div className='flex -space-x-4'>
                                 {[
-                                    "https://framerusercontent.com/images/D2T9NEaPOb2fzozmBSTs4eJ7sdg.jpg",
-                                    "https://framerusercontent.com/images/rWibq7qK6SYLsvi7YvY5ZioDo.jpg",
-                                    "https://framerusercontent.com/images/BC8kEVoVCultzLUf7sH1lHYICc.jpg",
-                                    "https://framerusercontent.com/images/TQ5Y4EoZFZZAK1F6IY2lfoUGYL8.jpg",
-                                    "https://framerusercontent.com/images/D2T9NEaPOb2fzozmBSTs4eJ7sdg.jpg"
+                                    "/assets/avatar-1.jpg",
+                                    "/assets/avatar-2.jpg",
+                                    "/assets/avatar-3.jpg",
+                                    "/assets/avatar-4.jpg",
+                                    "/assets/avatar-1.jpg"
                                 ].map((img, i) => (
                                     <div
                                         key={i}
@@ -129,15 +131,25 @@ export default function Hero() {
                     <div className='flex flex-col sm:flex-row gap-4'>
                         <ButtonSlide
                             variant="dark"
-                            className="w-auto px-8 py-4 rounded-full"
+                            className="w-auto px-8 py-4 rounded-full group"
                             onClick={() => window.location.href = '#'}
+                            icon={
+                                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-transparent transition-all duration-300 group-hover:bg-white">
+                                    <MdKeyboardArrowRight className="w-5 h-5 text-white transition-colors duration-300 group-hover:text-black" />
+                                </span>
+                            }
                         >
                             Start Free Trial
                         </ButtonSlide>
 
                         <ButtonSlide
                             variant="light"
-                            className="w-auto px-8 py-4 rounded-full bg-white border border-zinc-200 hover:bg-zinc-50"
+                            className="w-auto px-8 py-4 rounded-full bg-white border border-zinc-200 hover:bg-zinc-50 group"
+                            icon={
+                                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-transparent transition-all duration-300 group-hover:bg-[#F15A29]">
+                                    <IoMdArrowForward className="w-4 h-4 text-zinc-600 transition-colors duration-300 group-hover:text-white" />
+                                </span>
+                            }
                         >
                             See How It Works
                         </ButtonSlide>

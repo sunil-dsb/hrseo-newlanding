@@ -10,11 +10,11 @@ import { FaStar } from 'react-icons/fa';
 export default function TrustCTA() {
     return (
         <section className='py-20 px-6'>
-            <div className='max-w-5xl mx-auto w-full'>
+            <div className='max-w-5xl 2xl:max-w-7xl mx-auto w-full'>
                 <BlurFade delay={0.1}>
                     <div className='relative w-full rounded-2xl overflow-hidden h-[36rem] bg-zinc-900 group'>
                         <Image
-                            src="https://framerusercontent.com/images/YONjKj76nkanVkusPMgvv81A.jpg?width=2160&height=1110"
+                            src="/assets/demo-thumbnail.jpg"
                             alt="Workspace"
                             fill
                             className='object-cover opacity-70 transition-transform duration-700'
@@ -41,6 +41,7 @@ export default function TrustCTA() {
                                     href="#reviews"
                                     whileHover={{ x: 5 }}
                                     className='inline-flex items-center gap-2 text-white hover:text-[#F15A29] transition-colors text-lg'
+                                    aria-label="Read all user reviews"
                                 >
                                     <EncryptedText text="Leave a review" />
                                     <FiArrowUpRight className="w-5 h-5" />
@@ -49,11 +50,11 @@ export default function TrustCTA() {
                                 <div className='flex items-center gap-4 p-2'>
                                     <div className='flex -space-x-4'>
                                         {[
-                                            "https://framerusercontent.com/images/D2T9NEaPOb2fzozmBSTs4eJ7sdg.jpg",
-                                            "https://framerusercontent.com/images/rWibq7qK6SYLsvi7YvY5ZioDo.jpg",
-                                            "https://framerusercontent.com/images/BC8kEVoVCultzLUf7sH1lHYICc.jpg",
-                                            "https://framerusercontent.com/images/TQ5Y4EoZFZZAK1F6IY2lfoUGYL8.jpg",
-                                            "https://framerusercontent.com/images/D2T9NEaPOb2fzozmBSTs4eJ7sdg.jpg"
+                                            "/assets/avatar-1.jpg",
+                                            "/assets/avatar-2.jpg",
+                                            "/assets/avatar-3.jpg",
+                                            "/assets/avatar-4.jpg",
+                                            "/assets/avatar-1.jpg"
                                         ].map((img, i) => (
                                             <div
                                                 key={i}
@@ -61,7 +62,7 @@ export default function TrustCTA() {
                                             >
                                                 <Image
                                                     src={img}
-                                                    alt={`User ${i + 1}`}
+                                                    alt={`Reviewer ${i + 1}`}
                                                     width={40}
                                                     height={40}
                                                     className="w-full h-full object-cover grayscale opacity-80"

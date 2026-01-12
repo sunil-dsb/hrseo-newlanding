@@ -14,27 +14,27 @@ import Image from 'next/image';
 const PARTNERS = [
     {
         name: "Capsule",
-        src: "https://cdn.prod.website-files.com/5f462e8160aa877216f7d4b7/6914d7840136df554ccdc3ce_capsule-logo.svg",
+        src: "/assets/capsule-logo.svg",
         alt: "Capsule Logo"
     },
     {
         name: "Perplexity",
-        src: "https://cdn.prod.website-files.com/5f462e8160aa877216f7d4b7/6900a5aeac60e9ff74e41d01_perplexity-logo.svg",
+        src: "/assets/perplexity-logo.svg",
         alt: "Perplexity Logo"
     },
     {
         name: "Alternative Airlines",
-        src: "https://cdn.prod.website-files.com/5f462e8160aa877216f7d4b7/6914d7c5a71ef2ff4ba96909_ff5b14ee570ac7f88567b4f9172cd9ac_alternative-airlines-logo.svg",
+        src: "/assets/alternative-airlines-logo.svg",
         alt: "Alternative Airlines Logo"
     },
     {
         name: "Heights",
-        src: "https://cdn.prod.website-files.com/5f462e8160aa877216f7d4b7/6914d05d4b60ec714b637edc_heaights-logo.svg",
+        src: "/assets/heights-logo.svg",
         alt: "Heights Logo"
     },
     {
         name: "Learnerbly",
-        src: "https://cdn.prod.website-files.com/5f462e8160aa877216f7d4b7/642be1d37c0636fe714176c5_learnerbly-logo.svg",
+        src: "/assets/learnerbly-logo.svg",
         alt: "Learnerbly Logo"
     }
 ];
@@ -49,7 +49,7 @@ const TOOLS = [
             "Track competitors' AI visibility",
             "Get AI tips to improve your strategy"
         ],
-        image: "https://www.semrush.com/static/index/toolkits/ai.svg"
+        image: "/assets/semrush-ai.svg"
     },
     {
         id: "content-gen",
@@ -60,7 +60,7 @@ const TOOLS = [
             "Get high-ranking content ideas",
             "Score and optimize content in real time"
         ],
-        image: "https://www.semrush.com/static/index/toolkits/social.svg"
+        image: "/assets/semrush-social.svg"
     },
     {
         id: "rank-track",
@@ -71,7 +71,7 @@ const TOOLS = [
             "Track local & mobile rankings",
             "Visualize progress with instant reports"
         ],
-        image: "https://www.semrush.com/static/index/toolkits/seo.svg"
+        image: "/assets/semrush-seo.svg"
     },
     {
         id: "keyword-research",
@@ -82,7 +82,7 @@ const TOOLS = [
             "Analyze search intent instantly",
             "Discover endless content opportunities"
         ],
-        image: "https://www.semrush.com/static/index/toolkits/traffic.svg"
+        image: "/assets/semrush-traffic.svg"
     },
     {
         id: "backlink-audit",
@@ -93,7 +93,7 @@ const TOOLS = [
             "Spy on competitor backlinks",
             "Disavow toxic links easily"
         ],
-        image: "https://www.semrush.com/static/index/toolkits/pr.svg"
+        image: "/assets/semrush-pr.svg"
     },
     {
         id: "tech-health",
@@ -104,14 +104,14 @@ const TOOLS = [
             "Improve Core Web Vitals speed",
             "Get actionable fix recommendations"
         ],
-        image: "https://www.semrush.com/static/index/toolkits/seo.svg"
+        image: "/assets/semrush-seo.svg"
     }
 ];
 
 export const ToolsGrid = () => {
     return (
         <section className="py-24 px-4 font-sans">
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-5xl 2xl:max-w-7xl mx-auto">
                 {/* Section Header */}
                 <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
                     <div className="max-w-xl">
@@ -149,11 +149,17 @@ export const ToolsGrid = () => {
                     {TOOLS.map((tool, i) => (
                         <m.div
                             key={tool.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.5, delay: i * 0.1 }}
-                            whileHover={{ y: -4 }}
+                            initial={{ opacity: 0, y: 40, scale: 0.95, filter: "blur(10px)" }}
+                            whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{
+                                duration: 0.6,
+                                delay: i * 0.08,
+                                type: "spring",
+                                stiffness: 100,
+                                damping: 15
+                            }}
+                            whileHover={{ y: -6, transition: { duration: 0.3, type: "spring", stiffness: 300 } }}
                             className="relative p-3 group"
                         >
                             {/* Top Border & Dots */}

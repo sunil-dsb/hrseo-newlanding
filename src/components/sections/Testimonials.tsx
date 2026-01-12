@@ -8,10 +8,10 @@ import { Marquee } from '@/components/ui/Marquee';
 
 // Image URLs provided by user
 const AVATARS = [
-    "https://framerusercontent.com/images/D2T9NEaPOb2fzozmBSTs4eJ7sdg.jpg",
-    "https://framerusercontent.com/images/rWibq7qK6SYLsvi7YvY5ZioDo.jpg",
-    "https://framerusercontent.com/images/BC8kEVoVCultzLUf7sH1lHYICc.jpg",
-    "https://framerusercontent.com/images/TQ5Y4EoZFZZAK1F6IY2lfoUGYL8.jpg"
+    "/assets/avatar-1.jpg",
+    "/assets/avatar-2.jpg",
+    "/assets/avatar-3.jpg",
+    "/assets/avatar-4.jpg"
 ];
 
 const TESTIMONIALS = [
@@ -80,7 +80,7 @@ const column3 = TESTIMONIALS.slice(4, 6);
 export const Testimonials = () => {
     return (
         <section className="pb-24 px-4 overflow-hidden">
-            <div className="max-w-5xl mx-auto h-[700px] relative"> {/* Fixed height for Marquee container */}
+            <div className="max-w-5xl 2xl:max-w-7xl mx-auto h-[700px] relative"> {/* Fixed height for Marquee container */}
                 <div className="flex flex-row justify-center gap-6 h-full overflow-hidden relative">
                     {/* First Column - Down */}
                     <div className="w-full h-full relative">
@@ -161,9 +161,9 @@ const TestimonialCard = ({ data, index }: { data: typeof TESTIMONIALS[0], index:
                         />
                     </div>
                     <div>
-                        <h4 className="font-medium text-black text-base leading-tight">
+                        <div className="font-medium text-black text-base leading-tight">
                             {data.name}
-                        </h4>
+                        </div>
                         <p className="text-sm text-zinc-400 font-light">
                             {data.handle}
                         </p>
