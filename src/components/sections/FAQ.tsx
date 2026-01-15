@@ -50,23 +50,23 @@ export const FAQ = () => {
 
     return (
         <section className="py-24 overflow-hidden">
-            <div className="max-w-5xl 2xl:max-w-7xl mx-auto">
+            <div className="max-w-5xl 2xl:max-w-7xl container-4k mx-auto">
                 {/* Header Section */}
                 <div className="flex flex-col items-center text-center mb-20 space-y-6">
-                    <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-black">
+                    <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-black min-[2560px]:text-8xl">
                         Got <TextHighlight>questions?</TextHighlight>
                     </h2>
 
-                    <p className="max-w-md text-zinc-500 text-lg font-light">
+                    <p className="max-w-md text-zinc-500 text-lg font-light min-[2560px]:text-xl min-[2560px]:max-w-2xl">
                         If you have any other questions or need more information, feel free to reach out directly.
                     </p>
 
                     <Link
                         href="/contact"
-                        className="group flex items-center gap-2 font-medium text-black hover:opacity-70 transition-opacity"
+                        className="group flex items-center gap-2 font-medium text-black hover:opacity-70 transition-opacity faq-ask-link min-[2560px]:text-lg"
                     >
                         <EncryptedText text="Ask a question" />
-                        <GoArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        <GoArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 min-[2560px]:w-5 min-[2560px]:h-5" />
                     </Link>
                 </div>
 
@@ -120,7 +120,7 @@ const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boo
         <m.div
             layout
             onClick={onToggle}
-            className={`relative bg-white rounded-xl p-6 md:p-8 cursor-pointer overflow-hidden duration-300`}
+            className={`relative bg-white rounded-xl p-6 md:p-8 cursor-pointer overflow-hidden duration-300 disable-animation-mobile`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -134,12 +134,12 @@ const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boo
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
                 {/* Number */}
-                <span className="text-zinc-400 font-medium text-lg leading-snug shrink-0 w-10">
+                <span className="text-zinc-400 font-medium text-lg leading-snug shrink-0 w-10 min-[2560px]:text-xl min-[2560px]:w-14">
                     {item.id}/
                 </span>
 
                 {/* Question */}
-                <h3 className="text-zinc-700 font-normal leading-snug w-full pr-12 text-lg transition-colors duration-300">
+                <h3 className="text-zinc-700 font-normal leading-snug w-full pr-12 text-lg transition-colors duration-300 min-[2560px]:text-xl">
                     {item.question}
                 </h3>
             </m.div>
@@ -152,7 +152,7 @@ const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boo
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-zinc-500 font-light leading-relaxed mt-4"
+                        className="text-zinc-500 font-light leading-relaxed mt-4 min-[2560px]:text-base min-[2560px]:mt-6"
                     >
                         {item.answer}
                     </m.div>
@@ -161,7 +161,7 @@ const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boo
 
             {/* Plus Icon - Fixed Position */}
             <div className="absolute top-6 right-6 md:top-8 md:right-8 text-zinc-900 z-20">
-                <FiPlus className={`w-5 h-5 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`} />
+                <FiPlus className={`w-5 h-5 transition-transform duration-300 min-[2560px]:w-6 min-[2560px]:h-6 ${isOpen ? "rotate-45" : ""}`} />
             </div>
         </m.div>
     );

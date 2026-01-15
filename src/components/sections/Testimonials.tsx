@@ -79,8 +79,8 @@ const column3 = TESTIMONIALS.slice(4, 6);
 
 export const Testimonials = () => {
     return (
-        <section className="pb-24 px-4 overflow-hidden">
-            <div className="max-w-5xl 2xl:max-w-7xl mx-auto h-[700px] relative"> {/* Fixed height for Marquee container */}
+        <section className="pb-20 md:pb-24 px-4 overflow-hidden">
+            <div className="max-w-5xl 2xl:max-w-7xl container-4k mx-auto h-[700px] 2xl:h-[800px] min-[2560px]:h-[1000px] relative"> {/* Fixed height for Marquee container */}
                 <div className="flex flex-row justify-center gap-6 h-full overflow-hidden relative">
                     {/* First Column - Down */}
                     <div className="w-full h-full relative">
@@ -161,23 +161,23 @@ const TestimonialCard = ({ data, index }: { data: typeof TESTIMONIALS[0], index:
                         />
                     </div>
                     <div>
-                        <div className="font-medium text-black text-base leading-tight">
+                        <div className="font-medium text-black text-base leading-tight min-[2560px]:text-xl">
                             {data.name}
                         </div>
-                        <p className="text-sm text-zinc-400 font-light">
+                        <p className="text-sm text-zinc-400 font-light min-[2560px]:text-base">
                             {data.handle}
                         </p>
                     </div>
                 </div>
 
                 {/* 3. Review Text */}
-                <p className="text-zinc-500 text-sm leading-relaxed flex-1 font-light">
+                <p className="text-zinc-500 text-sm leading-relaxed flex-1 font-light min-[2560px]:text-base">
                     {data.text}
                 </p>
 
                 {/* 4. Footer: Location // Date */}
                 <div className="pt-2 border-t border-zinc-100/0">
-                    <p className="text-sm text-black font-light opacity-90 flex items-center">
+                    <p className="text-sm text-black font-light opacity-90 flex items-center min-[2560px]:text-base">
                         {data.tag}
                         <span className="text-zinc-400 mx-2">{'//'}</span>
                         <span className="text-zinc-400 font-light">

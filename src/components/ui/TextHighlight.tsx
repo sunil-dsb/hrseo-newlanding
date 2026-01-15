@@ -21,7 +21,7 @@ export const TextHighlight = ({
         <span className={cn("relative inline-block", className)}>
             <span className="relative z-10">{children}</span>
             <m.div
-                className="absolute inset-0 -z-10 rotate-2 scale-105"
+                className="absolute inset-0 -z-10 rotate-2 scale-95 md:scale-105"
                 style={{ backgroundColor: color, transformOrigin: "left" }}
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}

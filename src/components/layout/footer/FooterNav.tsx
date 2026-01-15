@@ -31,18 +31,18 @@ const LINKS = {
 
 export const FooterNav = () => {
     return (
-        <div className='max-w-5xl 2xl:max-w-7xl mx-auto px-6 relative z-10'>
+        <div className='max-w-5xl 2xl:max-w-7xl container-4k mx-auto px-6 relative z-10'>
             <div className="flex flex-col justify-between gap-10 lg:flex-row">
-                <nav className="flex max-w-[600px] flex-1 flex-wrap gap-10 md:justify-between md:gap-8 lg:flex-nowrap">
+                <nav className="flex max-w-150 flex-1 flex-wrap gap-10 md:justify-between md:gap-8 lg:flex-nowrap">
                     {/* Products Column */}
                     <div className="flex-[1_1_45%] md:flex-[1_1_150px] xl:flex-[1_0_auto]">
-                        <h3 className="text-sm font-semibold uppercase tracking-tighter text-zinc-800">
+                        <h3 className="text-sm font-semibold uppercase tracking-tighter text-zinc-800 footer-nav-header min-[2560px]:text-base">
                             <span className='text-zinc-400'># </span> <EncryptedText text="Products" />
                         </h3>
                         <ul className="mt-5 flex flex-col gap-2 md:mt-6">
                             {LINKS.products.map((link) => (
                                 <li key={link.name}>
-                                    <Link href={link.href} className="text-zinc-500 hover:text-black transition-colors duration-300 xl:whitespace-nowrap text-sm font-medium">
+                                    <Link href={link.href} className="text-zinc-500 hover:text-black transition-colors duration-300 xl:whitespace-nowrap text-sm font-medium footer-nav-link min-[2560px]:text-base">
                                         <HoverTextHighlight>{link.name}</HoverTextHighlight>
                                     </Link>
                                 </li>
@@ -52,13 +52,13 @@ export const FooterNav = () => {
 
                     {/* Resources Column */}
                     <div className="flex-[1_1_45%] md:flex-[1_1_150px] xl:flex-[1_0_auto]">
-                        <h3 className="text-sm font-semibold uppercase tracking-tighter text-zinc-800">
+                        <h3 className="text-sm font-semibold uppercase tracking-tighter text-zinc-800 footer-nav-header min-[2560px]:text-base">
                             <span className='text-zinc-400'># </span> <EncryptedText text="Resources" />
                         </h3>
                         <ul className="mt-5 flex flex-col gap-2 md:mt-6">
                             {LINKS.resources.map((link) => (
                                 <li key={link.name}>
-                                    <Link href={link.href} className="text-zinc-500 hover:text-black transition-colors duration-300 xl:whitespace-nowrap text-sm font-medium">
+                                    <Link href={link.href} className="text-zinc-500 hover:text-black transition-colors duration-300 xl:whitespace-nowrap text-sm font-medium footer-nav-link min-[2560px]:text-base">
                                         <HoverTextHighlight>{link.name}</HoverTextHighlight>
                                     </Link>
                                 </li>
@@ -68,13 +68,13 @@ export const FooterNav = () => {
 
                     {/* Company Column */}
                     <div className="flex-[1_1_45%] md:flex-[1_1_150px] xl:flex-[1_0_auto]">
-                        <h3 className="text-sm font-semibold uppercase tracking-tighter text-zinc-800">
+                        <h3 className="text-sm font-semibold uppercase tracking-tighter text-zinc-800 footer-nav-header min-[2560px]:text-base">
                             <span className='text-zinc-400'># </span> <EncryptedText text="Company" />
                         </h3>
-                        <ul className="mt-5 flex flex-col gap-2 md:mt-6">
+                        <ul className="mt-5 flex flex-col gap-2 md:mt-6 ">
                             {LINKS.company.map((link) => (
                                 <li key={link.name}>
-                                    <Link href={link.href} className="text-zinc-500 hover:text-black transition-colors duration-300 xl:whitespace-nowrap text-sm font-medium">
+                                    <Link href={link.href} className="text-zinc-500 hover:text-black transition-colors duration-300 xl:whitespace-nowrap text-sm font-medium footer-nav-link min-[2560px]:text-base">
                                         <HoverTextHighlight>{link.name}</HoverTextHighlight>
                                     </Link>
                                 </li>
@@ -84,9 +84,9 @@ export const FooterNav = () => {
                 </nav>
 
                 {/* Demo Video Widget */}
-                <div className="flex-1 sm:max-w-[306px]">
+                <div className="flex-1 sm:max-w-76.5">
                     <div className="mb-8 flex flex-col gap-1">
-                        <a href="mailto:info@hrseo.mail" className="text-zinc-500 hover:text-black transition-colors duration-300 text-base font-medium w-fit text-lg">
+                        <a href="mailto:info@hrseo.mail" className="text-zinc-500 hover:text-black transition-colors duration-300 text-base font-medium w-fit text-lg footer-email-link">
                             <TextHighlight className="text-black">info@hrseo.mailcom</TextHighlight>
                         </a>
                     </div>
@@ -105,9 +105,9 @@ export const FooterNav = () => {
 
                     <a
                         href="#"
-                        className="group flex items-center gap-5 rounded-lg border border-zinc-200 bg-white p-2 transition-all hover:border-zinc-300"
+                        className="group flex items-center gap-5 rounded-lg border border-zinc-200 bg-white p-2 transition-all hover:border-zinc-300 footer-video-widget"
                     >
-                        <div className="relative h-[80px] w-[108px] shrink-0 overflow-hidden rounded bg-zinc-100">
+                        <div className="relative h-20 w-27 shrink-0 overflow-hidden rounded bg-zinc-100 footer-video-thumbnail">
                             <Image
                                 src="/assets/demo-thumbnail.jpg"
                                 alt="Demo"

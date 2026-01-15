@@ -9,7 +9,7 @@ export const FooterBrand = () => {
         <div className='relative w-full pt-12 z-10'>
             {/* Giant Animated Branding */}
             <m.div
-                className='group relative mx-auto h-[140px] max-w-5xl cursor-default overflow-hidden sm:h-[180px] md:h-[220px] pointer-events-auto z-10'
+                className='group relative mx-auto h-35 max-w-5xl 2xl:max-w-7xl container-4k cursor-default overflow-hidden sm:h-45 md:h-55 pointer-events-auto z-10 footer-brand-container'
                 initial="initial"
                 whileHover="hover"
                 animate="initial"
@@ -69,9 +69,9 @@ export const FooterBrand = () => {
             </m.div>
 
             {/* Bottom Bar */}
-            <div className='relative z-20 mx-auto max-w-5xl px-6 pb-8'>
+            <div className='relative z-20 mx-auto max-w-5xl 2xl:max-w-7xl px-6 pb-8'>
                 <div className="flex flex-col items-end gap-5 border-t border-transparent pt-8 lg:flex-row lg:justify-between">
-                    <div className="flex flex-1 flex-wrap items-center justify-center gap-9 gap-y-5 text-sm font-medium tracking-wide text-zinc-500 md:justify-start">
+                    <div className="flex flex-1 flex-wrap items-center justify-center gap-9 gap-y-5 text-sm font-medium tracking-wide text-zinc-500 md:justify-start footer-bottom-text min-[2560px]:text-base">
                         <div className="opacity-60">© 2026 HRSEO. All rights reserved.</div>
                         <div className="flex items-center gap-8">
                             <Link href="#" className="text-zinc-900/60 transition-colors hover:text-[#F15A29] hover:underline">Terms of Service</Link>

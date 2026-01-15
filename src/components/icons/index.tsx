@@ -10,7 +10,7 @@ export {
 } from './icons';
 
 export {
-    USFlag,
+    EnglishFlag,
     SpainFlag,
     FranceFlag,
     languages,

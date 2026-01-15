@@ -1,7 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
-import { m, useScroll, useTransform, MotionValue } from 'framer-motion';
+import { m, Variants } from 'framer-motion';
 import { BlurFade } from '@/components/ui/Animators';
 import { TextHighlight } from '@/components/ui/TextHighlight';
 import { EncryptedText } from '@/components/ui/EncryptedText';
@@ -9,7 +8,7 @@ import { TrendingUpIcon } from '@/components/ui/trending-up';
 
 const StepVisual1 = () => (
     <div className="relative w-full h-full bg-zinc-50 rounded-lg overflow-hidden border border-zinc-100 flex items-center justify-center p-6">
-        <div className="w-full max-w-[200px] space-y-3">
+        <div className="w-full max-w-50 space-y-3">
             <div className="h-8 w-full bg-white rounded-md border border-zinc-200 shadow-sm flex items-center px-3 gap-2">
                 <div className="w-3 h-3 rounded-full border border-zinc-300"></div>
                 <div className="h-1.5 w-20 bg-zinc-100 rounded"></div>
@@ -35,7 +34,7 @@ const StepVisual1 = () => (
 
 const StepVisual2 = () => (
     <div className="relative w-full h-full bg-zinc-900 rounded-lg overflow-hidden flex items-center justify-center p-6">
-        <div className="w-full max-w-[200px] space-y-2.5">
+        <div className="w-full max-w-100 space-y-2.5">
             <div className="flex items-center gap-2 mb-3">
                 <div className="w-2 h-2 rounded-full bg-[#F15A29] animate-pulse"></div>
                 <div className="h-2 w-24 bg-zinc-700 rounded"></div>
@@ -97,24 +96,37 @@ const STEPS = [
 
 const positions = [16, 50, 84];
 
+const cardVariants: Variants = {
+    hidden: {
+        left: "50%",
+        x: "-50%",
+        opacity: 0,
+        scale: 0.9
+    },
+    visible: (i: number) => ({
+        left: `${positions[i]}%`,
+        x: "-50%",
+        opacity: 1,
+        scale: 1,
+        transition: {
+            delay: i * 0.2,
+            type: "spring" as const,
+            stiffness: 100,
+            damping: 15
+        }
+    })
+};
+
 export const Steps = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    // Only track scroll for desktop animation
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    });
-
     return (
         <section className="font-sans relative">
-            <div className="max-w-5xl 2xl:max-w-7xl mx-auto px-4 py-24">
-                <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="max-w-5xl 2xl:max-w-7xl container-4k mx-auto px-4 py-20">
+                <div className="text-center max-w-2xl mx-auto">
                     <BlurFade delay={0.1}>
                         <h2 className="text-5xl sm:text-6xl font-bold text-black tracking-tighter leading-[1.1]">
                             Your{' '}
                             step-by-step path to scale
-                            <span className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#F15A29] mx-2 align-middle align-bottom translate-y-2">
+                            <span className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 min-[2560px]:w-24 min-[2560px]:h-24 rounded-full bg-[#F15A29] mx-2 align-middle align-bottom translate-y-2">
                                 <m.span
                                     initial={{ scale: 0 }}
                                     whileInView={{ scale: 1 }}
@@ -122,50 +134,47 @@ export const Steps = () => {
                                     transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.2 }}
                                     className="flex items-center justify-center"
                                 >
-                                    <TrendingUpIcon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                                    <TrendingUpIcon className="w-6 h-6 sm:w-7 sm:h-7 min-[2560px]:w-12 min-[2560px]:h-12 text-white" />
                                 </m.span>
                             </span>{' '}
                             <TextHighlight className="text-black inline-block px-1">without limits</TextHighlight>
                         </h2>
                     </BlurFade>
-                    <BlurFade delay={0.2} className='mt-8 max-w-lg mx-auto'>
-                        <p className="text-lg text-zinc-500 font-light">
+                    <BlurFade delay={0.2} className='mt-8 max-w-lg mx-auto min-[2560px]:max-w-2xl'>
+                        <p className="text-lg text-zinc-500 font-light min-[2560px]:text-xl">
                             Get started in minutes and see the difference our platform can make for your business.
                         </p>
                     </BlurFade>
                 </div>
 
                 {/* Mobile/Tablet View (Standard Grid) - Hidden on Desktop */}
-                <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 lg:gap-8">
                     {STEPS.map((step, index) => (
                         <StaticCard key={step.id} step={step} index={index} />
                     ))}
                 </div>
-            </div>
 
-            {/* Desktop View (Sticky Animation) - Hidden on Mobile/Tablet */}
-            <div ref={containerRef} className="hidden lg:block relative h-[250vh] -mt-32">
-                <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-                    <div className="relative w-full max-w-5xl h-[500px]">
+                {/* Desktop View (Auto-Play Animation) - Hidden on Mobile/Tablet */}
+                <div className="hidden lg:block relative h-[650px] w-full mt-12 md:mt-0 min-[2560px]:pt-32 min-[2560px]:mb-12">
+                    <div className="relative w-full h-full steps-cards-4k">
                         {STEPS.map((step, index) => (
                             <AnimatedCard
                                 key={step.id}
                                 step={step}
                                 index={index}
-                                scrollYProgress={scrollYProgress}
                                 totalCards={STEPS.length}
                             />
                         ))}
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 
 // Static Card for Mobile/Tablet
 const StaticCard = ({ step, index }: { step: typeof STEPS[0], index: number }) => (
-    <BlurFade delay={0.2 + (index * 0.1)}>
+    <BlurFade delay={0.2 + (index * 0.1)} className="disable-animation-mobile">
         <div className="relative p-3 h-full">
             {/* Top Border & Dots */}
             <div className="absolute top-0 left-0 right-0 h-[0.8px] bg-black/5" />
@@ -177,7 +186,7 @@ const StaticCard = ({ step, index }: { step: typeof STEPS[0], index: number }) =
             <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
             <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
 
-            <div className="bg-white rounded-xl border border-zinc-100 p-8 h-[420px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 shadow-sm hover:shadow-xl">
+            <div className="bg-white rounded-xl border border-zinc-100 p-8 h-[420px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 shadow-sm hover:shadow-lg">
                 <div className="flex justify-between items-start mb-6">
                     <span className="text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                         <EncryptedText text={`// Step ${step.step}`} />
@@ -193,7 +202,7 @@ const StaticCard = ({ step, index }: { step: typeof STEPS[0], index: number }) =
                 </div>
 
                 <h3 className="text-2xl font-bold text-black mb-2 tracking-tight line-clamp-2 md:min-h-[64px]">{step.title}</h3>
-                <p className="text-sm text-zinc-500 font-light mb-4 line-clamp-3">{step.description}</p>
+                <p className="text-sm text-zinc-500 font-light mb-8 max-w-[200px] line-clamp-3">{step.description}</p>
 
                 <div className="flex-1 w-full rounded-lg overflow-hidden relative mt-auto border border-zinc-100">
                     {step.visual}
@@ -206,27 +215,21 @@ const StaticCard = ({ step, index }: { step: typeof STEPS[0], index: number }) =
 interface AnimatedCardProps {
     step: typeof STEPS[0];
     index: number;
-    scrollYProgress: MotionValue<number>;
     totalCards: number;
 }
 
 // Animated Card for Desktop
-const AnimatedCard = ({ step, index, scrollYProgress, totalCards }: AnimatedCardProps) => {
-    // Spread animation
-    const spreadProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
-    const x = useTransform(spreadProgress, [0, 1], ["50%", `${positions[index]}%`]);
-    const scale = useTransform(spreadProgress, [0, 1], [0.85, 1]);
-
+const AnimatedCard = ({ step, index, totalCards }: AnimatedCardProps) => {
     return (
         <m.div
-            className="absolute top-[45%] w-[320px] h-[450px] group"
+            custom={index}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="absolute top-[50%] -translate-y-1/2 w-[20rem] h-[26.25rem] min-[2560px]:w-[26rem] min-[2560px]:h-[34rem] group steps-single-card-4k min-[2560px]:mt-6"
             style={{
-                left: x,
-                x: "-50%",
-                y: "-50%",
-                scale,
                 zIndex: totalCards - index,
-                willChange: "transform, left",
             }}
         >
             <div className="relative p-3 h-full w-full">
@@ -240,7 +243,7 @@ const AnimatedCard = ({ step, index, scrollYProgress, totalCards }: AnimatedCard
                 <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
                 <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
 
-                <div className="bg-white rounded-xl border border-zinc-100 p-8 h-full flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-xl">
+                <div className="bg-white rounded-xl border border-zinc-100 p-8 h-full flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-lg">
                     <div className="flex justify-between items-start mb-6">
                         <span className="text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                             <EncryptedText text={`// Step ${step.step}`} />
@@ -255,8 +258,8 @@ const AnimatedCard = ({ step, index, scrollYProgress, totalCards }: AnimatedCard
                         </div>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-black mb-2 tracking-tight line-clamp-2 md:min-h-[64px]">{step.title}</h3>
-                    <p className="text-sm text-zinc-500 font-light mb-4 line-clamp-3">{step.description}</p>
+                    <h3 className="text-2xl font-bold text-black mb-2 tracking-tight line-clamp-2 md:min-h-[64px] min-[2560px]:text-3xl min-[2560px]:mb-4">{step.title}</h3>
+                    <p className="text-sm text-zinc-500 font-light mb-8 max-w-[200px] line-clamp-3 min-[2560px]:text-base min-[2560px]:max-w-[22rem]">{step.description}</p>
 
                     <div className="flex-1 w-full rounded-lg overflow-hidden relative mt-auto border border-zinc-100">
                         {step.visual}

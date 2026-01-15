@@ -58,7 +58,7 @@ export default function Pricing() {
                         </span>
                         <span className="block">Zero - Hidden Fees.</span>
                     </h2>
-                    <p className="text-zinc-500 text-lg font-light max-w-2xl mx-auto">
+                    <p className="text-zinc-500 text-lg font-light max-w-2xl mx-auto min-[2560px]:text-xl">
                         Simple pricing for creators, teams, and agencies.
                     </p>
                 </div>
@@ -118,7 +118,7 @@ export default function Pricing() {
                     </div>
                 </div>
 
-                <div className='grid md:grid-cols-2 gap-8'>
+                <div className='grid md:grid-cols-2 gap-8 md:gap-6 px-4 md:px-8'>
                     <BlurFade delay={0.1}>
                         <div className='bg-white rounded-2xl p-8 sm:p-10 h-full flex flex-col relative overflow-hidden group border border-zinc-200 shadow-sm transition-all hover:shadow-lg hover:shadow-black/5'>
                             <div className='flex justify-between items-start mb-6'>
@@ -126,27 +126,27 @@ export default function Pricing() {
                                     <LuMonitor className="w-7 h-7" />
                                 </div>
                                 <div className='flex flex-col items-end'>
-                                    <div className='text-4xl font-bold tracking-tight'>
+                                    <div className='text-4xl font-bold tracking-tight min-[2560px]:text-5xl'>
                                         ${billingCycle === 'monthly' ? '79' : '63'}
                                     </div>
-                                    <div className='text-zinc-500 text-sm font-medium'>
+                                    <div className='text-zinc-500 text-sm font-medium min-[2560px]:text-base'>
                                         /month
-                                        {billingCycle === 'yearly' && <span className="block text-xs text-zinc-400 font-normal">billed yearly</span>}
+                                        {billingCycle === 'yearly' && <span className="block text-xs text-zinc-400 font-normal min-[2560px]:text-sm">billed yearly</span>}
                                     </div>
                                 </div>
                             </div>
 
                             <div className='mb-8'>
-                                <h3 className='text-xl font-bold mb-1'>Professional</h3>
-                                <p className='text-zinc-500 text-sm'>Ideal for growing businesses.</p>
+                                <h3 className='text-xl font-bold mb-1 min-[2560px]:text-2xl'>Professional</h3>
+                                <p className='text-zinc-500 text-sm min-[2560px]:text-base'>Ideal for growing businesses.</p>
                             </div>
 
                             <ButtonSlide
                                 variant="light"
-                                className="mb-10"
+                                className="mb-10 min-[2560px]:text-lg min-[2560px]:px-8 min-[2560px]:py-4"
                                 icon={
                                     <div className='rounded-full bg-white p-2 transition-colors duration-300 group-hover:bg-[#F15A29] group-hover:text-white'>
-                                        <HiLightningBolt className="w-3.5 h-3.5" />
+                                        <HiLightningBolt className="w-3.5 h-3.5 min-[2560px]:w-5 min-[2560px]:h-5" />
                                     </div>
                                 }
                             >
@@ -154,12 +154,12 @@ export default function Pricing() {
                             </ButtonSlide>
 
                             <div className='space-y-4 mb-auto'>
-                                <p className='text-sm font-medium text-zinc-900'>What&apos;s Included</p>
+                                <p className='text-sm font-medium text-zinc-900 min-[2560px]:text-base'>What&apos;s Included</p>
                                 <ul className='space-y-3'>
                                     {PROFESSIONAL_FEATURES.map((item, i) => (
-                                        <li key={i} className='flex items-center gap-3 text-sm text-zinc-600'>
-                                            <span className='w-5 h-5 rounded-full bg-zinc-100 flex items-center justify-center shrink-0'>
-                                                <FaCheck className="text-zinc-500 w-2.5 h-2.5" />
+                                        <li key={i} className='flex items-center gap-3 text-sm text-zinc-600 min-[2560px]:text-base'>
+                                            <span className='w-5 h-5 min-[2560px]:w-6 min-[2560px]:h-6 rounded-full bg-zinc-100 flex items-center justify-center shrink-0'>
+                                                <FaCheck className="text-zinc-500 w-2.5 h-2.5 min-[2560px]:w-3.5 min-[2560px]:h-3.5" />
                                             </span>
                                             {item}
                                         </li>
@@ -176,29 +176,29 @@ export default function Pricing() {
                                     <HiOutlineOfficeBuilding className="w-7 h-7" />
                                 </div>
                                 <div className='flex flex-col items-end'>
-                                    <div className='text-4xl font-bold tracking-tight'>
+                                    <div className='text-4xl font-bold tracking-tight min-[2560px]:text-5xl'>
                                         ${billingCycle === 'monthly' ? '199' : '159'}
                                     </div>
-                                    <div className='text-zinc-500 text-sm font-medium'>
+                                    <div className='text-zinc-500 text-sm font-medium min-[2560px]:text-base'>
                                         /month
-                                        {billingCycle === 'yearly' && <span className="block text-xs text-zinc-400 font-normal">billed yearly</span>}
+                                        {billingCycle === 'yearly' && <span className="block text-xs text-zinc-400 font-normal min-[2560px]:text-sm">billed yearly</span>}
                                     </div>
                                 </div>
                             </div>
 
                             <div className='mb-8'>
                                 <div className="flex items-center gap-2 mb-1">
-                                    <h3 className='text-xl font-bold'>Enterprise</h3>
+                                    <h3 className='text-xl font-bold min-[2560px]:text-2xl'>Enterprise</h3>
                                 </div>
-                                <p className='text-zinc-500 text-sm'>For large organizations with complex needs.</p>
+                                <p className='text-zinc-500 text-sm min-[2560px]:text-base'>For large organizations with complex needs.</p>
                             </div>
 
                             <ButtonSlide
                                 variant="dark"
-                                className="mb-10"
+                                className="mb-10 min-[2560px]:text-lg min-[2560px]:px-8 min-[2560px]:py-4"
                                 icon={
                                     <div className="w-6 h-6 rounded-full bg-[#F15A29] flex items-center justify-center text-white transition-colors duration-300 group-hover:bg-zinc-700">
-                                        <HiLightningBolt className="w-3.5 h-3.5" />
+                                        <HiLightningBolt className="w-3.5 h-3.5 min-[2560px]:w-5 min-[2560px]:h-5" />
                                     </div>
                                 }
                             >
@@ -206,12 +206,12 @@ export default function Pricing() {
                             </ButtonSlide>
 
                             <div className='space-y-4 mb-auto'>
-                                <p className='text-sm font-medium text-zinc-900'>What&apos;s Included</p>
+                                <p className='text-sm font-medium text-zinc-900 min-[2560px]:text-base'>What&apos;s Included</p>
                                 <ul className='space-y-3'>
                                     {ENTERPRISE_FEATURES.map((item, i) => (
-                                        <li key={i} className='flex items-center gap-3 text-sm text-zinc-600'>
-                                            <span className='w-5 h-5 rounded-full bg-[#F15A29] flex items-center justify-center shrink-0'>
-                                                <FaCheck className="text-white w-2.5 h-2.5" />
+                                        <li key={i} className='flex items-center gap-3 text-sm text-zinc-600 min-[2560px]:text-base'>
+                                            <span className='w-5 h-5 min-[2560px]:w-6 min-[2560px]:h-6 rounded-full bg-[#F15A29] flex items-center justify-center shrink-0'>
+                                                <FaCheck className="text-white w-2.5 h-2.5 min-[2560px]:w-3.5 min-[2560px]:h-3.5" />
                                             </span>
                                             {item}
                                         </li>

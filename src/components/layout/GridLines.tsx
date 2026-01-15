@@ -5,7 +5,7 @@ import { m } from 'framer-motion';
 export function GridLines() {
     return (
         <div className="fixed inset-0 flex justify-center pointer-events-none z-0 select-none" aria-hidden="true">
-            <div className="w-full h-full max-w-5xl  2xl:max-w-7xl grid grid-cols-3">
+            <div className="w-full h-full max-w-5xl 2xl:max-w-7xl container-4k grid grid-cols-3">
                 {[0, 1, 2].map((index) => (
                     <m.div
                         key={index}

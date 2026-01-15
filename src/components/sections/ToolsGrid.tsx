@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { m } from 'framer-motion';
 import { BotMessageSquareIcon } from '@/components/ui/bot-message-square';
 import { ZapIcon } from '@/components/ui/zap';
@@ -111,23 +110,23 @@ const TOOLS = [
 export const ToolsGrid = () => {
     return (
         <section className="py-24 px-4 font-sans">
-            <div className="max-w-5xl 2xl:max-w-7xl mx-auto">
+            <div className="max-w-5xl 2xl:max-w-7xl container-4k mx-auto">
                 {/* Section Header */}
-                <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
-                    <div className="max-w-xl">
-                        <h2 className="text-2xl font-bold tracking-tight text-black mb-2">
+                <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 md:px-6">
+                    <div className="max-w-xl text-left min-[2560px]:max-w-2xl">
+                        <h2 className="text-3xl md:text-2xl min-[2560px]:text-4xl font-bold tracking-tight text-black mb-2">
                             Powerful tools for modern growth.
                         </h2>
-                        <p className="text-base text-zinc-500 font-light">
+                        <p className="text-lg md:text-base min-[2560px]:text-xl text-zinc-500 font-light">
                             Everything you need to dominate search, all in one platform.
                         </p>
                     </div>
 
                     <div className="flex flex-col gap-3">
-                        <p className="text-sm text-zinc-500 font-light  text-right lg:text-right">
+                        <p className="text-zinc-500 font-light text-right min-[2560px]:text-lg">
                             Trusted by partners like :
                         </p>
-                        <div className="w-full max-w-[400px] overflow-hidden mask-image-gradient">
+                        <div className="w-full max-w-[25rem] overflow-hidden">
                             <Marquee pauseOnHover className="[--duration:20s] [--gap:2rem]">
                                 {PARTNERS.map((partner, i) => (
                                     <div key={i} className="relative h-6 w-20 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
@@ -145,13 +144,13 @@ export const ToolsGrid = () => {
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 md:gap-x-2">
                     {TOOLS.map((tool, i) => (
                         <m.div
                             key={tool.id}
-                            initial={{ opacity: 0, y: 40, scale: 0.95, filter: "blur(10px)" }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-                            viewport={{ once: true, margin: "-100px" }}
+                            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                            viewport={{ once: true, margin: "-50px" }}
                             transition={{
                                 duration: 0.6,
                                 delay: i * 0.08,
@@ -160,15 +159,15 @@ export const ToolsGrid = () => {
                                 damping: 15
                             }}
                             whileHover={{ y: -6, transition: { duration: 0.3, type: "spring", stiffness: 300 } }}
-                            className="relative p-3 group"
+                            className="relative p-3 group disable-animation-mobile"
                         >
                             {/* Top Border & Dots */}
-                            <div className="absolute top-0 left-0 right-0 h-[0.8px] bg-black/6" />
+                            <div className="absolute top-0 left-0 right-0 h-[0.05rem] bg-black/6" />
                             <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
                             <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
 
                             {/* Bottom Border & Dots */}
-                            <div className="absolute bottom-0 left-0 right-0 h-[0.8px] bg-black/6" />
+                            <div className="absolute bottom-0 left-0 right-0 h-[0.05rem] bg-black/6" />
                             <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-300 rounded-full" />
                             <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-300 rounded-full" />
 
@@ -179,10 +178,10 @@ export const ToolsGrid = () => {
                                 <div className="p-8 pb-0 flex-1">
                                     {/* Header */}
                                     <div className="flex items-center gap-4 mb-6">
-                                        <div className="w-12 h-12 rounded-lg bg-zinc-100 flex items-center justify-center text-[#F15A29] group-hover:scale-110 transition-transform duration-300">
-                                            <tool.icon size={24} />
+                                        <div className="w-12 h-12 min-[2560px]:w-16 min-[2560px]:h-16 rounded-lg bg-zinc-100 flex items-center justify-center text-[#F15A29] group-hover:scale-110 transition-transform duration-300">
+                                            <tool.icon className="w-6 h-6 min-[2560px]:w-8 min-[2560px]:h-8 flex items-center justify-center [&_svg]:w-full [&_svg]:h-full" />
                                         </div>
-                                        <h3 className="text-xl font-bold tracking-tight text-[#222]">
+                                        <h3 className="text-xl min-[2560px]:text-2xl font-bold tracking-tight text-[#222]">
                                             {tool.title}
                                         </h3>
                                     </div>
@@ -192,7 +191,7 @@ export const ToolsGrid = () => {
                                         {tool.points.map((point, idx) => (
                                             <li key={idx} className="flex items-start gap-3">
                                                 <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 shrink-0" />
-                                                <span className="text-zinc-500 text-sm font-light leading-relaxed">
+                                                <span className="text-zinc-500 text-sm min-[2560px]:text-base font-light leading-relaxed">
                                                     {point}
                                                 </span>
                                             </li>

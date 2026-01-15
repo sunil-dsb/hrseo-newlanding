@@ -70,13 +70,13 @@ export function LanguageDropdown({
             <div ref={dropdownRef} className={`relative ${className}`}>
                 <button
                     onClick={toggleDropdown}
-                    className="p-2 text-zinc-500 hover:text-brand-dark transition-colors rounded-full hover:bg-zinc-100/50"
+                    className="p-1 md:p-2 text-zinc-500 hover:text-brand-dark transition-colors rounded-full hover:bg-zinc-100/50"
                     aria-label="Change language"
                     aria-expanded={isOpen}
                     aria-haspopup="menu"
                     type="button"
                 >
-                    <BiGlobe className="h-5 w-5" />
+                    <BiGlobe className="h-6 w-6 md:h-5 md:w-5" />
                 </button>
 
                 {isOpen && (
@@ -89,11 +89,11 @@ export function LanguageDropdown({
                             <button
                                 key={language.code}
                                 onClick={() => handleLanguageChange(language)}
-                                className="w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg"
+                                className="w-full flex items-center gap-3 px-3 py-1.5 text-left transition-colors text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg"
                                 role="menuitem"
                                 aria-current={currentLang.code === language.code ? "true" : "false"}
                             >
-                                <language.Flag className="shrink-0 shadow-sm" />
+                                <language.Flag className="shrink-0" />
                                 <span
                                     className={`text-sm transition-all ${currentLang.code === language.code
                                         ? "font-semibold text-black"
@@ -152,7 +152,7 @@ export function LanguageDropdown({
                             <button
                                 key={lang.code}
                                 onClick={() => handleLanguageChange(lang)}
-                                className="w-full flex items-center gap-2 px-3 py-2 text-zinc-600 transition-colors hover:bg-zinc-50 rounded-md"
+                                className="w-full flex items-center gap-2 px-3 py-1.5 text-zinc-600 transition-colors hover:bg-zinc-50 rounded-md"
                                 role="menuitem"
                                 type="button"
                             >

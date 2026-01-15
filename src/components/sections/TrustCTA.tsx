@@ -9,8 +9,8 @@ import { FaStar } from 'react-icons/fa';
 
 export default function TrustCTA() {
     return (
-        <section className='py-20 px-6'>
-            <div className='max-w-5xl 2xl:max-w-7xl mx-auto w-full'>
+        <section className='py-20 px-2 md:px-6'>
+            <div className='max-w-5xl 2xl:max-w-7xl container-4k mx-auto w-full'>
                 <BlurFade delay={0.1}>
                     <div className='relative w-full rounded-2xl overflow-hidden h-[36rem] bg-zinc-900 group'>
                         <Image
@@ -21,7 +21,7 @@ export default function TrustCTA() {
                             quality={95}
                         />
 
-                        <div className='absolute inset-0 p-8 sm:p-12 md:p-16 flex flex-col justify-between text-left'>
+                        <div className='absolute inset-0 p-4 sm:p-12 md:p-16 flex flex-col justify-between text-center md:text-left'>
                             <div className='max-w-3xl relative z-10 mt-auto mb-12'>
                                 <h2 className='text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white leading-[0.9] mb-6'>
                                     <span className='relative inline-block mr-3'>
@@ -36,7 +36,7 @@ export default function TrustCTA() {
                                 </p>
                             </div>
 
-                            <div className='flex flex-col md:flex-row items-start md:items-end justify-between gap-8 relative z-10 w-full'>
+                            <div className='flex flex-col md:flex-row items-center md:items-end justify-between gap-8 relative z-10 w-full'>
                                 <m.a
                                     href="#reviews"
                                     whileHover={{ x: 5 }}
@@ -70,7 +70,7 @@ export default function TrustCTA() {
                                             </div>
                                         ))}
                                     </div>
-                                    <div className='flex flex-col text-left'>
+                                    <div className='flex flex-col text-center md:text-left'>
                                         <div className='flex items-center gap-1.5'>
                                             <span className='text-white font-bold text-base'>4.9/5</span>
                                             <span className='flex text-[#F15A29] gap-0.5'>
