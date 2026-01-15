@@ -4,19 +4,21 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { m, useScroll, useMotionValueEvent } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { LanguageDropdown } from '@/components/ui/LanguageDropdown';
 
 const NAV_LINKS = [
-    { name: 'Product', href: '#product' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Resources', href: '#resources' },
-    { name: 'Enterprise', href: '#enterprise' },
+    { key: 'product', href: '#product' },
+    { key: 'pricing', href: '#pricing' },
+    { key: 'resources', href: '#resources' },
+    { key: 'enterprise', href: '#enterprise' },
 ];
 
 export function Navbar() {
     const { scrollY } = useScroll();
     const [hidden, setHidden] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const t = useTranslations('Navbar');
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious() || 0;
@@ -65,11 +67,11 @@ export function Navbar() {
                         <nav className="hidden md:flex items-center">
                             {NAV_LINKS.map((link) => (
                                 <Link
-                                    key={link.name}
+                                    key={link.key}
                                     href={link.href}
                                     className="px-4 py-1.5 text-sm font-medium text-zinc-500 hover:text-black hover:bg-white rounded-full transition-all duration-200 navbar-link-item"
                                 >
-                                    {link.name}
+                                    {t(link.key)}
                                 </Link>
                             ))}
                         </nav>
@@ -135,10 +137,10 @@ export function Navbar() {
                         className="btn-anim relative overflow-hidden md:h-12 md:w-35 rounded-full bg-brand-primary text-white text-sm font-bold shadow-xl shadow-brand-primary/20 hover:shadow-brand-primary/30 transition-all shrink-0 flex items-center justify-center p-4 px-6 md:p-0 navbar-cta-btn"
                     >
                         <div className='span-visible'>
-                            <span>Get Started</span>
+                            <span>{t('getStarted')}</span>
                         </div>
                         <div className='span-hidden absolute inset-0'>
-                            <span>Get Started</span>
+                            <span>{t('getStarted')}</span>
                         </div>
                     </button>
                 </m.div>
@@ -159,22 +161,22 @@ export function Navbar() {
                     <nav className="flex flex-col gap-2">
                         {NAV_LINKS.map((link) => (
                             <Link
-                                key={link.name}
+                                key={link.key}
                                 href={link.href}
                                 onClick={() => setMobileMenuOpen(false)}
                                 className="px-4 py-3 text-lg font-medium text-zinc-600 hover:text-black hover:bg-zinc-100 rounded-xl transition-all"
                             >
-                                {link.name}
+                                {t(link.key)}
                             </Link>
                         ))}
                     </nav>
                     <div className="border-t border-zinc-200 pt-4 flex flex-col gap-4">
                         <div className="flex items-center justify-between px-2">
-                            <span className="text-zinc-500 font-medium">Language</span>
+                            <span className="text-zinc-500 font-medium">{t('language')}</span>
                             <LanguageDropdown variant="footer" align="right" />
                         </div>
                         <button className="w-full py-3 rounded-xl bg-brand-primary text-white font-bold text-center shadow-lg shadow-brand-primary/20">
-                            Get Started
+                            {t('getStarted')}
                         </button>
                     </div>
                 </div>

@@ -1,0 +1,59 @@
+{
+  "Hero": {
+    "preTitlePrefix": "Vous n'avez pas besoin ",
+    "preTitleEncrypted": "d'outils SEO coûteux",
+    "titlePrefix": "Vous avez besoin ",
+    "titleHighlight1": "puissant",
+    "titleHighlight2": "ia seo",
+    "titleSuffix": " outils.",
+    "description": "Améliorez vos classements avec des insights IA magiques. Simple, rapide, efficace.",
+    "trustedBy": "Approuvé par +10 000 marketeurs",
+    "cta": "Essai Gratuit",
+    "secondaryCta": "Comment ça Marche"
+  },
+  "Navbar": {
+    "product": "Produit",
+    "pricing": "Tarification",
+    "resources": "Ressources",
+    "enterprise": "Entreprise",
+    "getStarted": "Commencer",
+    "language": "Langue"
+  },
+  "Footer": {
+    "products": "Produits",
+    "resources": "Ressources",
+    "company": "Entreprise",
+    "links": {
+      "keywordResearch": "Recherche de Mots-clés",
+      "rankTracking": "Suivi de Position",
+      "backlinkAnalysis": "Analyse de Backlinks",
+      "siteAudit": "Audit de Site",
+      "seoReporting": "Rapports SEO",
+      "customers": "Clients",
+      "resourceCenter": "Centre de Ressources",
+      "webinars": "Webinaires",
+      "blog": "Blog",
+      "videos": "Vidéos",
+      "about": "À Propos",
+      "careers": "Carrières",
+      "newsroom": "Salle de Presse",
+      "security": "Sécurité"
+    },
+    "copyright": "© 2026 HRSEO. Tous droits réservés.",
+    "terms": "Conditions d'Utilisation",
+    "privacy": "Politique de Confidentialité",
+    "videoWidget": {
+      "cta": "Voir comment ça marche.",
+      "platform": "Plateforme HRSEO"
+    }
+  },
+  "Metadata": {
+    "title": "HRSEO - Outil SEO",
+    "description": "Hazlo Rentable - HRSEO un package d'outils SEO. Recherche de mots-clés productive, analyse SERP, suivi de classement et analyse de backlinks grâce à des outils super faciles à utiliser."
+  },
+  "NotFound": {
+    "title": "Page Non Trouvée",
+    "description": "Désolé, la page que vous recherchez n'existe pas.",
+    "homeButton": "Retour à l'Accueil"
+  }
+}

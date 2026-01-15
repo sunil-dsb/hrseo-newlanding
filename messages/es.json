@@ -1,0 +1,59 @@
+{
+  "Hero": {
+    "preTitlePrefix": "No necesitas ",
+    "preTitleEncrypted": "herramientas SEO costosas",
+    "titlePrefix": "Necesitas ",
+    "titleHighlight1": "poderosas",
+    "titleHighlight2": "ia seo",
+    "titleSuffix": " herramientas.",
+    "description": "Mejora tus rankings con insights de IA que parecen magia. Simple, rápido, efectivo.",
+    "trustedBy": "Con la confianza de +10,000 marketers",
+    "cta": "Empezar Prueba Gratis",
+    "secondaryCta": "Cómo Funciona"
+  },
+  "Navbar": {
+    "product": "Producto",
+    "pricing": "Precios",
+    "resources": "Recursos",
+    "enterprise": "Empresa",
+    "getStarted": "Empezar",
+    "language": "Idioma"
+  },
+  "Footer": {
+    "products": "Productos",
+    "resources": "Recursos",
+    "company": "Empresa",
+    "links": {
+      "keywordResearch": "Investigación de Palabras Clave",
+      "rankTracking": "Rastreo de Ranks",
+      "backlinkAnalysis": "Análisis de Backlinks",
+      "siteAudit": "Auditoría del Sitio",
+      "seoReporting": "Reportes SEO",
+      "customers": "Clientes",
+      "resourceCenter": "Centro de Recursos",
+      "webinars": "Webinars",
+      "blog": "Blog",
+      "videos": "Videos",
+      "about": "Nosotros",
+      "careers": "Carreras",
+      "newsroom": "Sala de Prensa",
+      "security": "Seguridad"
+    },
+    "copyright": "© 2026 HRSEO. Todos los derechos reservados.",
+    "terms": "Términos de Servicio",
+    "privacy": "Política de Privacidad",
+    "videoWidget": {
+      "cta": "Mira cómo funciona.",
+      "platform": "Plataforma HRSEO"
+    }
+  },
+  "Metadata": {
+    "title": "HRSEO - Herramienta SEO",
+    "description": "Hazlo Rentable - HRSEO paquete de herramientas SEO. Investigación de palabras clave productiva, análisis SERP, rastreo de rankings y análisis de backlinks gracias a herramientas súper fáciles de usar."
+  },
+  "NotFound": {
+    "title": "Página No Encontrada",
+    "description": "Lo sentimos, la página que buscas no existe.",
+    "homeButton": "Volver al Inicio"
+  }
+}

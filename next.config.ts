@@ -19,5 +19,9 @@ const nextConfig: NextConfig = {
   },
 };
 
+const createNextIntlPlugin = require('next-intl/plugin');
+
+const withNextIntl = createNextIntlPlugin();
+
 // Force rebuild
-export default nextConfig;
+export default withNextIntl(nextConfig);

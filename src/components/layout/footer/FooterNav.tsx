@@ -6,30 +6,11 @@ import { FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { EncryptedText } from '@/components/ui/EncryptedText';
 import { HoverTextHighlight, TextHighlight } from '@/components/ui/TextHighlight';
 
-const LINKS = {
-    products: [
-        { name: 'Keyword Research', href: '#' },
-        { name: 'Rank Tracking', href: '#' },
-        { name: 'Backlink Analysis', href: '#' },
-        { name: 'Site Audit', href: '#' },
-        { name: 'SEO Reporting', href: '#' },
-    ],
-    resources: [
-        { name: 'Customers', href: '#' },
-        { name: 'Resource Center', href: '#' },
-        { name: 'Webinars', href: '#' },
-        { name: 'Blog', href: '#' },
-        { name: 'Videos', href: '#' },
-    ],
-    company: [
-        { name: 'About', href: '#' },
-        { name: 'Careers', href: '#' },
-        { name: 'Newsroom', href: '#' },
-        { name: 'Security', href: '#' },
-    ]
-};
+import { useTranslations } from 'next-intl';
 
 export const FooterNav = () => {
+    const t = useTranslations('Footer');
+
     return (
         <div className='max-w-5xl 2xl:max-w-7xl container-4k mx-auto px-6 relative z-10'>
             <div className="flex flex-col justify-between gap-10 lg:flex-row">
@@ -37,13 +18,19 @@ export const FooterNav = () => {
                     {/* Products Column */}
                     <div className="flex-[1_1_45%] md:flex-[1_1_150px] xl:flex-[1_0_auto]">
                         <h3 className="text-sm font-semibold uppercase tracking-tighter text-zinc-800 footer-nav-header min-[2560px]:text-base">
-                            <span className='text-zinc-400'># </span> <EncryptedText text="Products" />
+                            <span className='text-zinc-400'># </span> <EncryptedText text={t('products')} />
                         </h3>
                         <ul className="mt-5 flex flex-col gap-2 md:mt-6">
-                            {LINKS.products.map((link) => (
-                                <li key={link.name}>
+                            {[
+                                { key: 'keywordResearch', href: '#' },
+                                { key: 'rankTracking', href: '#' },
+                                { key: 'backlinkAnalysis', href: '#' },
+                                { key: 'siteAudit', href: '#' },
+                                { key: 'seoReporting', href: '#' },
+                            ].map((link) => (
+                                <li key={link.key}>
                                     <Link href={link.href} className="text-zinc-500 hover:text-black transition-colors duration-300 xl:whitespace-nowrap text-sm font-medium footer-nav-link min-[2560px]:text-base">
-                                        <HoverTextHighlight>{link.name}</HoverTextHighlight>
+                                        <HoverTextHighlight>{t(`links.${link.key}`)}</HoverTextHighlight>
                                     </Link>
                                 </li>
                             ))}
@@ -53,13 +40,19 @@ export const FooterNav = () => {
                     {/* Resources Column */}
                     <div className="flex-[1_1_45%] md:flex-[1_1_150px] xl:flex-[1_0_auto]">
                         <h3 className="text-sm font-semibold uppercase tracking-tighter text-zinc-800 footer-nav-header min-[2560px]:text-base">
-                            <span className='text-zinc-400'># </span> <EncryptedText text="Resources" />
+                            <span className='text-zinc-400'># </span> <EncryptedText text={t('resources')} />
                         </h3>
                         <ul className="mt-5 flex flex-col gap-2 md:mt-6">
-                            {LINKS.resources.map((link) => (
-                                <li key={link.name}>
+                            {[
+                                { key: 'customers', href: '#' },
+                                { key: 'resourceCenter', href: '#' },
+                                { key: 'webinars', href: '#' },
+                                { key: 'blog', href: '#' },
+                                { key: 'videos', href: '#' },
+                            ].map((link) => (
+                                <li key={link.key}>
                                     <Link href={link.href} className="text-zinc-500 hover:text-black transition-colors duration-300 xl:whitespace-nowrap text-sm font-medium footer-nav-link min-[2560px]:text-base">
-                                        <HoverTextHighlight>{link.name}</HoverTextHighlight>
+                                        <HoverTextHighlight>{t(`links.${link.key}`)}</HoverTextHighlight>
                                     </Link>
                                 </li>
                             ))}
@@ -69,13 +62,18 @@ export const FooterNav = () => {
                     {/* Company Column */}
                     <div className="flex-[1_1_45%] md:flex-[1_1_150px] xl:flex-[1_0_auto]">
                         <h3 className="text-sm font-semibold uppercase tracking-tighter text-zinc-800 footer-nav-header min-[2560px]:text-base">
-                            <span className='text-zinc-400'># </span> <EncryptedText text="Company" />
+                            <span className='text-zinc-400'># </span> <EncryptedText text={t('company')} />
                         </h3>
                         <ul className="mt-5 flex flex-col gap-2 md:mt-6 ">
-                            {LINKS.company.map((link) => (
-                                <li key={link.name}>
+                            {[
+                                { key: 'about', href: '#' },
+                                { key: 'careers', href: '#' },
+                                { key: 'newsroom', href: '#' },
+                                { key: 'security', href: '#' },
+                            ].map((link) => (
+                                <li key={link.key}>
                                     <Link href={link.href} className="text-zinc-500 hover:text-black transition-colors duration-300 xl:whitespace-nowrap text-sm font-medium footer-nav-link min-[2560px]:text-base">
-                                        <HoverTextHighlight>{link.name}</HoverTextHighlight>
+                                        <HoverTextHighlight>{t(`links.${link.key}`)}</HoverTextHighlight>
                                     </Link>
                                 </li>
                             ))}
@@ -124,10 +122,10 @@ export const FooterNav = () => {
                         </div>
                         <div>
                             <div className="mb-1 font-bold tracking-widest uppercase text-[#059669] text-[10px]">
-                                See how it works.
+                                {t('videoWidget.cta')}
                             </div>
                             <div className="text-sm font-medium leading-tight text-zinc-900">
-                                HRSEO Platform
+                                {t('videoWidget.platform')}
                             </div>
                         </div>
                     </a>

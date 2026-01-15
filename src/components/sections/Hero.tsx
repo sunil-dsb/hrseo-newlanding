@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from 'react';
 import { m } from 'framer-motion';
@@ -12,8 +12,10 @@ import { MdKeyboardArrowRight } from 'react-icons/md';
 import { IoMdArrowForward } from 'react-icons/io';
 import Image from 'next/image';
 import { ButtonSlide } from '@/components/ui/ButtonSlide';
+import { useTranslations } from 'next-intl';
 
 export default function Hero() {
+    const t = useTranslations('Hero');
     const [spinCycle, setSpinCycle] = React.useState(0);
 
     const handleTextComplete = () => {
@@ -25,8 +27,8 @@ export default function Hero() {
             <div className='max-w-5xl 2xl:max-w-7xl container-4k mx-auto w-full px-4'>
                 <BlurFade delay={0.1}>
                     <p className='text-2xl min-[2560px]:text-3xl text-black mb-6'>
-                        You don&apos;t need <EncryptedText
-                            text="expensive SEO tools"
+                        {t('preTitlePrefix')}<EncryptedText
+                            text={t('preTitleEncrypted')}
                             className="text-zinc-400"
                             revealDelayMs={50}
                             onComplete={handleTextComplete}
@@ -35,8 +37,8 @@ export default function Hero() {
                 </BlurFade>
 
                 <BlurFade delay={0.2}>
-                    <h1 className='text-6xl sm:text-7xl md:text-[6.875rem] min-[2560px]:text-[10.3rem] font-bold tracking-tighter mb-12'>
-                        You need a{' '}
+                    <h1 className='text-6xl sm:text-7xl md:text-[6.5rem] min-[2560px]:text-[10.3rem] font-bold tracking-tighter mb-12'>
+                        {t('titlePrefix')}
                         <span className='inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 min-[2560px]:h-24 min-[2560px]:w-24 rounded-full bg-brand-primary mx-2 align-middle'>
                             <m.span
                                 animate={{ rotate: spinCycle * 720 }}
@@ -46,7 +48,7 @@ export default function Hero() {
                                 <HiLightningBolt className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 min-[2560px]:h-12 min-[2560px]:w-12 text-white" />
                             </m.span>
                         </span>
-                        <TextHighlight className="font-bold relative z-20">powerful</TextHighlight>
+                        <TextHighlight className="font-bold relative z-20">{t('titleHighlight1')}</TextHighlight>
                         <br />
                         <span className='inline-flex items-center mx-2 sm:mx-3 md:mx-4 align-middle'>
                             <m.span
@@ -66,15 +68,14 @@ export default function Hero() {
                                 </m.span>
                             </span>
                         </span>
-                        <TextHighlight className="font-bold relative z-20" color="#ebebebff" delay={1.5}>ai seo</TextHighlight> tools.
+                        <TextHighlight className="font-bold relative z-20" color="#ebebebff" delay={1.5}>{t('titleHighlight2')}</TextHighlight>{t('titleSuffix')}
                     </h1>
                 </BlurFade>
 
                 <div className='flex flex-col md:flex-row md:items-start gap-8 md:gap-16 mb-12 max-w-5xl 2xl:max-w-7xl 2xl:gap-24'>
                     <BlurFade delay={0.3}>
                         <p className='text-lg md:text-xl min-[2560px]:text-2xl text-zinc-500 max-w-sm 2xl:max-w-lg font-light'>
-                            Boost your rankings with AI-powered insights that feel like magic.
-                            Simple, fast, effective.
+                            {t('description')}
                         </p>
                     </BlurFade>
 
@@ -120,7 +121,7 @@ export default function Hero() {
                                     </span>
                                 </div>
                                 <p className='text-sm min-[2560px]:text-lg text-zinc-500 font-light'>
-                                    Trusted by 10,000+ marketers
+                                    {t('trustedBy')}
                                 </p>
                             </div>
                         </div>
@@ -139,7 +140,7 @@ export default function Hero() {
                                 </span>
                             }
                         >
-                            Start Free Trial
+                            {t('cta')}
                         </ButtonSlide>
 
                         <ButtonSlide
@@ -151,7 +152,7 @@ export default function Hero() {
                                 </span>
                             }
                         >
-                            See How It Works
+                            {t('secondaryCta')}
                         </ButtonSlide>
                     </div>
                 </BlurFade>

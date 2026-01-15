@@ -1,0 +1,59 @@
+{
+  "Hero": {
+    "preTitlePrefix": "You don't need ",
+    "preTitleEncrypted": "expensive SEO tools",
+    "titlePrefix": "You need a ",
+    "titleHighlight1": "powerful",
+    "titleHighlight2": "ai seo",
+    "titleSuffix": " tools.",
+    "description": "Boost your rankings with AI-powered insights that feel like magic. Simple, fast, effective.",
+    "trustedBy": "Trusted by 10,000+ marketers",
+    "cta": "Start Free Trial",
+    "secondaryCta": "See How It Works"
+  },
+  "Navbar": {
+    "product": "Product",
+    "pricing": "Pricing",
+    "resources": "Resources",
+    "enterprise": "Enterprise",
+    "getStarted": "Get Started",
+    "language": "Language"
+  },
+  "Footer": {
+    "products": "Products",
+    "resources": "Resources",
+    "company": "Company",
+    "links": {
+      "keywordResearch": "Keyword Research",
+      "rankTracking": "Rank Tracking",
+      "backlinkAnalysis": "Backlink Analysis",
+      "siteAudit": "Site Audit",
+      "seoReporting": "SEO Reporting",
+      "customers": "Customers",
+      "resourceCenter": "Resource Center",
+      "webinars": "Webinars",
+      "blog": "Blog",
+      "videos": "Videos",
+      "about": "About",
+      "careers": "Careers",
+      "newsroom": "Newsroom",
+      "security": "Security"
+    },
+    "copyright": "© 2026 HRSEO. All rights reserved.",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "videoWidget": {
+      "cta": "See how it works.",
+      "platform": "HRSEO Platform"
+    }
+  },
+  "Metadata": {
+    "title": "HRSEO - SEO Tool",
+    "description": "Hazlo Rentable - HRSEO a SEO tools package. Productive keyword research, SERP analysis, rank tracking and backlink analysis thanks to super easy to use tools."
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, the page you are looking for does not exist.",
+    "homeButton": "Go Back Home"
+  }
+}

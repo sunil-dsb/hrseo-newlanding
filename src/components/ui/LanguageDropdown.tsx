@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { BiGlobe } from "react-icons/bi";
 import { languages, type Language } from "@/components/icons/FlagIcons";
+import { usePathname, useRouter } from '@/i18n/routing';
+import { useLocale } from 'next-intl';
 
 interface LanguageDropdownProps {
     className?: string;
@@ -16,18 +18,22 @@ export function LanguageDropdown({
     align = "right"
 }: LanguageDropdownProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const [currentLang, setCurrentLang] = useState<Language>(languages[0]);
+    const locale = useLocale();
+    const router = useRouter();
+    const pathname = usePathname();
+
+    // Find current lang based on URL locale
+    const [currentLang, setCurrentLang] = useState<Language>(
+        languages.find(l => l.code === locale) || languages[0]
+    );
+
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    // Sync state with locale updates
     useEffect(() => {
-        const savedLanguage = localStorage.getItem("language");
-        if (savedLanguage) {
-            const foundLang = languages.find(lang => lang.label === savedLanguage);
-            if (foundLang) {
-                setCurrentLang(foundLang);
-            }
-        }
-    }, []);
+        const found = languages.find(l => l.code === locale);
+        if (found) setCurrentLang(found);
+    }, [locale]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -56,9 +62,8 @@ export function LanguageDropdown({
     }, [isOpen]);
 
     const handleLanguageChange = (language: Language) => {
-        setCurrentLang(language);
-        localStorage.setItem("language", language.label);
         setIsOpen(false);
+        router.replace(pathname, { locale: language.code });
     };
 
     const toggleDropdown = () => {
