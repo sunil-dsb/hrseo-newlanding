@@ -23,6 +23,67 @@
     --color-sidebar-primary: var(--sidebar-primary);
     --color-sidebar-foreground: var(--sidebar-foreground);
     --color-sidebar: var(--sidebar);
+    --animate-noise-grain: noise-grain 0.2s steps(3) infinite;
+    --animate-fade-in: fade-in 0.5s ease-out forwards;
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes noise-grain {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        10% {
+            transform: translate(-5%, -5%);
+        }
+
+        20% {
+            transform: translate(-10%, 5%);
+        }
+
+        30% {
+            transform: translate(5%, -10%);
+        }
+
+        40% {
+            transform: translate(-5%, 15%);
+        }
+
+        50% {
+            transform: translate(-10%, 5%);
+        }
+
+        60% {
+            transform: translate(15%, 0);
+        }
+
+        70% {
+            transform: translate(0, 10%);
+        }
+
+        80% {
+            transform: translate(-15%, 0);
+        }
+
+        90% {
+            transform: translate(10%, 5%);
+        }
+
+        100% {
+            transform: translate(5%, 0);
+        }
+    }
+
     --color-chart-5: var(--chart-5);
     --color-chart-4: var(--chart-4);
     --color-chart-3: var(--chart-3);
@@ -93,6 +154,27 @@ body {
 ::-moz-selection {
     background: #fbb0404d !important;
     color: inherit;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d4d4d8;
+    /* zinc-300 */
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a1a1aa;
+    /* zinc-400 */
 }
 
 /* Button Animation */

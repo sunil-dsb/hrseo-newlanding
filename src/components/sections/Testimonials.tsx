@@ -122,7 +122,7 @@ export const Testimonials = () => {
 
 const TestimonialCard = ({ data, index }: { data: typeof TESTIMONIALS[0], index: number }) => {
     return (
-        <m.div
+        <m.figure
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -130,27 +130,27 @@ const TestimonialCard = ({ data, index }: { data: typeof TESTIMONIALS[0], index:
             className="relative p-3 group"
         >
             {/* Top Border & Dots */}
-            <div className="absolute top-0 left-0 right-0 h-[0.8px] bg-black/6" />
-            <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
-            <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
+            <div className="absolute top-0 left-0 right-0 h-[0.8px] bg-black/6" aria-hidden="true" />
+            <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
+            <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
 
             {/* Bottom Border & Dots */}
-            <div className="absolute bottom-0 left-0 right-0 h-[0.8px] bg-black/6" />
-            <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-300 rounded-full" />
-            <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-300 rounded-full" />
+            <div className="absolute bottom-0 left-0 right-0 h-[0.8px] bg-black/6" aria-hidden="true" />
+            <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-300 rounded-full" aria-hidden="true" />
+            <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-300 rounded-full" aria-hidden="true" />
 
             {/* Card Content - Inset from the borders */}
             <div className="bg-white rounded-2xl p-6 flex flex-col gap-6 border border-zinc-100 transition-all duration-300">
 
                 {/* 1. Stars */}
-                <div className="flex gap-0.5">
+                <div className="flex gap-0.5" aria-label="5 out of 5 stars">
                     {[1, 2, 3, 4, 5].map((s) => (
-                        <FaStar key={s} className="w-2.5 h-2.5 text-[#F15A29]" />
+                        <FaStar key={s} className="w-2.5 h-2.5 text-[#F15A29]" aria-hidden="true" />
                     ))}
                 </div>
 
                 {/* 2. User Profile */}
-                <div className="flex items-center gap-4">
+                <figcaption className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-zinc-100 overflow-hidden relative shrink-0">
                         <Image
                             src={data.avatar}
@@ -168,24 +168,24 @@ const TestimonialCard = ({ data, index }: { data: typeof TESTIMONIALS[0], index:
                             {data.handle}
                         </p>
                     </div>
-                </div>
+                </figcaption>
 
                 {/* 3. Review Text */}
-                <p className="text-zinc-500 text-sm leading-relaxed flex-1 font-light min-[2560px]:text-base">
-                    {data.text}
-                </p>
+                <blockquote className="text-zinc-500 text-sm leading-relaxed flex-1 font-light min-[2560px]:text-base">
+                    "{data.text}"
+                </blockquote>
 
                 {/* 4. Footer: Location // Date */}
                 <div className="pt-2 border-t border-zinc-100/0">
                     <p className="text-sm text-black font-light opacity-90 flex items-center min-[2560px]:text-base">
                         {data.tag}
-                        <span className="text-zinc-400 mx-2">{'//'}</span>
+                        <span className="text-zinc-400 mx-2" aria-hidden="true">{'//'}</span>
                         <span className="text-zinc-400 font-light">
                             <EncryptedText text={data.date} />
                         </span>
                     </p>
                 </div>
             </div>
-        </m.div>
+        </m.figure>
     );
 };

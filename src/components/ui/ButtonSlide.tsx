@@ -15,8 +15,9 @@ export const ButtonSlide = ({
     icon,
     className,
     variant = 'light',
+    as: Component = 'button',
     ...props
-}: ButtonSlideProps) => {
+}: ButtonSlideProps & { as?: React.ElementType }) => {
     // Base styles
     const baseStyles = "relative inline-flex items-center justify-between w-full px-6 py-4 rounded-lg font-semibold overflow-hidden group cursor-pointer transition-all";
 
@@ -27,7 +28,7 @@ export const ButtonSlide = ({
     };
 
     return (
-        <button
+        <Component
             className={cn(baseStyles, variants[variant], className)}
             {...props}
         >
@@ -39,13 +40,13 @@ export const ButtonSlide = ({
                 </div>
 
                 {/* Hidden Content (Slides detailed Up from bottom) */}
-                <div className="absolute top-0 left-0 w-full flex items-center h-full transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:translate-y-0">
+                <div className="absolute top-0 left-0 w-full flex items-center h-full transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:translate-y-0" aria-hidden="true">
                     <span>{children}</span>
                 </div>
             </div>
 
             {/* Static Icon */}
             {icon && <div className="ml-3 shrink-0 relative z-10">{icon}</div>}
-        </button>
+        </Component>
     );
 };

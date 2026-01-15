@@ -1,7 +1,7 @@
 'use client';
 
 import { m } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { LanguageDropdown } from '@/components/ui/LanguageDropdown';
 
 import { useTranslations } from 'next-intl';
@@ -25,6 +25,7 @@ export const FooterBrand = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-auto w-full translate-y-[45%]"
                         preserveAspectRatio="xMidYMid meet"
+                        aria-hidden="true"
                     >
                         <m.text
                             x="50%"
@@ -76,7 +77,7 @@ export const FooterBrand = () => {
             <div className='relative z-20 mx-auto max-w-5xl 2xl:max-w-7xl px-6 pb-8'>
                 <div className="flex flex-col items-end gap-5 border-t border-transparent pt-8 lg:flex-row lg:justify-between">
                     <div className="flex flex-1 flex-wrap items-center justify-center gap-9 gap-y-5 text-sm font-medium tracking-wide text-zinc-500 md:justify-start footer-bottom-text min-[2560px]:text-base">
-                        <div className="opacity-60">{t('copyright')}</div>
+                        <div>{t('copyright')}</div>
                         <div className="flex items-center gap-8">
                             <Link href="#" className="text-zinc-900/60 transition-colors hover:text-[#F15A29] hover:underline">{t('terms')}</Link>
                             <Link href="#" className="text-zinc-900/60 transition-colors hover:text-[#F15A29] hover:underline">{t('privacy')}</Link>

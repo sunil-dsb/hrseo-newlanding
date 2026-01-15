@@ -52,8 +52,9 @@
     "description": "Hazlo Rentable - HRSEO un package d'outils SEO. Recherche de mots-clés productive, analyse SERP, suivi de classement et analyse de backlinks grâce à des outils super faciles à utiliser."
   },
   "NotFound": {
-    "title": "Page Non Trouvée",
-    "description": "Désolé, la page que vous recherchez n'existe pas.",
+    "label": "Erreur 404",
+    "title": "Page <highlight>Non Trouvée</highlight>",
+    "description": "La page que vous recherchez n'existe pas ou a peut-être été déplacée.",
     "homeButton": "Retour à l'Accueil"
   }
 }

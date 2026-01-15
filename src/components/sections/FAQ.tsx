@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { m, AnimatePresence } from 'framer-motion';
 import { FiPlus } from 'react-icons/fi';
 import { GoArrowUpRight } from 'react-icons/go';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { TextHighlight } from '@/components/ui/TextHighlight';
 import { EncryptedText } from '@/components/ui/EncryptedText';
 
@@ -117,13 +117,14 @@ export const FAQ = () => {
 
 const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boolean, onToggle: () => void }) => {
     return (
-        <m.div
-            layout
+        <m.button
             onClick={onToggle}
-            className={`relative bg-white rounded-xl p-6 md:p-8 cursor-pointer overflow-hidden duration-300 disable-animation-mobile`}
+            className={`w-full text-left relative bg-white rounded-xl p-6 md:p-8 cursor-pointer overflow-hidden duration-300 disable-animation-mobile group focus:outline-none focus:ring-2 focus:ring-brand-primary/20`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
+            aria-expanded={isOpen}
+            aria-controls={`faq-answer-${item.id}`}
         >
             {/* Sliding Header Container: Moves left so Question aligns with start */}
             <m.div
@@ -139,7 +140,7 @@ const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boo
                 </span>
 
                 {/* Question */}
-                <h3 className="text-zinc-700 font-normal leading-snug w-full pr-12 text-lg transition-colors duration-300 min-[2560px]:text-xl">
+                <h3 className="text-zinc-700 font-normal leading-snug w-full pr-12 text-lg transition-colors duration-300 min-[2560px]:text-xl group-hover:text-black">
                     {item.question}
                 </h3>
             </m.div>
@@ -148,11 +149,13 @@ const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boo
             <AnimatePresence>
                 {isOpen && (
                     <m.div
+                        id={`faq-answer-${item.id}`}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="text-zinc-500 font-light leading-relaxed mt-4 min-[2560px]:text-base min-[2560px]:mt-6"
+                        role="region"
                     >
                         {item.answer}
                     </m.div>
@@ -160,9 +163,9 @@ const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boo
             </AnimatePresence>
 
             {/* Plus Icon - Fixed Position */}
-            <div className="absolute top-6 right-6 md:top-8 md:right-8 text-zinc-900 z-20">
+            <div className="absolute top-6 right-6 md:top-8 md:right-8 text-zinc-900 z-20 pointer-events-none">
                 <FiPlus className={`w-5 h-5 transition-transform duration-300 min-[2560px]:w-6 min-[2560px]:h-6 ${isOpen ? "rotate-45" : ""}`} />
             </div>
-        </m.div>
+        </m.button>
     );
 };

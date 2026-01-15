@@ -9,13 +9,14 @@ export function GridLines() {
                 {[0, 1, 2].map((index) => (
                     <m.div
                         key={index}
-                        initial={{ height: 0 }}
-                        animate={{ height: '100%' }}
+                        initial={{ scaleY: 0 }}
+                        animate={{ scaleY: 1 }}
                         transition={{
                             duration: 2.5,
                             delay: 0.2 + index * 0.1,
                             ease: [0.22, 1, 0.36, 1],
                         }}
+                        style={{ originY: 0 }}
                         className={`relative h-full ${index === 0 ? 'border-l border-black/6' : ''} ${index === 2 ? 'border-r border-black/6' : ''}`}
                     >
                         {(index === 0 || index === 1) && (

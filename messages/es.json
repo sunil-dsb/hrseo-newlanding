@@ -52,8 +52,9 @@
     "description": "Hazlo Rentable - HRSEO paquete de herramientas SEO. Investigación de palabras clave productiva, análisis SERP, rastreo de rankings y análisis de backlinks gracias a herramientas súper fáciles de usar."
   },
   "NotFound": {
-    "title": "Página No Encontrada",
-    "description": "Lo sentimos, la página que buscas no existe.",
+    "label": "Error 404",
+    "title": "Página <highlight>No Encontrada</highlight>",
+    "description": "La página que buscas no existe o puede haber sido movida.",
     "homeButton": "Volver al Inicio"
   }
 }

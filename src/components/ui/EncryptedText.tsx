@@ -140,30 +140,32 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
     if (!text) return null;
 
     return (
+        
         <m.span
             ref={ref}
-            className={cn(className)}
-            aria-label={text}
-            role="text"
+            className={cn("inline-block relative", className)}
         >
-            {text.split("").map((char, index) => {
-                const isRevealed = index < revealCount;
-                const displayChar = isRevealed
-                    ? char
-                    : char === " "
-                        ? " "
-                        : (!isMounted ? char : (scrambleCharsRef.current[index] ??
-                            generateRandomCharacter(charset)));
+            <span className="sr-only">{text}</span>
+            <span aria-hidden="true">
+                {text.split("").map((char, index) => {
+                    const isRevealed = index < revealCount;
+                    const displayChar = isRevealed
+                        ? char
+                        : char === " "
+                            ? " "
+                            : (!isMounted ? char : (scrambleCharsRef.current[index] ??
+                                generateRandomCharacter(charset)));
 
-                return (
-                    <span
-                        key={index}
-                        className={cn(isRevealed ? revealedClassName : encryptedClassName)}
-                    >
-                        {displayChar}
-                    </span>
-                );
-            })}
+                    return (
+                        <span
+                            key={index}
+                            className={cn(isRevealed ? revealedClassName : encryptedClassName)}
+                        >
+                            {displayChar}
+                        </span>
+                    );
+                })}
+            </span>
         </m.span>
     );
 };

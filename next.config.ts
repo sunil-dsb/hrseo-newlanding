@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.prod.website-files.com',
       },
     ],
+    qualities: [75, 85, 95],
+  },
+  experimental: {
+    optimizeCss: true, // Requires 'critters' package
   },
 };
 

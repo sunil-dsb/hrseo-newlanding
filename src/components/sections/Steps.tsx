@@ -120,7 +120,7 @@ const cardVariants: Variants = {
 export const Steps = () => {
     return (
         <section className="font-sans relative">
-            <div className="max-w-5xl 2xl:max-w-7xl container-4k mx-auto px-4 py-20">
+            <div className="max-w-5xl 2xl:max-w-7xl container-4k mx-auto px-4 py-20 md:py-0">
                 <div className="text-center max-w-2xl mx-auto">
                     <BlurFade delay={0.1}>
                         <h2 className="text-5xl sm:text-6xl font-bold text-black tracking-tighter leading-[1.1]">
@@ -133,6 +133,7 @@ export const Steps = () => {
                                     viewport={{ once: true }}
                                     transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.2 }}
                                     className="flex items-center justify-center"
+                                    aria-hidden="true"
                                 >
                                     <TrendingUpIcon className="w-6 h-6 sm:w-7 sm:h-7 min-[2560px]:w-12 min-[2560px]:h-12 text-white" />
                                 </m.span>
@@ -148,24 +149,27 @@ export const Steps = () => {
                 </div>
 
                 {/* Mobile/Tablet View (Standard Grid) - Hidden on Desktop */}
-                <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 lg:gap-8">
+                <ol className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 lg:gap-8 list-none m-0 p-0">
                     {STEPS.map((step, index) => (
-                        <StaticCard key={step.id} step={step} index={index} />
+                        <li key={step.id}>
+                            <StaticCard step={step} index={index} />
+                        </li>
                     ))}
-                </div>
+                </ol>
 
                 {/* Desktop View (Auto-Play Animation) - Hidden on Mobile/Tablet */}
                 <div className="hidden lg:block relative h-[650px] w-full mt-12 md:mt-0 min-[2560px]:pt-32 min-[2560px]:mb-12">
-                    <div className="relative w-full h-full steps-cards-4k">
+                    <ol className="relative w-full h-full steps-cards-4k list-none m-0 p-0">
                         {STEPS.map((step, index) => (
-                            <AnimatedCard
-                                key={step.id}
-                                step={step}
-                                index={index}
-                                totalCards={STEPS.length}
-                            />
+                            <li key={step.id}>
+                                <AnimatedCard
+                                    step={step}
+                                    index={index}
+                                    totalCards={STEPS.length}
+                                />
+                            </li>
                         ))}
-                    </div>
+                    </ol>
                 </div>
             </div>
         </section >
@@ -174,24 +178,24 @@ export const Steps = () => {
 
 // Static Card for Mobile/Tablet
 const StaticCard = ({ step, index }: { step: typeof STEPS[0], index: number }) => (
-    <BlurFade delay={0.2 + (index * 0.1)} className="disable-animation-mobile">
-        <div className="relative p-3 h-full">
+    <BlurFade delay={0.2 + (index * 0.1)} className="disable-animation-mobile h-full">
+        <article className="relative p-3 h-full">
             {/* Top Border & Dots */}
-            <div className="absolute top-0 left-0 right-0 h-[0.8px] bg-black/5" />
-            <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
-            <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
+            <div className="absolute top-0 left-0 right-0 h-[0.8px] bg-black/5" aria-hidden="true" />
+            <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
+            <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
 
             {/* Bottom Border & Dots */}
-            <div className="absolute bottom-0 left-0 right-0 h-[0.8px] bg-black/5" />
-            <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
-            <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
+            <div className="absolute bottom-0 left-0 right-0 h-[0.8px] bg-black/5" aria-hidden="true" />
+            <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
+            <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
 
             <div className="bg-white rounded-xl border border-zinc-100 p-8 h-[420px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 shadow-sm hover:shadow-lg">
                 <div className="flex justify-between items-start mb-6">
                     <span className="text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                         <EncryptedText text={`// Step ${step.step}`} />
                     </span>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1" aria-hidden="true">
                         <span className="text-2xl font-bold text-zinc-900 leading-none">{step.step}</span>
                         <div className="flex gap-0.5 ml-1">
                             <div className={`w-1 h-1 rounded-full ${index >= 0 ? 'bg-[#F15A29]' : 'bg-zinc-200'}`}></div>
@@ -204,11 +208,11 @@ const StaticCard = ({ step, index }: { step: typeof STEPS[0], index: number }) =
                 <h3 className="text-2xl font-bold text-black mb-2 tracking-tight line-clamp-2 md:min-h-[64px]">{step.title}</h3>
                 <p className="text-sm text-zinc-500 font-light mb-8 max-w-[200px] line-clamp-3">{step.description}</p>
 
-                <div className="flex-1 w-full rounded-lg overflow-hidden relative mt-auto border border-zinc-100">
+                <div className="flex-1 w-full rounded-lg overflow-hidden relative mt-auto border border-zinc-100" aria-hidden="true">
                     {step.visual}
                 </div>
             </div>
-        </div>
+        </article>
     </BlurFade>
 );
 
@@ -232,23 +236,23 @@ const AnimatedCard = ({ step, index, totalCards }: AnimatedCardProps) => {
                 zIndex: totalCards - index,
             }}
         >
-            <div className="relative p-3 h-full w-full">
+            <article className="relative p-3 h-full w-full">
                 {/* Top Border & Dots */}
-                <div className="absolute top-0 left-0 right-0 h-[0.8px] bg-black/5" />
-                <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
-                <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
+                <div className="absolute top-0 left-0 right-0 h-[0.8px] bg-black/5" aria-hidden="true" />
+                <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
+                <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
 
                 {/* Bottom Border & Dots */}
-                <div className="absolute bottom-0 left-0 right-0 h-[0.8px] bg-black/5" />
-                <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
-                <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
+                <div className="absolute bottom-0 left-0 right-0 h-[0.8px] bg-black/5" aria-hidden="true" />
+                <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
+                <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
 
                 <div className="bg-white rounded-xl border border-zinc-100 p-8 h-full flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-lg">
                     <div className="flex justify-between items-start mb-6">
                         <span className="text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                             <EncryptedText text={`// Step ${step.step}`} />
                         </span>
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-1" aria-hidden="true">
                             <span className="text-2xl font-bold text-zinc-900 leading-none">{step.step}</span>
                             <div className="flex gap-0.5 ml-1">
                                 <div className={`w-1 h-1 rounded-full ${index >= 0 ? 'bg-[#F15A29]' : 'bg-zinc-200'}`}></div>
@@ -261,11 +265,11 @@ const AnimatedCard = ({ step, index, totalCards }: AnimatedCardProps) => {
                     <h3 className="text-2xl font-bold text-black mb-2 tracking-tight line-clamp-2 md:min-h-[64px] min-[2560px]:text-3xl min-[2560px]:mb-4">{step.title}</h3>
                     <p className="text-sm text-zinc-500 font-light mb-8 max-w-[200px] line-clamp-3 min-[2560px]:text-base min-[2560px]:max-w-[22rem]">{step.description}</p>
 
-                    <div className="flex-1 w-full rounded-lg overflow-hidden relative mt-auto border border-zinc-100">
+                    <div className="flex-1 w-full rounded-lg overflow-hidden relative mt-auto border border-zinc-100" aria-hidden="true">
                         {step.visual}
                     </div>
                 </div>
-            </div>
+            </article>
         </m.div>
     );
 };

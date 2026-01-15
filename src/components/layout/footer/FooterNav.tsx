@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import Image from 'next/image';
 import { FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { EncryptedText } from '@/components/ui/EncryptedText';
@@ -90,13 +90,13 @@ export const FooterNav = () => {
                     </div>
 
                     <div className="mb-4 flex gap-2">
-                        <a href="#" className="flex size-6 items-center justify-center rounded-full bg-[#F15A29] p-1 text-white transition-all hover:bg-black hover:text-white">
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="flex size-6 items-center justify-center rounded-full bg-[#F15A29] p-1 text-white transition-all hover:bg-black hover:text-white" aria-label="LinkedIn">
                             <FaLinkedin className="size-full" />
                         </a>
-                        <a href="#" className="flex size-6 items-center justify-center rounded-full bg-[#F15A29] p-1 text-white transition-all hover:bg-black hover:text-white">
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="flex size-6 items-center justify-center rounded-full bg-[#F15A29] p-1 text-white transition-all hover:bg-black hover:text-white" aria-label="Twitter">
                             <FaTwitter className="size-full" />
                         </a>
-                        <a href="#" className="flex size-6 items-center justify-center rounded-full bg-[#F15A29] p-1 text-white transition-all hover:bg-black hover:text-white">
+                        <a href="#" target="_blank" rel="noopener noreferrer" className="flex size-6 items-center justify-center rounded-full bg-[#F15A29] p-1 text-white transition-all hover:bg-black hover:text-white" aria-label="YouTube">
                             <FaYoutube className="size-full" />
                         </a>
                     </div>
@@ -110,6 +110,7 @@ export const FooterNav = () => {
                                 src="/assets/demo-thumbnail.jpg"
                                 alt="Demo"
                                 fill
+                                sizes="(max-width: 768px) 100vw, 300px"
                                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 flex items-center justify-center bg-black/5">

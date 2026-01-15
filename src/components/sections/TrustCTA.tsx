@@ -9,7 +9,7 @@ import { FaStar } from 'react-icons/fa';
 
 export default function TrustCTA() {
     return (
-        <section className='py-20 px-2 md:px-6'>
+        <section className='py-20 px-6'>
             <div className='max-w-5xl 2xl:max-w-7xl container-4k mx-auto w-full'>
                 <BlurFade delay={0.1}>
                     <div className='relative w-full rounded-2xl overflow-hidden h-[36rem] bg-zinc-900 group'>
@@ -19,6 +19,7 @@ export default function TrustCTA() {
                             fill
                             className='object-cover opacity-70 transition-transform duration-700'
                             quality={95}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                         />
 
                         <div className='absolute inset-0 p-4 sm:p-12 md:p-16 flex flex-col justify-between text-center md:text-left'>
@@ -41,14 +42,13 @@ export default function TrustCTA() {
                                     href="#reviews"
                                     whileHover={{ x: 5 }}
                                     className='inline-flex items-center gap-2 text-white hover:text-[#F15A29] transition-colors text-lg'
-                                    aria-label="Read all user reviews"
                                 >
                                     <EncryptedText text="Leave a review" />
-                                    <FiArrowUpRight className="w-5 h-5" />
+                                    <FiArrowUpRight className="w-5 h-5" aria-hidden="true" />
                                 </m.a>
 
                                 <div className='flex items-center gap-4 p-2'>
-                                    <div className='flex -space-x-4'>
+                                    <div className='flex -space-x-4' aria-hidden="true">
                                         {[
                                             "/assets/avatar-1.jpg",
                                             "/assets/avatar-2.jpg",
@@ -62,7 +62,7 @@ export default function TrustCTA() {
                                             >
                                                 <Image
                                                     src={img}
-                                                    alt={`Reviewer ${i + 1}`}
+                                                    alt=""
                                                     width={40}
                                                     height={40}
                                                     className="w-full h-full object-cover grayscale opacity-80"
@@ -71,11 +71,11 @@ export default function TrustCTA() {
                                         ))}
                                     </div>
                                     <div className='flex flex-col text-center md:text-left'>
-                                        <div className='flex items-center gap-1.5'>
-                                            <span className='text-white font-bold text-base'>4.9/5</span>
+                                        <div className='flex items-center gap-1.5' aria-label="4.9 out of 5 stars" role="img">
+                                            <span className='text-white font-bold text-base' aria-hidden="true">4.9/5</span>
                                             <span className='flex text-[#F15A29] gap-0.5'>
                                                 {[1, 2, 3, 4, 5].map((s) => (
-                                                    <FaStar key={s} className="w-3 h-3" />
+                                                    <FaStar key={s} className="w-3 h-3" aria-hidden="true" />
                                                 ))}
                                             </span>
                                         </div>

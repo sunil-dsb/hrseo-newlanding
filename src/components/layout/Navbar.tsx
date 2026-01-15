@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import Image from 'next/image';
 import { m, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useTranslations } from 'next-intl';
@@ -85,39 +85,20 @@ export function Navbar() {
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             className="md:hidden p-2 text-zinc-600 hover:text-black transition-colors"
+                            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                         >
-                            {mobileMenuOpen ? (
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <path d="M18 6 6 18" />
-                                    <path d="m6 6 12 12" />
-                                </svg>
-                            ) : (
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <line x1="4" x2="20" y1="12" y2="12" />
-                                    <line x1="4" x2="20" y1="6" y2="6" />
-                                    <line x1="4" x2="20" y1="18" y2="18" />
-                                </svg>
-                            )}
+                            <div className="relative w-6 h-2.5 flex flex-col justify-between items-center group">
+                                <m.span
+                                    animate={mobileMenuOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    className="w-6 h-0.5 bg-zinc-600 group-hover:bg-black rounded-full origin-center"
+                                />
+                                <m.span
+                                    animate={mobileMenuOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    className="w-6 h-0.5 bg-zinc-600 group-hover:bg-black rounded-full origin-center"
+                                />
+                            </div>
                         </button>
                     </div>
                 </m.div>
@@ -133,16 +114,18 @@ export function Navbar() {
                         opacity: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } // Synced fade with navbar
                     }}
                 >
-                    <button
-                        className="btn-anim relative overflow-hidden md:h-12 md:w-35 rounded-full bg-brand-primary text-white text-sm font-bold shadow-xl shadow-brand-primary/20 hover:shadow-brand-primary/30 transition-all shrink-0 flex items-center justify-center p-4 px-6 md:p-0 navbar-cta-btn"
-                    >
-                        <div className='span-visible'>
-                            <span>{t('getStarted')}</span>
-                        </div>
-                        <div className='span-hidden absolute inset-0'>
-                            <span>{t('getStarted')}</span>
-                        </div>
-                    </button>
+                    <Link href="/signup">
+                        <button
+                            className="btn-anim relative overflow-hidden md:h-12 md:w-35 rounded-full bg-brand-primary text-white text-sm font-bold shadow-xl shadow-brand-primary/20 hover:shadow-brand-primary/30 transition-all shrink-0 flex items-center justify-center p-4 px-6 md:p-0 navbar-cta-btn"
+                        >
+                            <div className='span-visible'>
+                                <span>{t('getStarted')}</span>
+                            </div>
+                            <div className='span-hidden absolute inset-0'>
+                                <span>{t('getStarted')}</span>
+                            </div>
+                        </button>
+                    </Link>
                 </m.div>
             </div>
 
@@ -156,6 +139,9 @@ export function Navbar() {
                 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="absolute top-full left-0 w-full px-4 overflow-hidden pointer-events-auto md:hidden"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Mobile Navigation"
             >
                 <div className="bg-white/95 backdrop-blur-md rounded-2xl border border-zinc-200 shadow-xl p-4 flex flex-col gap-4">
                     <nav className="flex flex-col gap-2">
@@ -175,9 +161,11 @@ export function Navbar() {
                             <span className="text-zinc-500 font-medium">{t('language')}</span>
                             <LanguageDropdown variant="footer" align="right" />
                         </div>
-                        <button className="w-full py-3 rounded-xl bg-brand-primary text-white font-bold text-center shadow-lg shadow-brand-primary/20">
-                            {t('getStarted')}
-                        </button>
+                        <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
+                            <button className="w-full py-3 rounded-xl bg-brand-primary text-white font-bold text-center shadow-lg shadow-brand-primary/20">
+                                {t('getStarted')}
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </m.div>

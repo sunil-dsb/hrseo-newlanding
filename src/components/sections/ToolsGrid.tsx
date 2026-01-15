@@ -135,6 +135,7 @@ export const ToolsGrid = () => {
                                             alt={partner.alt}
                                             fill
                                             className="object-contain"
+                                            sizes="80px"
                                         />
                                     </div>
                                 ))}
@@ -144,9 +145,9 @@ export const ToolsGrid = () => {
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 md:gap-x-2">
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 md:gap-x-2 list-none p-0 m-0">
                     {TOOLS.map((tool, i) => (
-                        <m.div
+                        <m.li
                             key={tool.id}
                             initial={{ opacity: 0, y: 20, scale: 0.95 }}
                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -162,14 +163,14 @@ export const ToolsGrid = () => {
                             className="relative p-3 group disable-animation-mobile"
                         >
                             {/* Top Border & Dots */}
-                            <div className="absolute top-0 left-0 right-0 h-[0.05rem] bg-black/6" />
-                            <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
-                            <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" />
+                            <div className="absolute top-0 left-0 right-0 h-[0.05rem] bg-black/6" aria-hidden="true" />
+                            <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
+                            <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-200 rounded-full" aria-hidden="true" />
 
                             {/* Bottom Border & Dots */}
-                            <div className="absolute bottom-0 left-0 right-0 h-[0.05rem] bg-black/6" />
-                            <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-300 rounded-full" />
-                            <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-300 rounded-full" />
+                            <div className="absolute bottom-0 left-0 right-0 h-[0.05rem] bg-black/6" aria-hidden="true" />
+                            <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-zinc-300 rounded-full" aria-hidden="true" />
+                            <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 bg-zinc-300 rounded-full" aria-hidden="true" />
 
                             {/* Inner Card */}
                             <div className="bg-white rounded-2xl p-0 h-full flex flex-col border border-zinc-100 overflow-hidden hover:shadow-lg hover:shadow-black/5 hover:border-zinc-200 transition-all duration-300">
@@ -178,7 +179,7 @@ export const ToolsGrid = () => {
                                 <div className="p-8 pb-0 flex-1">
                                     {/* Header */}
                                     <div className="flex items-center gap-4 mb-6">
-                                        <div className="w-12 h-12 min-[2560px]:w-16 min-[2560px]:h-16 rounded-lg bg-zinc-100 flex items-center justify-center text-[#F15A29] group-hover:scale-110 transition-transform duration-300">
+                                        <div className="w-12 h-12 min-[2560px]:w-16 min-[2560px]:h-16 rounded-lg bg-zinc-100 flex items-center justify-center text-[#F15A29] group-hover:scale-110 transition-transform duration-300 shrink-0" aria-hidden="true">
                                             <tool.icon className="w-6 h-6 min-[2560px]:w-8 min-[2560px]:h-8 flex items-center justify-center [&_svg]:w-full [&_svg]:h-full" />
                                         </div>
                                         <h3 className="text-xl min-[2560px]:text-2xl font-bold tracking-tight text-[#222]">
@@ -190,7 +191,7 @@ export const ToolsGrid = () => {
                                     <ul className="space-y-1 mb-8">
                                         {tool.points.map((point, idx) => (
                                             <li key={idx} className="flex items-start gap-3">
-                                                <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 shrink-0" />
+                                                <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 shrink-0" aria-hidden="true" />
                                                 <span className="text-zinc-500 text-sm min-[2560px]:text-base font-light leading-relaxed">
                                                     {point}
                                                 </span>
@@ -204,16 +205,17 @@ export const ToolsGrid = () => {
                                     <div className="w-full h-full relative">
                                         <Image
                                             src={tool.image}
-                                            alt={tool.title}
+                                            alt=""
                                             fill
                                             className="object-contain object-bottom"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         />
                                     </div>
                                 </div>
                             </div>
-                        </m.div>
+                        </m.li>
                     ))}
-                </div>
+                </ul>
             </div>
         </section>
     );

@@ -52,8 +52,9 @@
     "description": "Hazlo Rentable - HRSEO a SEO tools package. Productive keyword research, SERP analysis, rank tracking and backlink analysis thanks to super easy to use tools."
   },
   "NotFound": {
-    "title": "Page Not Found",
-    "description": "Sorry, the page you are looking for does not exist.",
-    "homeButton": "Go Back Home"
+    "label": "404 Error",
+    "title": "Page <highlight>Not Found</highlight>",
+    "description": "The page you’re looking for doesn’t exist or may have been moved.",
+    "homeButton": "Back to Home"
   }
 }

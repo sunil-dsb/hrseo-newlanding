@@ -38,8 +38,10 @@ export async function generateMetadata({
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Metadata' });
 
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://hrseo.io';
+
     return {
-        metadataBase: new URL("https://hrseo.io"),
+        metadataBase: new URL(baseUrl),
         title: {
             default: t('title'),
             template: `%s | HRSEO`,
@@ -57,7 +59,7 @@ export async function generateMetadata({
             "Website Audit",
             "Rank Tracking",
         ],
-        authors: [{ name: "HRSEO", url: "https://hrseo.io" }],
+        authors: [{ name: "HRSEO", url: baseUrl }],
         creator: "Hazlo Rentable",
         publisher: "Hazlo Rentable",
         icons: {
@@ -94,7 +96,7 @@ export async function generateMetadata({
         manifest: "/favicon_io/site.webmanifest",
         openGraph: {
             type: "website",
-            url: "https://hrseo.io",
+            url: baseUrl,
             siteName: "HRSEO",
             title: t('title'),
             description: t('description'),
@@ -122,11 +124,11 @@ export async function generateMetadata({
             },
         },
         alternates: {
-            canonical: `https://hrseo.io/${locale}`,
+            canonical: `${baseUrl}/${locale}`,
             languages: {
-                'en': 'https://hrseo.io/en',
-                'es': 'https://hrseo.io/es',
-                'fr': 'https://hrseo.io/fr',
+                'en': `${baseUrl}/en`,
+                'es': `${baseUrl}/es`,
+                'fr': `${baseUrl}/fr`,
             },
         },
         verification: {

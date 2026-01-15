@@ -48,7 +48,7 @@ export function BlurFade({
                 delay,
                 ease: [0.25, 0.4, 0.25, 1],
             }}
-            className={className}
+            className={`${className} will-change-[transform,opacity,filter]`}
         >
             {children}
         </m.div>

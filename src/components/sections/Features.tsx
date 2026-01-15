@@ -23,63 +23,63 @@ const features = [
         title: "From Niche to Keywords",
         description:
             "Define your niche and instantly generate keyword opportunities powered by real data and adapted to your business model.",
-        href: "#",
+        href: "/features/keywords",
     },
     {
         icon: TrendingUpIcon,
         title: "Rank Tracking & Monitoring",
         description:
             "Track your rankings in real-time across all search engines. Get instant alerts when rankings change and stay ahead of algorithm updates.",
-        href: "#",
+        href: "/features/tracking",
     },
     {
         icon: SlidersHorizontalIcon,
         title: "Classic Keyword Finder",
         description:
             "Enter any keyword and explore related terms, trends, and difficulty scores. Ideal for refining your search when you already have a direction.",
-        href: "#",
+        href: "/features/finder",
     },
     {
         icon: LayoutPanelTopIcon,
         title: "Silo Builder",
         description:
             "Build your site structure automatically based on your keywords and SEO goals. Organize your pages into a logical hierarchy.",
-        href: "#",
+        href: "/features/silo",
     },
     {
         icon: FileStackIcon,
         title: "SERP Analysis",
         description:
             "Deep-dive into search engine results pages to understand ranking factors. Optimize your content based on what's actually working.",
-        href: "#",
+        href: "/features/serp",
     },
     {
         icon: LinkIcon,
         title: "Backlink Analysis",
         description:
             "Monitor your backlink profile and discover new link opportunities. Build authority with high-quality backlinks that boost rankings.",
-        href: "#",
+        href: "/features/backlinks",
     },
     {
         icon: FileTextIcon,
         title: "Content Generator",
         description:
             "Generate your SEO plan and optimized content in just a few clicks. Our AI agents build a clear content structure and write SEO-ready text.",
-        href: "#",
+        href: "/features/content",
     },
     {
         icon: MapPinIcon,
         title: "Business Model Mapper",
         description:
             "Get monetization insights for every keyword. Our AI automatically suggests the most profitable way to monetize each keyword based on intent.",
-        href: "#",
+        href: "/features/mapper",
     },
     {
         icon: ChartPieIcon,
         title: "Performance Reports",
         description:
             "Generate beautiful, white-label reports in seconds. Track progress, prove ROI, and share insights with clients or stakeholders.",
-        href: "#",
+        href: "/features/reporting",
     },
 ];
 
@@ -140,12 +140,13 @@ const Features = () => {
                                 <div className="hidden lg:flex items-center gap-2 mb-6">
                                     <div className="flex gap-1">
                                         {features.map((_, idx) => (
-                                            <m.div
+                                            <m.button
                                                 key={idx}
-                                                className="relative cursor-pointer"
+                                                className="relative cursor-pointer appearance-none bg-transparent border-0 p-0 focus:outline-none focus:ring-2 focus:ring-[#F15A29]/50 rounded-full"
                                                 onClick={() => {
                                                     cardRefs.current[idx]?.scrollIntoView({ behavior: "smooth", block: "center" });
                                                 }}
+                                                aria-label={`Scroll to ${features[idx].title}`}
                                             >
                                                 <m.div
                                                     className="w-4 h-1 rounded-full bg-zinc-100 overflow-hidden"
@@ -161,7 +162,7 @@ const Features = () => {
                                                         style={{ width: "100%" }}
                                                     />
                                                 </m.div>
-                                            </m.div>
+                                            </m.button>
                                         ))}
                                     </div>
                                     <div className="text-[0.625rem] text-zinc-300 font-medium">
@@ -190,14 +191,18 @@ const Features = () => {
                             </BlurFade>
 
                             <BlurFade delay={0.4}>
-                                <ButtonSlide
-                                    variant="dark"
-                                    className="w-auto px-8 rounded-full"
-                                    onClick={() => (window.location.href = "#")}
-                                    icon={<FiArrowRight className="w-4 h-4" />}
-                                >
-                                    Start Free Trial
-                                </ButtonSlide>
+                                <div className="inline-block">
+                                    <Link href="/signup">
+                                        <ButtonSlide
+                                            as="div"
+                                            variant="dark"
+                                            className="w-auto px-8 rounded-full"
+                                            icon={<FiArrowRight className="w-4 h-4" aria-hidden="true" />}
+                                        >
+                                            Start Free Trial
+                                        </ButtonSlide>
+                                    </Link>
+                                </div>
                             </BlurFade>
                         </div>
                     </div>
@@ -209,11 +214,12 @@ const Features = () => {
                                 key={index}
                                 href={feature.href}
                                 ref={(el) => setCardRef(el, index)}
-                                data-index={index}
+                                data-index={index} // kept as data attribute for intersection observer
                                 className={`group block h-full bg-white border p-8 rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-black/5 hover:border-[#F15A29]/30 ${index === activeIndex
                                     ? "border-[#F15A29]/30 shadow-xl shadow-black/5"
                                     : "border-zinc-200"
                                     }`}
+                                aria-label={`Learn more about ${feature.title}`}
                             >
                                 <div className="flex items-start gap-6 h-full">
                                     {/* Icon - Consistent with ToolsGrid */}
@@ -222,6 +228,7 @@ const Features = () => {
                                             }`}
                                         animate={{ scale: index === activeIndex ? 1.1 : 1 }}
                                         transition={{ type: "spring", stiffness: 300 }}
+                                        aria-hidden="true"
                                     >
                                         <feature.icon className="w-6 h-6 min-[2560px]:w-8 min-[2560px]:h-8 flex items-center justify-center [&_svg]:w-full [&_svg]:h-full" />
                                     </m.div>
@@ -236,7 +243,7 @@ const Features = () => {
                                         </p>
 
                                         {/* Learn More - Cleaner arrow interaction */}
-                                        <div className="flex items-center gap-2 text-zinc-600 font-medium text-sm min-[2560px]:text-base opacity-80 group-hover:opacity-100 transition-opacity mt-auto">
+                                        <div className="flex items-center gap-2 text-zinc-600 font-medium text-sm min-[2560px]:text-base opacity-80 group-hover:opacity-100 transition-opacity mt-auto" aria-hidden="true">
                                             <span className="group-hover:underline">Learn more</span>
                                             <FiArrowRight className="w-4 h-4 min-[2560px]:w-5 min-[2560px]:h-5 transition-transform duration-300 group-hover:translate-x-1" />
                                         </div>
