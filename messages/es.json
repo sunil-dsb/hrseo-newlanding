@@ -56,5 +56,66 @@
     "title": "Página <highlight>No Encontrada</highlight>",
     "description": "La página que buscas no existe o puede haber sido movida.",
     "homeButton": "Volver al Inicio"
+  },
+  "Dashboard": {
+    "nav": {
+      "dashboard": "Tablero",
+      "people": "Personas",
+      "hiring": "Contratación",
+      "devices": "Dispositivos",
+      "apps": "Aplicaciones",
+      "salary": "Salario",
+      "calendar": "Calendario",
+      "reviews": "Reseñas",
+      "settings": "Configuración"
+    },
+    "header": {
+      "greeting": "Hola {name}",
+      "interviews": "Entrevistas",
+      "hired": "Contratados",
+      "projectTime": "Tiempo de proyecto",
+      "output": "Salida",
+      "employee": "Empleado",
+      "hirings": "Contrataciones",
+      "projects": "Proyectos"
+    },
+    "salaryTable": {
+      "title": "Salario",
+      "searchPlaceholder": "Buscar",
+      "headers": {
+        "name": "Nombre",
+        "jobTitle": "Puesto",
+        "netSalary": "Salario Neto",
+        "status": "Estado"
+      },
+      "status": {
+        "paid": "Pagado",
+        "absent": "Ausente",
+        "pending": "Pendiente"
+      }
+    },
+    "hiringStats": {
+      "title": "Estadísticas de Contratación",
+      "others": "Otros",
+      "design": "Diseño"
+    },
+    "attendance": {
+      "title": "Reporte de Asistencia"
+    },
+    "employeeComposition": {
+      "title": "Composición de Empleados"
+    },
+    "schedule": {
+      "title": "Horario",
+      "days": {
+        "sun": "Dom",
+        "mon": "Lun",
+        "tue": "Mar",
+        "wed": "Mié",
+        "thu": "Jue",
+        "fri": "Vie",
+        "sat": "Sáb"
+      }
+    }
   }
 }

@@ -56,5 +56,66 @@
     "title": "Page <highlight>Non Trouvée</highlight>",
     "description": "La page que vous recherchez n'existe pas ou a peut-être été déplacée.",
     "homeButton": "Retour à l'Accueil"
+  },
+  "Dashboard": {
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "people": "Personnes",
+      "hiring": "Recrutement",
+      "devices": "Appareils",
+      "apps": "Applications",
+      "salary": "Salaire",
+      "calendar": "Calendrier",
+      "reviews": "Avis",
+      "settings": "Paramètres"
+    },
+    "header": {
+      "greeting": "Bonjour {name}",
+      "interviews": "Entretiens",
+      "hired": "Embauchés",
+      "projectTime": "Temps projet",
+      "output": "Sortie",
+      "employee": "Employé",
+      "hirings": "Recrutements",
+      "projects": "Projets"
+    },
+    "salaryTable": {
+      "title": "Salaire",
+      "searchPlaceholder": "Rechercher",
+      "headers": {
+        "name": "Nom",
+        "jobTitle": "Poste",
+        "netSalary": "Salaire Net",
+        "status": "Statut"
+      },
+      "status": {
+        "paid": "Payé",
+        "absent": "Absent",
+        "pending": "En attente"
+      }
+    },
+    "hiringStats": {
+      "title": "Statistiques de Recrutement",
+      "others": "Autres",
+      "design": "Design"
+    },
+    "attendance": {
+      "title": "Rapport de Présence"
+    },
+    "employeeComposition": {
+      "title": "Composition des Employés"
+    },
+    "schedule": {
+      "title": "Calendrier",
+      "days": {
+        "sun": "Dim",
+        "mon": "Lun",
+        "tue": "Mar",
+        "wed": "Mer",
+        "thu": "Jeu",
+        "fri": "Ven",
+        "sat": "Sam"
+      }
+    }
   }
 }
