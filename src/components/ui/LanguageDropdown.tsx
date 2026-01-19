@@ -5,6 +5,7 @@ import { BiGlobe } from "react-icons/bi";
 import { languages, type Language } from "@/components/icons/FlagIcons";
 import { usePathname, useRouter } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
+import { useRouter as useBaseRouter, useSearchParams } from 'next/navigation';
 
 interface LanguageDropdownProps {
     className?: string;
@@ -19,8 +20,10 @@ export function LanguageDropdown({
 }: LanguageDropdownProps) {
     const [isOpen, setIsOpen] = useState(false);
     const locale = useLocale();
-    const router = useRouter();
+    const router = useRouter(); // next-intl router
+    const baseRouter = useBaseRouter(); // native next router
     const pathname = usePathname();
+    const searchParams = useSearchParams();
 
     // Find current lang based on URL locale
     const [currentLang, setCurrentLang] = useState<Language>(
@@ -63,7 +66,19 @@ export function LanguageDropdown({
 
     const handleLanguageChange = (language: Language) => {
         setIsOpen(false);
-        router.replace(pathname, { locale: language.code });
+        const params = searchParams.toString();
+        const queryString = params ? `?${params}` : '';
+
+        if (language.code === 'en') {
+            // Force explicit /en path for English using native router
+            const newPath = `/en${pathname === '/' ? '' : pathname}${queryString}`;
+            baseRouter.push(newPath);
+        } else {
+            // For other languages, let next-intl handle the path, but we might need to manually ensure params are kept if next-intl router doesn't auto-merge (it usually replaces).
+            // Passing the path + query string to next-intl's router.replace works if the pathname argument supports it.
+            // Safer: router.replace(pathname + queryString, { locale: language.code });
+            router.replace(`${pathname}${queryString}`, { locale: language.code });
+        }
     };
 
     const toggleDropdown = () => {

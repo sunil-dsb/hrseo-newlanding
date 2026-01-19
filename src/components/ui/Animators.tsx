@@ -2,6 +2,7 @@
 
 import { m } from 'framer-motion';
 import React from 'react';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 export function FadeIn({
     children,
@@ -14,10 +15,13 @@ export function FadeIn({
     delay?: number;
     className?: string;
 }) {
+    const isMobile = useIsMobile();
+
     return (
         <m.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
+            animate={isMobile ? { opacity: 1 } : undefined}
+            whileInView={isMobile ? undefined : { opacity: 1 }}
             viewport={{ once: true, margin: '-20px' }}
             transition={{ duration, delay, ease: 'easeOut' }}
             className={className}
@@ -38,10 +42,13 @@ export function BlurFade({
     className?: string;
     yOffset?: number;
 }) {
+    const isMobile = useIsMobile();
+
     return (
         <m.div
-            initial={{ opacity: 0, scale: 0.98, filter: 'blur(4px)', y: yOffset }}
-            whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 }}
+            initial={isMobile ? { opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 } : { opacity: 0, scale: 0.98, filter: 'blur(4px)', y: yOffset }}
+            animate={isMobile ? { opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 } : undefined}
+            whileInView={isMobile ? undefined : { opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 }}
             viewport={{ once: true, margin: '-20px' }}
             transition={{
                 duration: 0.6,
@@ -62,11 +69,14 @@ export const TextHighlight = ({
     children: React.ReactNode;
     className?: string;
 }) => {
+    const isMobile = useIsMobile();
+
     return (
         <span className={`relative inline-block px-1 ${className}`}>
             <m.span
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
+                initial={isMobile ? { scaleX: 1 } : { scaleX: 0 }}
+                animate={isMobile ? { scaleX: 1 } : undefined}
+                whileInView={isMobile ? undefined : { scaleX: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="absolute inset-0 bg-[#F15A29] -skew-y-1 origin-left rotate-2 -z-10"

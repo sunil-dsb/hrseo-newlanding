@@ -8,6 +8,9 @@ import { ChartBarIncreasingIcon } from '@/components/ui/chart-bar-increasing';
 import { EarthIcon } from '@/components/ui/earth';
 import { ShieldCheckIcon } from '@/components/ui/shield-check';
 import { Marquee } from '@/components/ui/Marquee';
+import Link from 'next/link';
+import { useIsMobile } from '@/hooks/use-is-mobile';
+
 import Image from 'next/image';
 
 const PARTNERS = [
@@ -108,6 +111,8 @@ const TOOLS = [
 ];
 
 export const ToolsGrid = () => {
+    const isMobile = useIsMobile();
+
     return (
         <section className="py-24 px-4 font-sans">
             <div className="max-w-5xl 2xl:max-w-7xl container-4k mx-auto">
@@ -149,18 +154,16 @@ export const ToolsGrid = () => {
                     {TOOLS.map((tool, i) => (
                         <m.li
                             key={tool.id}
-                            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                            initial={isMobile ? undefined : { opacity: 0, y: 20 }}
+                            whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{
-                                duration: 0.6,
-                                delay: i * 0.08,
-                                type: "spring",
-                                stiffness: 100,
-                                damping: 15
+                                duration: 0.5,
+                                delay: i * 0.1,
+                                ease: "easeOut"
                             }}
-                            whileHover={{ y: -6, transition: { duration: 0.3, type: "spring", stiffness: 300 } }}
-                            className="relative p-3 group disable-animation-mobile"
+                            whileHover={isMobile ? undefined : { y: -5, transition: { duration: 0.2, ease: "easeOut" } }}
+                            className="relative p-3 group disable-animation-mobile will-change-transform"
                         >
                             {/* Top Border & Dots */}
                             <div className="absolute top-0 left-0 right-0 h-[0.05rem] bg-black/6" aria-hidden="true" />

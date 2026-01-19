@@ -5,6 +5,7 @@ import { FaStar } from 'react-icons/fa';
 import Image from 'next/image';
 import { EncryptedText } from '@/components/ui/EncryptedText';
 import { Marquee } from '@/components/ui/Marquee';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 // Image URLs provided by user
 const AVATARS = [
@@ -121,10 +122,12 @@ export const Testimonials = () => {
 };
 
 const TestimonialCard = ({ data, index }: { data: typeof TESTIMONIALS[0], index: number }) => {
+    const isMobile = useIsMobile();
+
     return (
         <m.figure
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={isMobile ? undefined : { opacity: 0, y: 20 }}
+            whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="relative p-3 group"

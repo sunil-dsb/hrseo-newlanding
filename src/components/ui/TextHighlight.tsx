@@ -3,6 +3,7 @@
 import React from 'react';
 import { m } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 interface TextHighlightProps {
     children: React.ReactNode;
@@ -17,14 +18,17 @@ export const TextHighlight = ({
     className,
     delay = 0.4
 }: TextHighlightProps) => {
+    const isMobile = useIsMobile();
+
     return (
         <span className={cn("relative inline-block", className)}>
             <span className="relative z-10">{children}</span>
             <m.div
                 className="absolute inset-0 -z-10 rotate-2 scale-95 md:scale-105"
                 style={{ backgroundColor: color, transformOrigin: "left" }}
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
+                initial={isMobile ? { scaleX: 1 } : { scaleX: 0 }}
+                animate={isMobile ? { scaleX: 1 } : undefined}
+                whileInView={isMobile ? undefined : { scaleX: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: delay, ease: "circOut" }}
             />

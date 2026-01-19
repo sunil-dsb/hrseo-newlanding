@@ -14,10 +14,12 @@ import { IoMdArrowForward } from 'react-icons/io';
 import Image from 'next/image';
 import { ButtonSlide } from '@/components/ui/ButtonSlide';
 import { useTranslations } from 'next-intl';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 export default function Hero() {
     const t = useTranslations('Hero');
     const [spinCycle, setSpinCycle] = React.useState(0);
+    const isMobile = useIsMobile();
 
     const handleTextComplete = () => {
         setSpinCycle(prev => prev + 1);
@@ -117,8 +119,8 @@ export default function Hero() {
                                         {[1, 2, 3, 4, 5].map((i) => (
                                             <m.span
                                                 key={i}
-                                                initial={{ opacity: 0, scale: 0 }}
-                                                animate={{ opacity: 1, scale: 1 }}
+                                                initial={isMobile ? undefined : { opacity: 0, scale: 0 }}
+                                                animate={isMobile ? undefined : { opacity: 1, scale: 1 }}
                                                 transition={{ delay: 1.5 + (i * 0.1), type: "spring" }}
                                                 viewport={{ once: true }}
                                                 className="will-change-transform"

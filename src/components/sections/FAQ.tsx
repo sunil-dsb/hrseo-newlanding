@@ -7,6 +7,7 @@ import { GoArrowUpRight } from 'react-icons/go';
 import { Link } from '@/i18n/routing';
 import { TextHighlight } from '@/components/ui/TextHighlight';
 import { EncryptedText } from '@/components/ui/EncryptedText';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 const FAQS = [
     {
@@ -116,12 +117,14 @@ export const FAQ = () => {
 };
 
 const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boolean, onToggle: () => void }) => {
+    const isMobile = useIsMobile();
+
     return (
         <m.button
             onClick={onToggle}
             className={`w-full text-left relative bg-white rounded-xl p-6 md:p-8 cursor-pointer overflow-hidden duration-300 disable-animation-mobile group focus:outline-none focus:ring-2 focus:ring-brand-primary/20`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={isMobile ? undefined : { opacity: 0, y: 20 }}
+            whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             aria-expanded={isOpen}
             aria-controls={`faq-answer-${item.id}`}
@@ -130,9 +133,9 @@ const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boo
             <m.div
                 className="flex items-start gap-6 relative z-10"
                 animate={{
-                    x: isOpen ? -64 : 0 // Perfect shift: 40px (w-10) + 24px (gap-6) = 64px
+                    x: isOpen ? (isMobile ? 0 : -64) : 0
                 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: isMobile ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
                 {/* Number */}
                 <span className="text-zinc-400 font-medium text-lg leading-snug shrink-0 w-10 min-[2560px]:text-xl min-[2560px]:w-14">
@@ -150,10 +153,10 @@ const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boo
                 {isOpen && (
                     <m.div
                         id={`faq-answer-${item.id}`}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        initial={isMobile ? { opacity: 1, y: 0, height: 0 } : { opacity: 0, y: 20 }}
+                        animate={isMobile ? { opacity: 1, y: 0, height: 'auto' } : { opacity: 1, y: 0 }}
+                        exit={isMobile ? { opacity: 0, y: 0, height: 0 } : { opacity: 0, y: 10 }}
+                        transition={{ duration: isMobile ? 0.3 : 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="text-zinc-500 font-light leading-relaxed mt-4 min-[2560px]:text-base min-[2560px]:mt-6"
                         role="region"
                     >

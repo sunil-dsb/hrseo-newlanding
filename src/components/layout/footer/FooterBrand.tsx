@@ -3,11 +3,14 @@
 import { m } from 'framer-motion';
 import { Link } from '@/i18n/routing';
 import { LanguageDropdown } from '@/components/ui/LanguageDropdown';
+import { Suspense } from 'react';
 
 import { useTranslations } from 'next-intl';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 export const FooterBrand = () => {
     const t = useTranslations('Footer');
+    const isMobile = useIsMobile();
 
     return (
         <div className='relative w-full pt-12 z-10'>
@@ -15,7 +18,7 @@ export const FooterBrand = () => {
             <m.div
                 className='group relative mx-auto h-35 max-w-5xl 2xl:max-w-7xl container-4k cursor-default overflow-hidden sm:h-45 md:h-55 pointer-events-auto z-10 footer-brand-container'
                 initial="initial"
-                whileHover="hover"
+                whileHover={isMobile ? undefined : "hover"}
                 animate="initial"
             >
                 <div className='absolute left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center'>
@@ -36,7 +39,7 @@ export const FooterBrand = () => {
                             fontWeight="bold"
                             fontFamily="var(--font-hrse), system-ui, sans-serif"
                             letterSpacing="-0.08em"
-                            variants={{
+                            variants={isMobile ? undefined : {
                                 initial: { transition: { staggerChildren: 0.05, staggerDirection: 1 } },
                                 hover: { transition: { staggerChildren: 0.05, staggerDirection: 1 } }
                             }}
@@ -44,7 +47,7 @@ export const FooterBrand = () => {
                             {['h', 'r', 's', 'e', 'o'].map((char, i) => (
                                 <m.tspan
                                     key={i}
-                                    variants={{
+                                    variants={isMobile ? undefined : {
                                         initial: {
                                             fill: "#05131A",
                                             fillOpacity: 0.05,
@@ -64,6 +67,7 @@ export const FooterBrand = () => {
                                             }
                                         }
                                     }}
+                                    style={isMobile ? { fill: "#05131A", fillOpacity: 0.05 } : undefined}
                                 >
                                     {char}
                                 </m.tspan>
@@ -85,7 +89,9 @@ export const FooterBrand = () => {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <LanguageDropdown variant="footer" align="right" />
+                        <Suspense fallback={<div className="w-40 h-10 rounded-lg bg-zinc-100 animate-pulse" />}>
+                            <LanguageDropdown variant="footer" align="right" />
+                        </Suspense>
                     </div>
                 </div>
             </div>
