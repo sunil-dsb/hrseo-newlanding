@@ -33,3 +33,17 @@ export default async function Home({
         </main>
     );
 }
+
+export async function generateMetadata({
+    params
+}: {
+    params: Promise<{ locale: string }>;
+}) {
+    const { locale } = await params;
+    return {
+        alternates: {
+            // Explicitly point to the localized path
+            canonical: `/${locale}`,
+        },
+    };
+}

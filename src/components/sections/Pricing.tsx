@@ -72,7 +72,7 @@ export default function Pricing() {
                         aria-label="Monthly billing"
                         className={`btn-anim relative overflow-hidden font-bold text-sm transition-all duration-300 w-32 ${billingCycle === 'monthly'
                             ? 'bg-black text-white shadow-xl shadow-black/10 rounded-full'
-                            : 'bg-zinc-200 text-zinc-500 hover:bg-zinc-200 rounded-lg'
+                            : 'bg-zinc-200 text-zinc-700 hover:bg-zinc-200 rounded-lg'
                             }`}
                     >
                         <div className='span-visible py-3'>
@@ -90,7 +90,7 @@ export default function Pricing() {
                             aria-label="Yearly billing"
                             className={`btn-anim relative overflow-hidden font-bold text-sm transition-all duration-300 w-32 ${billingCycle === 'yearly'
                                 ? 'bg-black text-white shadow-xl shadow-black/10 rounded-full'
-                                : 'bg-zinc-200 text-zinc-500 hover:bg-zinc-200 rounded-lg'
+                                : 'bg-zinc-200 text-zinc-700 hover:bg-zinc-200 rounded-lg'
                                 }`}
                         >
                             <div className='span-visible py-3'>

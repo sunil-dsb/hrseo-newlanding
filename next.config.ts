@@ -19,7 +19,10 @@ const nextConfig: NextConfig = {
     qualities: [75, 85, 95],
   },
   experimental: {
-    optimizeCss: true, // Requires 'critters' package
+    optimizeCss: {
+      "inlineFonts": true,
+      "pruneSource": true,
+    }, // Requires 'critters' package
     optimizePackageImports: ['lucide-react', 'react-icons', 'framer-motion'],
   },
   reactStrictMode: true,

@@ -163,7 +163,7 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
                     return (
                         <span
                             key={index}
-                            className={cn(isRevealed ? revealedClassName : encryptedClassName)}
+                            className={cn(isRevealed ? revealedClassName : cn("font-mono", encryptedClassName))}
                         >
                             {displayChar}
                         </span>

@@ -153,10 +153,10 @@ const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boo
                 {isOpen && (
                     <m.div
                         id={`faq-answer-${item.id}`}
-                        initial={isMobile ? { opacity: 1, y: 0, height: 0 } : { opacity: 0, y: 20 }}
-                        animate={isMobile ? { opacity: 1, y: 0, height: 'auto' } : { opacity: 1, y: 0 }}
-                        exit={isMobile ? { opacity: 0, y: 0, height: 0 } : { opacity: 0, y: 10 }}
-                        transition={{ duration: isMobile ? 0.3 : 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        initial={isMobile ? { opacity: 0, height: 0 } : { opacity: 0, y: 20 }}
+                        animate={isMobile ? { opacity: 1, height: 'auto' } : { opacity: 1, y: 0 }}
+                        exit={isMobile ? { opacity: 0, height: 0 } : { opacity: 0, y: 10 }}
+                        transition={{ duration: isMobile ? 0.2 : 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="text-zinc-500 font-light leading-relaxed mt-4 min-[2560px]:text-base min-[2560px]:mt-6"
                         role="region"
                     >

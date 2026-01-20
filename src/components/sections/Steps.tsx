@@ -14,9 +14,9 @@ const StepVisual1 = () => (
                 <div className="h-1.5 w-20 bg-zinc-100 rounded"></div>
             </div>
             <div className="flex gap-2 flex-wrap">
-                <div className="px-2 py-1 bg-zinc-200 rounded text-[8px] text-zinc-700 font-medium">SaaS</div>
-                <div className="px-2 py-1 bg-[#F15A29]/10 text-[#C04015] rounded text-[8px] font-medium border border-[#F15A29]/20">Marketing</div>
-                <div className="px-2 py-1 bg-zinc-100 rounded text-[8px] text-zinc-600">Tech</div>
+                <div className="px-2 py-1 bg-zinc-200 rounded text-[8px] text-zinc-800 font-medium">SaaS</div>
+                <div className="px-2 py-1 bg-[#F15A29]/10 text-[#9a3412] rounded text-[8px] font-medium border border-[#F15A29]/20">Marketing</div>
+                <div className="px-2 py-1 bg-zinc-100 rounded text-[8px] text-zinc-700">Tech</div>
             </div>
             <div className="space-y-1.5 pt-2">
                 <div className="flex items-center justify-between">
@@ -149,7 +149,7 @@ export const Steps = () => {
                 </div>
 
                 {/* Mobile/Tablet View (Standard Grid) - Hidden on Desktop */}
-                <ol className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 lg:gap-8 list-none m-0 p-0">
+                <ol className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 lg:gap-8 list-none m-0 p-0 pt-8">
                     {STEPS.map((step, index) => (
                         <li key={step.id}>
                             <StaticCard step={step} index={index} />
