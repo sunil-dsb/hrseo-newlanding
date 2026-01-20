@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import Hero from "@/components/sections/Hero"; // Static for LCP
-import { ToolsGrid } from "@/components/sections/ToolsGrid"; // Static for LCP
+const ToolsGrid = dynamic(() => import("@/components/sections/ToolsGrid").then(mod => mod.ToolsGrid));
 import { setRequestLocale } from 'next-intl/server';
 
 // Dynamic imports for below-the-fold sections

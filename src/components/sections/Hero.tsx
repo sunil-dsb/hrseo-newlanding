@@ -32,14 +32,14 @@ export default function Hero() {
                     <p className='text-xl min-[2560px]:text-3xl text-black mb-6'>
                         {t('preTitlePrefix')}<EncryptedText
                             text={t('preTitleEncrypted')}
-                            className="text-zinc-400"
+                            className="text-zinc-500"
                             revealDelayMs={50}
                             onComplete={handleTextComplete}
                         />
                     </p>
                 </BlurFade>
 
-                <h1 className='text-6xl sm:text-7xl md:text-[6.5rem] min-[2560px]:text-[10.3rem] font-bold tracking-tighter mb-12 animate-fade-in'>
+                <h1 className="text-6xl sm:text-7xl md:text-[6.5rem] min-[2560px]:text-[10.3rem] font-bold tracking-tighter mb-12 md:animate-fade-in">
                     {t('titlePrefix')}
                     <span className='inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 min-[2560px]:h-24 min-[2560px]:w-24 rounded-full bg-brand-primary mx-2 align-middle'>
                         <m.span
@@ -107,6 +107,7 @@ export default function Hero() {
                                             height={40}
                                             className="w-full h-full object-cover grayscale opacity-80"
                                             priority
+                                            sizes="40px"
                                         />
                                     </div>
                                 ))}

@@ -208,7 +208,7 @@ export const ToolsGrid = () => {
                                     <div className="w-full h-full relative">
                                         <Image
                                             src={tool.image}
-                                            alt=""
+                                            alt={`${tool.title} Interface`}
                                             fill
                                             className="object-contain object-bottom"
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import { GridLines, Navbar, Footer } from "@/components/layout";
+import dynamic from 'next/dynamic';
+import { Navbar } from "@/components/layout";
+const GridLines = dynamic(() => import("@/components/layout").then(mod => mod.GridLines));
+const Footer = dynamic(() => import("@/components/layout").then(mod => mod.Footer));
 import { MotionProvider } from "@/lib/motion";
 import localFont from "next/font/local";
 import "../globals.css";
@@ -28,6 +31,7 @@ const hrseFont = localFont({
     ],
     variable: "--font-hrse",
     display: "swap",
+    preload: true,
 });
 
 export async function generateMetadata({
@@ -124,11 +128,11 @@ export async function generateMetadata({
             },
         },
         alternates: {
-            canonical: locale === 'en' ? baseUrl : `${baseUrl}/${locale}`,
+            canonical: './',
             languages: {
-                'en': baseUrl,
-                'es': `${baseUrl}/es`,
-                'fr': `${baseUrl}/fr`,
+                'en': '/en',
+                'es': '/es',
+                'fr': '/fr',
             },
         },
         verification: {
@@ -171,7 +175,7 @@ export default async function LocaleLayout({
                 <NextIntlClientProvider messages={messages}>
                     <MotionProvider>
                         <GridLines />
-                        <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0" aria-hidden="true">
+                        <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 hidden md:block" aria-hidden="true">
                             <div className="absolute inset-0 bg-[url('/noise.gif')] opacity-[0.02]"></div>
                         </div>
                         <Navbar />

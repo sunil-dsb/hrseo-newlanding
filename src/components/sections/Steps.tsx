@@ -14,9 +14,9 @@ const StepVisual1 = () => (
                 <div className="h-1.5 w-20 bg-zinc-100 rounded"></div>
             </div>
             <div className="flex gap-2 flex-wrap">
-                <div className="px-2 py-1 bg-zinc-200 rounded text-[8px] text-zinc-500 font-medium">SaaS</div>
-                <div className="px-2 py-1 bg-[#F15A29]/10 text-[#F15A29] rounded text-[8px] font-medium border border-[#F15A29]/20">Marketing</div>
-                <div className="px-2 py-1 bg-zinc-100 rounded text-[8px] text-zinc-400">Tech</div>
+                <div className="px-2 py-1 bg-zinc-200 rounded text-[8px] text-zinc-700 font-medium">SaaS</div>
+                <div className="px-2 py-1 bg-[#F15A29]/10 text-[#C04015] rounded text-[8px] font-medium border border-[#F15A29]/20">Marketing</div>
+                <div className="px-2 py-1 bg-zinc-100 rounded text-[8px] text-zinc-600">Tech</div>
             </div>
             <div className="space-y-1.5 pt-2">
                 <div className="flex items-center justify-between">

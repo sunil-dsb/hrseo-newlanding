@@ -24,7 +24,7 @@ export function FadeIn({
             whileInView={isMobile ? undefined : { opacity: 1 }}
             viewport={{ once: true, margin: '-20px' }}
             transition={{ duration, delay, ease: 'easeOut' }}
-            className={className}
+            className={`${className} disable-animation-mobile`}
         >
             {children}
         </m.div>
@@ -46,16 +46,16 @@ export function BlurFade({
 
     return (
         <m.div
-            initial={isMobile ? { opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 } : { opacity: 0, scale: 0.98, filter: 'blur(4px)', y: yOffset }}
-            animate={isMobile ? { opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 } : undefined}
-            whileInView={isMobile ? undefined : { opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 }}
+            initial={isMobile ? { opacity: 1, scale: 1, filter: 'none', y: 0 } : { opacity: 0, scale: 0.98, filter: 'blur(4px)', y: yOffset }}
+            animate={isMobile ? { opacity: 1, scale: 1, filter: 'none', y: 0 } : undefined}
+            whileInView={isMobile ? undefined : { opacity: 1, scale: 1, filter: 'none', y: 0 }}
             viewport={{ once: true, margin: '-20px' }}
             transition={{
                 duration: 0.6,
                 delay,
                 ease: [0.25, 0.4, 0.25, 1],
             }}
-            className={`${className} will-change-[transform,opacity,filter]`}
+            className={`${className} ${isMobile ? '' : 'will-change-[transform,opacity,filter]'} disable-animation-mobile`}
         >
             {children}
         </m.div>
@@ -72,7 +72,7 @@ export const TextHighlight = ({
     const isMobile = useIsMobile();
 
     return (
-        <span className={`relative inline-block px-1 ${className}`}>
+        <span className={`relative inline-block px-1 disable-animation-mobile ${className}`}>
             <m.span
                 initial={isMobile ? { scaleX: 1 } : { scaleX: 0 }}
                 animate={isMobile ? { scaleX: 1 } : undefined}

@@ -66,6 +66,7 @@ export default function TrustCTA() {
                                                     width={40}
                                                     height={40}
                                                     className="w-full h-full object-cover grayscale opacity-80"
+                                                    sizes="40px"
                                                 />
                                             </div>
                                         ))}

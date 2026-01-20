@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { m, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 
 type EncryptedTextProps = {
     text: string;
@@ -58,16 +59,19 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
     const [isMounted, setIsMounted] = useState(false);
     const scrambleCharsRef = useRef<string[]>([]);
 
+    const isMobile = useIsMobile();
+
     // Initialize plain text on mount to match server, then scramble
     useEffect(() => {
         setIsMounted(true);
         if (text) {
-            scrambleCharsRef.current = generateGibberishPreservingSpaces(text, charset).split("");
+            // on mobile, don't scramble initially
+            scrambleCharsRef.current = isMobile ? text.split("") : generateGibberishPreservingSpaces(text, charset).split("");
         }
-    }, [text, charset]);
+    }, [text, charset, isMobile]);
 
     const startAnimation = () => {
-        if (!isMounted) return;
+        if (!isMounted || isMobile) return;
         const initial = text
             ? generateGibberishPreservingSpaces(text, charset)
             : "";
@@ -140,10 +144,10 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
     if (!text) return null;
 
     return (
-        
+
         <m.span
             ref={ref}
-            className={cn("inline-block relative", className)}
+            className={cn("inline-block relative tabular-nums", className)}
         >
             <span className="sr-only">{text}</span>
             <span aria-hidden="true">
@@ -153,7 +157,7 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
                         ? char
                         : char === " "
                             ? " "
-                            : (!isMounted ? char : (scrambleCharsRef.current[index] ??
+                            : (!isMounted || isMobile ? char : (scrambleCharsRef.current[index] ??
                                 generateRandomCharacter(charset)));
 
                     return (

@@ -146,7 +146,7 @@ const TestimonialCard = ({ data, index }: { data: typeof TESTIMONIALS[0], index:
             <div className="bg-white rounded-2xl p-6 flex flex-col gap-6 border border-zinc-100 transition-all duration-300">
 
                 {/* 1. Stars */}
-                <div className="flex gap-0.5" aria-label="5 out of 5 stars">
+                <div className="flex gap-0.5" aria-label="5 out of 5 stars" role="img">
                     {[1, 2, 3, 4, 5].map((s) => (
                         <FaStar key={s} className="w-2.5 h-2.5 text-[#F15A29]" aria-hidden="true" />
                     ))}

@@ -69,6 +69,7 @@ export default function Pricing() {
                     <button
                         onClick={() => setBillingCycle('monthly')}
                         aria-pressed={billingCycle === 'monthly'}
+                        aria-label="Monthly billing"
                         className={`btn-anim relative overflow-hidden font-bold text-sm transition-all duration-300 w-32 ${billingCycle === 'monthly'
                             ? 'bg-black text-white shadow-xl shadow-black/10 rounded-full'
                             : 'bg-zinc-200 text-zinc-500 hover:bg-zinc-200 rounded-lg'
@@ -77,7 +78,7 @@ export default function Pricing() {
                         <div className='span-visible py-3'>
                             <span>Monthly</span>
                         </div>
-                        <div className='span-hidden absolute inset-0 py-3'>
+                        <div className='span-hidden absolute inset-0 py-3' aria-hidden="true">
                             <span>Monthly</span>
                         </div>
                     </button>
@@ -86,6 +87,7 @@ export default function Pricing() {
                         <button
                             onClick={() => setBillingCycle('yearly')}
                             aria-pressed={billingCycle === 'yearly'}
+                            aria-label="Yearly billing"
                             className={`btn-anim relative overflow-hidden font-bold text-sm transition-all duration-300 w-32 ${billingCycle === 'yearly'
                                 ? 'bg-black text-white shadow-xl shadow-black/10 rounded-full'
                                 : 'bg-zinc-200 text-zinc-500 hover:bg-zinc-200 rounded-lg'
@@ -94,7 +96,7 @@ export default function Pricing() {
                             <div className='span-visible py-3'>
                                 <span>Yearly</span>
                             </div>
-                            <div className='span-hidden absolute inset-0 py-3'>
+                            <div className='span-hidden absolute inset-0 py-3' aria-hidden="true">
                                 <span>Yearly</span>
                             </div>
                         </button>

@@ -138,7 +138,7 @@ const FAQCard = ({ item, isOpen, onToggle }: { item: typeof FAQS[0], isOpen: boo
                 transition={{ duration: isMobile ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
                 {/* Number */}
-                <span className="text-zinc-400 font-medium text-lg leading-snug shrink-0 w-10 min-[2560px]:text-xl min-[2560px]:w-14">
+                <span className="text-zinc-500 font-medium text-lg leading-snug shrink-0 w-10 min-[2560px]:text-xl min-[2560px]:w-14">
                     {item.id}/
                 </span>
 

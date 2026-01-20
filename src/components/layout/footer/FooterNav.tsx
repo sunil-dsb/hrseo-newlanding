@@ -122,7 +122,7 @@ export const FooterNav = () => {
                             </div>
                         </div>
                         <div>
-                            <div className="mb-1 font-bold tracking-widest uppercase text-[#059669] text-[10px]">
+                            <div className="mb-1 font-bold tracking-widest uppercase text-[#047857] text-[10px]">
                                 {t('videoWidget.cta')}
                             </div>
                             <div className="text-sm font-medium leading-tight text-zinc-900">

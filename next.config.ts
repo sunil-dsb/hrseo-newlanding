@@ -20,7 +20,9 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizeCss: true, // Requires 'critters' package
+    optimizePackageImports: ['lucide-react', 'react-icons', 'framer-motion'],
   },
+  reactStrictMode: true,
 };
 
 const createNextIntlPlugin = require('next-intl/plugin');
