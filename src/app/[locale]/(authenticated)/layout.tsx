@@ -1,8 +1,4 @@
-import {
-  DashboardNavbar,
-  DashboardFooter,
-  GridLines,
-} from "@/components/layout";
+import { DashboardNavbar, DashboardFooter, Navbar } from "@/components/layout";
 
 export default function DashboardLayout({
   children,
@@ -10,12 +6,9 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-brand-light/30 relative flex flex-col">
-      {/* Background Glows */}
-      <div className="fixed top-[-30%] right-[-10%] w-[1000px] h-[1000px] bg-brand-primary/20 rounded-full blur-[100px] pointer-events-none" />
-      <div className="fixed bottom-[-10%] left-[-10%] w-[800px] h-[800px] bg-white/40 dark:bg-white/5 rounded-full blur-[80px] pointer-events-none" />
-
+    <div className="min-h-screen bg-zinc-100/70 relative flex flex-col">
       <DashboardNavbar />
+      {/* <Navbar /> */}
       <main className="relative z-10 flex-1">{children}</main>
       <DashboardFooter />
     </div>

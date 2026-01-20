@@ -1,802 +1,593 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
 import {
-  Bell,
-  Settings,
-  User,
-  Search,
-  ArrowUpRight,
-  TrendingDown,
-  ChevronDown,
-  Users,
-  FolderOpen,
-} from "lucide-react";
-import { useTranslations } from "next-intl";
-import { cn } from "@/lib/utils";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
+  Area,
+  AreaChart,
   ResponsiveContainer,
+  Tooltip,
+  XAxis,
   PieChart,
   Pie,
   Cell,
-  CartesianGrid,
+  YAxis,
 } from "recharts";
-import { m } from "framer-motion";
-
-// --- Custom SVGs for Icons ---
-const MarsIcon = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <circle cx="12" cy="12" r="5" />
-    <path d="M16 8 L21 3" />
-    <path d="M17 3 L21 3 L21 7" />
-  </svg>
-);
-
-const VenusIcon = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <circle cx="12" cy="9" r="5" />
-    <path d="M12 14 L12 21" />
-    <path d="M8 18 L16 18" />
-  </svg>
-);
+import { Search, ArrowUpRight } from "lucide-react";
+import clsx from "clsx";
 
 // --- Mock Data ---
-
-const scheduleData = [
-  {
-    time: "09:00",
-    title: "Daily Sync",
-    duration: "09:30am–10:00am",
-    type: "dark",
-    active: true,
-    avatars: [],
-  },
-  {
-    time: "10:00",
-    empty: true,
-  },
-  {
-    time: "11:00",
-    title: "Task Review With Team",
-    duration: "10:30am–11:30am",
-    type: "light",
-    active: false,
-    avatars: [],
-  },
-  {
-    time: "12:00",
-    title: "Daily Meeting",
-    duration: "12:00pm–01:00pm",
-    type: "light",
-    active: false,
-    avatars: ["https://i.pravatar.cc/150?u=1", "https://i.pravatar.cc/150?u=2"],
-  },
-  { time: "01:00", empty: true },
-  { time: "02:00", empty: true },
-  { time: "03:00", empty: true },
-];
-
-const salaryData = [
-  {
-    id: 1,
-    name: "Yulia Polishchuk",
-    role: "Head of Design",
-    salary: "$2,500",
-    status: "Paid For",
-    avatar: "https://i.pravatar.cc/150?u=yulia",
-    checked: false,
-  },
-  {
-    id: 2,
-    name: "Bogdan Nikitin",
-    role: "Front End Dev...",
-    salary: "$3,000",
-    status: "Absent",
-    avatar: "https://i.pravatar.cc/150?u=bogdan",
-    checked: true,
-  },
-  {
-    id: 3,
-    name: "Daria Yurchenko",
-    role: "UX/UI Designer",
-    salary: "$1,500",
-    status: "Pending",
-    avatar: "https://i.pravatar.cc/150?u=daria",
-    checked: false,
-  },
-];
-
-const hiringStatsData = [
-  { name: "Jan", others: 120, design: 100 },
+const hiringData = [
+  { name: "Jan", others: 120, design: 50 },
   { name: "Feb", others: 130, design: 110 },
-  { name: "Mar", others: 125, design: 125 },
-  { name: "Apr", others: 140, design: 120 },
-  { name: "May", others: 135, design: 130 },
-  { name: "Jun", others: 160, design: 140 }, // Peak
-  { name: "Jul", others: 145, design: 135 },
-  { name: "Aug", others: 150, design: 125 },
-  { name: "Sep", others: 140, design: 120 },
-  { name: "Oct", others: 135, design: 130 },
-  { name: "Nov", others: 145, design: 140 },
-  { name: "Dec", others: 155, design: 150 },
+  { name: "Mar", others: 110, design: 90 },
+  { name: "Apr", others: 125, design: 140 },
+  { name: "Jun", others: 110, design: 90 },
+  { name: "Jul", others: 140, design: 80 }, // Highlighted in design
+  { name: "Aug", others: 120, design: 95 },
+  { name: "Sep", others: 135, design: 110 },
+  { name: "Oct", others: 125, design: 100 },
+  { name: "Nov", others: 130, design: 105 },
 ];
 
-const employeeCompositionData = [
-  { name: "Male", value: 70 },
-  { name: "Female", value: 30 },
+const employeeData = [
+  { name: "Female", value: 70 },
+  { name: "Male", value: 30 },
 ];
 
-// --- Components ---
-
-const HeaderStats = () => {
-  const t = useTranslations("Dashboard.header");
+export default function Dashboard() {
   return (
-    <div className="flex flex-col lg:flex-row justify-between items-end mb-5 gap-8 px-2 relative z-10">
-      <div className="flex-1 w-full lg:w-auto">
-        <h2 className="text-[40px] font-normal text-brand-primary mb-5 tracking-[-0.02em]">
-          {t("greeting", { name: "Valentina" })}
-        </h2>
+    <div className="p-8 lg:p-10 max-w-[1600px] mx-auto font-sans text-brand-dark">
+      {/* Header Section */}
+      <div className="mb-10">
+        <h1 className="text-5xl font-light mb-8">Hello Valentina</h1>
 
-        <div className="grid grid-cols-12 gap-2 items-center w-2/3">
-          {/* Interviews - Large Dark Pill */}
-          <div className="flex flex-col gap-1.5 col-span-6">
-            <span className="text-xs text-neutral-400 pl-1 font-medium tracking-wide">
-              {t("interviews")}
-            </span>
-            <div className="bg-brand-rich text-white p-3 rounded-4xl flex items-center shadow-xl shadow-black/5 relative overflow-hidden">
-              <span className="text-sm font-medium relative z-10 opacity-80">
-                70%
-              </span>
-            </div>
-          </div>
-
-          {/* Hired - Yellow Pill */}
-          <div className="flex flex-col gap-1.5 col-span-2">
-            <span className="text-xs text-neutral-400 pl-1 font-medium tracking-wide">
-              {t("hired")}
-            </span>
-            <div className="bg-brand-primary text-white p-3 rounded-4xl flex items-center shadow-lg">
-              <span className="text-sm font-medium">10%</span>
-            </div>
-          </div>
-
-          {/* Project Time - Striped Pill */}
-          <div className="flex flex-col gap-1.5 col-span-3">
-            <span className="text-xs text-neutral-400 pl-1 font-medium tracking-wide">
-              {t("projectTime")}
-            </span>
-            <div className="bg-muted text-brand-primary p-3 rounded-4xl flex items-center relative overflow-hidden">
-              <div
-                className="absolute inset-0 opacity-[0.1] dark:opacity-[0.05]"
-                style={{
-                  backgroundImage: `repeating-linear-gradient(
-                    -45deg,
-                    transparent,
-                    transparent 6px,
-                    var(--foreground) 6px,
-                    var(--foreground) 12px
-                  )`,
-                }}
-              />
-              <span className="text-sm font-medium relative z-10">15%</span>
-            </div>
-          </div>
-
-          {/* Output - Circle Chart Pill */}
-          <div className="flex flex-col gap-1.5 col-span-1">
-            <span className="text-xs text-neutral-400 pl-1 font-medium tracking-wide">
-              {t("output")}
-            </span>
-            <div className="text-brand-primary p-3 pr-8 rounded-4xl flex items-center justify-center border border-border">
-              <span className="text-sm text-neutral-500">5%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Right Stats Group */}
-      <div className="flex gap-12 pb-1 pr-4">
-        {/* Employee */}
-        <div className="flex flex-col items-center gap-1">
-          <div className="text-[36px] leading-tight font-light text-brand-primary">
-            91
-          </div>
-          <div className="flex flex-col items-center gap-0 text-neutral-500 text-[10px] uppercase tracking-wider font-semibold">
-            <div className="flex items-center gap-1.5 mb-0.5">
-              <Users className="w-3.5 h-3.5" strokeWidth={2} />
-              <span>{t("employee")}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Hirings */}
-        <div className="flex flex-col items-center gap-1">
-          <div className="text-[36px] leading-tight font-light text-brand-primary">
-            104
-          </div>
-          <div className="flex flex-col items-center gap-0 text-neutral-500 text-[10px] uppercase tracking-wider font-semibold">
-            <div className="flex items-center gap-1.5 mb-0.5">
-              <FolderOpen className="w-3.5 h-3.5" strokeWidth={2} />
-              <span>{t("hirings")}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Projects */}
-        <div className="flex flex-col items-center gap-1">
-          <div className="text-[36px] leading-tight font-light text-brand-primary">
-            185
-          </div>
-          <div className="flex flex-col items-center gap-0 text-neutral-500 text-[10px] uppercase tracking-wider font-semibold">
-            <div className="flex items-center gap-1.5 mb-0.5">
-              <div className="w-3.5 h-3.5 border border-current rounded flex items-center justify-center">
-                <div className="w-1.5 h-0.5 bg-current"></div>
+        {/* Top Stats Row */}
+        <div className="flex flex-col xl:flex-row gap-8 items-end">
+          {/* Progress Widgets */}
+          <div className="flex flex-wrap gap-2 flex-1 w-full">
+            {/* Interviews (Black) */}
+            <div className="relative flex flex-col justify-center h-[90px] rounded-[24px] px-6 bg-brand-dark text-white w-[240px] shrink-0 shadow-lg shadow-black/5">
+              <div className="text-xs mb-2 opacity-70 font-medium tracking-wide">
+                Interviews
               </div>
-              <span>{t("projects")}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const DashboardPage = () => {
-  const t = useTranslations("Dashboard");
-  const [selectedSalaryIds, setSelectedSalaryIds] = useState<number[]>([2]);
-
-  const toggleSalarySelection = (id: number) => {
-    setSelectedSalaryIds((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    );
-  };
-
-  // Styling helper for the dot matrix
-  const renderDotMatrix = () => {
-    const cols = 14;
-    const rows = 3;
-    const matrix = [];
-
-    for (let r = 0; r < rows; r++) {
-      const rowDots = [];
-      for (let c = 0; c < cols; c++) {
-        let isActive = false;
-        if (r === 2) isActive = true;
-        if (r === 1 && c > 2) isActive = true;
-        if (r === 0 && c > 5 && c < 12) isActive = true;
-
-        const isYellow = isActive && c >= 6 && c <= 12;
-        const isEmpty = !isActive;
-
-        rowDots.push(
-          <div
-            key={`${r}-${c}`}
-            className={cn(
-              "w-1.5 h-1.5 rounded-full",
-              isYellow ? "bg-brand-primary" : "bg-neutral-600",
-              isEmpty && "bg-neutral-600 opacity-20"
-            )}
-          />
-        );
-      }
-      matrix.push(
-        <div key={r} className="flex gap-2.5">
-          {rowDots}
-        </div>
-      );
-    }
-    return <div className="flex flex-col gap-2.5">{matrix}</div>;
-  };
-
-  return (
-    <div className="container mx-auto px-6 pt-10 pb-8 max-w-[1600px]">
-      <m.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        <HeaderStats />
-      </m.div>
-
-      {/* Bento Grid Layout - Compact Gap */}
-      <m.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-        className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-5"
-      >
-        {/* Schedule - Left Column (Span 3) - FROSTED GLASS */}
-        <div className="col-span-1 md:col-span-4 lg:col-span-3 bg-white/40 backdrop-blur-xl rounded-[32px] p-5 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.02)] border border-white/20 relative overflow-hidden">
-          {/* Title */}
-          <div className="flex justify-between items-center mb-5">
-            <h3 className="text-lg font-normal text-brand-primary">
-              {t("schedule.title")}
-            </h3>
-            {/* Arrow with WHITE background as requested */}
-            <button className="w-8 h-8 rounded-full bg-white border border-white/20 flex items-center justify-center hover:shadow-md transition shadow-sm">
-              <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
-            </button>
-          </div>
-
-          {/* Calendar Days Strip */}
-          <div className="flex justify-between items-center mb-5 px-1">
-            {["sun", "mon", "tue", "wed", "thu", "fri", "sat"].map((d, i) => (
-              <div
-                key={d}
-                className="flex flex-col items-center gap-0.5 group cursor-pointer"
-              >
-                <span
-                  className={cn(
-                    "text-[9px] uppercase font-medium",
-                    i === 3 ? "text-[#1A1B1E]" : "text-neutral-400"
-                  )}
-                >
-                  {t(`schedule.days.${d}`)}
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-2xl font-semibold tracking-tight">
+                  70%
                 </span>
-                <span
-                  className={cn(
-                    "text-xs font-semibold",
-                    i === 3
-                      ? "text-[#1A1B1E] text-sm"
-                      : "text-neutral-400 opacity-60"
-                  )}
-                >
-                  {22 + i}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <div className="relative pl-0 space-y-3">
-            {/* Vertical Line */}
-            <div className="absolute left-[24px] top-3 bottom-3 w-px bg-neutral-300/40 z-0" />
-
-            {scheduleData.map((item, idx) => (
-              <div
-                key={idx}
-                className="relative flex gap-3 min-h-[46px] items-start group z-10"
-              >
-                {/* Time/Status Dot */}
-                <div className="flex flex-col items-center min-w-[48px] pt-0.5">
-                  <div
-                    className={cn(
-                      "w-12 h-7 rounded-full flex items-center justify-center border text-[10px] font-medium transition-all z-20 shadow-sm",
-                      item.active || item.title === "Daily Sync"
-                        ? "border-brand-rich text-white bg-brand-rich"
-                        : "border-white/20 text-neutral-400 bg-white/40 backdrop-blur-sm",
-                      item.title === "Daily Meeting" &&
-                        "bg-brand-primary border-brand-primary text-white"
-                    )}
-                  >
-                    {item.time}
-                  </div>
-
-                  {/* Dots connecting */}
-                  {idx !== scheduleData.length - 1 && (
-                    <div className="w-0.5 h-0.5 rounded-full bg-neutral-300 dark:bg-neutral-700 mt-2" />
-                  )}
+                <div className="w-[100px] h-1.5 bg-white/20 rounded-full">
+                  <div className="w-[70%] h-full bg-white rounded-full" />
                 </div>
-
-                {/* Card */}
-                {item.title ? (
-                  <div
-                    className={cn(
-                      "flex-1 p-3.5 rounded-[20px] transition-all duration-300 hover:scale-[1.02] cursor-pointer",
-                      item.type === "dark"
-                        ? "bg-brand-rich text-white shadow-xl shadow-black/5"
-                        : "bg-white/40 border border-white/20 text-brand-primary shadow-sm backdrop-blur-sm"
-                    )}
-                  >
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h4 className="font-medium text-[13px] mb-0.5">
-                          {item.title}
-                        </h4>
-                        <p
-                          className={cn(
-                            "text-[9px]",
-                            item.type === "dark"
-                              ? "opacity-60"
-                              : "text-neutral-500"
-                          )}
-                        >
-                          {item.duration}
-                        </p>
-                      </div>
-                      {item.type === "dark" && (
-                        <div className="w-1.5 h-1.5 rounded-full bg-brand-primary mt-1" />
-                      )}
-                      {item.type === "light" && (
-                        <div className="w-1.5 h-1.5 rounded-full bg-brand-primary mt-1" />
-                      )}
-                    </div>
-
-                    {/* Avatars */}
-                    {item.avatars && item.avatars.length > 0 && (
-                      <div className="flex -space-x-1.5 mt-2">
-                        {item.avatars.map((src, i) => (
-                          <div
-                            key={i}
-                            className="w-5 h-5 rounded-full border border-glass overflow-hidden relative"
-                          >
-                            <Image
-                              src={src}
-                              alt="user"
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="h-5" />
-                )}
               </div>
-            ))}
+            </div>
 
-            {/* Expand Circle Button */}
-            <div className="absolute bottom-[-6px] left-[14px] z-20">
-              <div className="w-5 h-5 rounded-full bg-brand-rich flex items-center justify-center cursor-pointer hover:scale-110 transition shadow-md">
-                <ChevronDown className="w-3 h-3 text-white" />
+            {/* Hired (Yellow) */}
+            <div className="relative flex flex-col justify-center h-[90px] rounded-[24px] px-6 bg-brand-primary text-white w-[180px] shrink-0 shadow-lg shadow-brand-primary/20">
+              <div className="text-xs mb-2 opacity-80 font-medium tracking-wide">
+                Hired
               </div>
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-2xl font-semibold tracking-tight">
+                  10%
+                </span>
+                <div className="w-[60px] h-1.5 bg-white/20 rounded-full">
+                  <div className="w-[10%] h-full bg-white rounded-full" />
+                </div>
+              </div>
+            </div>
+
+            {/* Project time (Striped) */}
+            <div className="relative flex flex-col justify-center h-[90px] rounded-[24px] px-6 bg-[repeating-linear-gradient(45deg,#e5e5e5,#e5e5e5_5px,#f4f4f5_5px,#f4f4f5_10px)] text-brand-dark w-[180px] shrink-0">
+              <div className="text-xs mb-2 opacity-60 font-medium tracking-wide">
+                Project time
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-2xl font-semibold tracking-tight">
+                  15%
+                </span>
+                {/* Visual filler for striped block */}
+                <div className="opacity-0">...</div>
+              </div>
+            </div>
+
+            {/* Output (White) */}
+            <div className="relative flex flex-col justify-center h-[90px] rounded-[24px] px-6 bg-transparent border border-brand-dark/80 text-brand-dark w-[120px] shrink-0">
+              <div className="text-xs mb-1 opacity-60 font-medium tracking-wide">
+                Output
+              </div>
+              <span className="text-2xl font-semibold tracking-tight">5%</span>
             </div>
           </div>
+
+          {/* Quick Stats (Text only) */}
+          {/* <div className="flex gap-12 pb-3 xl:pl-4 shrink-0">
+            <StatItem label="Employee" value="91" icon="👥" />
+            <StatItem label="Hirings" value="104" icon="👜" />
+            <StatItem label="Projects" value="185" icon="💻" />
+          </div> */}
         </div>
+      </div>
 
-        {/* Middle Column (Span 6) */}
-        <div className="col-span-1 md:col-span-8 lg:col-span-6 flex flex-col gap-5">
-          {/* Salary Section - FROSTED GLASS */}
-          <div className="bg-white/40 backdrop-blur-xl rounded-[32px] p-5 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.02)] flex-1 border border-white/20">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-normal text-brand-primary">
-                {t("salaryTable.title")}
-              </h3>
-              <div className="relative group">
-                <Search className="w-4 h-4 text-neutral-400 absolute left-4 top-1/2 -translate-y-1/2 group-focus-within:text-primary transition-colors" />
-                <input
-                  type="text"
-                  placeholder={t("salaryTable.searchPlaceholder")}
-                  className="pl-11 pr-5 py-2.5 rounded-full bg-white border-none shadow-sm text-sm focus:outline-none w-[140px] transition-all focus:w-[200px] focus:ring-1 focus:ring-border placeholder:text-neutral-400"
-                />
+      {/* Main Grid: 3 Columns Asymmetric */}
+      <div className="grid grid-cols-1 gap-2 w-full">
+        {/* Column 2: Salary & Hiring */}
+        <div className="grid grid-cols-4 gap-2">
+          <div className="col-span-3">
+            <div className="bg-white rounded-[32px] p-7 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)]">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-[17px] font-bold text-brand-dark">
+                  Salary
+                </h3>
+                <div className="flex gap-3 items-center">
+                  <div className="bg-[#f5f5f7] rounded-full h-9 pl-4 pr-3 flex items-center gap-2 w-[180px]">
+                    <Search size={14} className="text-gray-400" />
+                    <span className="text-[13px] text-gray-400 font-medium">
+                      Search
+                    </span>
+                  </div>
+                  <button className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-colors">
+                    <ArrowUpRight size={14} strokeWidth={2} />
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div className="overflow-hidden">
-              <table className="w-full">
+              <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="text-left text-neutral-400 text-[10px] font-medium border-b border-dashed border-border/50">
-                    <th className="pb-2 pl-3 w-10">
-                      <div className="w-3.5 h-3.5 rounded border border-border bg-white/10" />
+                  <tr className="text-[11px] text-[#999] border-b border-white h-8">
+                    <th className="font-normal w-8">
+                      <div className="w-3.5 h-3.5 border border-gray-300 rounded-[4px]"></div>
                     </th>
-                    <th className="pb-2 pl-0 font-normal">
-                      {t("salaryTable.headers.name")}
-                    </th>
-                    <th className="pb-2 font-normal">
-                      {t("salaryTable.headers.jobTitle")}
-                    </th>
-                    <th className="pb-2 font-normal">
-                      {t("salaryTable.headers.netSalary")}
-                    </th>
-                    <th className="pb-2 font-normal">
-                      {t("salaryTable.headers.status")}
-                    </th>
+                    <th className="font-normal pl-2">Name</th>
+                    <th className="font-normal">Job Title</th>
+                    <th className="font-normal">Net Salary</th>
+                    <th className="font-normal">Status</th>
                   </tr>
                 </thead>
-                <tbody className="text-sm">
-                  {salaryData.map((row) => {
-                    const isSelected = selectedSalaryIds.includes(row.id);
-                    return (
-                      <tr
-                        key={row.id}
-                        onClick={() => toggleSalarySelection(row.id)}
-                        className={cn(
-                          "group transition-all duration-200 cursor-pointer border-b border-transparent rounded-[16px]",
-                          isSelected
-                            ? "bg-brand-rich shadow-lg shadow-black/5 scale-[1.02]"
-                            : "hover:bg-white/20"
-                        )}
-                      >
-                        <td className={cn("py-3 pl-3 first:rounded-l-[16px]")}>
-                          <div
-                            className={cn(
-                              "w-4 h-4 rounded-md border flex items-center justify-center transition-colors",
-                              isSelected
-                                ? "bg-brand-primary border-brand-primary text-white"
-                                : "border-border bg-white/10 group-hover:border-neutral-400"
-                            )}
-                          >
-                            {isSelected && (
-                              <div className="w-1.5 h-1.5 bg-white rounded-[1px]" />
-                            )}
-                          </div>
-                        </td>
-                        <td className="py-3 pl-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-full overflow-hidden bg-muted border border-white/20">
-                              <Image
-                                src={row.avatar}
-                                alt={row.name}
-                                width={36}
-                                height={36}
-                              />
-                            </div>
-                            <span
-                              className={cn(
-                                "font-medium text-[14px]",
-                                isSelected ? "text-white" : "text-brand-primary"
-                              )}
-                            >
-                              {row.name}
-                            </span>
-                          </div>
-                        </td>
-                        <td
-                          className={cn(
-                            "py-3 font-medium text-[13px]",
-                            isSelected ? "opacity-60" : "text-neutral-500"
-                          )}
-                        >
-                          {row.role}
-                        </td>
-                        <td
-                          className={cn(
-                            "py-3 font-medium text-[14px]",
-                            isSelected ? "text-white" : "text-brand-primary"
-                          )}
-                        >
-                          {row.salary}
-                        </td>
-                        <td className="py-3 last:rounded-r-[16px]">
-                          <span
-                            className={cn(
-                              "px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 w-fit border shadow-sm",
-                              row.status === "Paid For" &&
-                                "bg-[#F3F0FF]/60 text-[#7C3AED] border-[#E9D5FF]/60",
-                              row.status === "Absent" &&
-                                "bg-gray-100/60 text-[#6B7280] border-[#E5E7EB]/60",
-                              row.status === "Pending" &&
-                                "bg-[#ECFDF5]/60 text-[#059669] border-[#A7F3D0]/60"
-                            )}
-                          >
-                            <div
-                              className={cn(
-                                "w-1.5 h-1.5 rounded-full",
-                                row.status === "Paid For" && "bg-[#7C3AED]",
-                                row.status === "Absent" && "bg-[#6B7280]",
-                                row.status === "Pending" && "bg-[#059669]"
-                              )}
-                            />
-                            {row.status === "Paid For"
-                              ? t("salaryTable.status.paid")
-                              : row.status === "Absent"
-                              ? t("salaryTable.status.absent")
-                              : t("salaryTable.status.pending")}
-                          </span>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                <tbody className="text-[13px]">
+                  {/* <tr className="h-4"></tr> */}
+                  <SalaryRow
+                    img="https://i.pravatar.cc/150?u=1"
+                    name="Yulia Polishchuk"
+                    role="Head of Design"
+                    salary="$2,500"
+                    status="Paid For"
+                    statusColor="bg-[#eef2ff] text-[#4f46e5]"
+                  />
+                  <tr className="h-4"></tr>
+                  <SalaryRow
+                    img="https://i.pravatar.cc/150?u=8"
+                    name="Bogdan Nikitin"
+                    role="Front End Dev..."
+                    salary="$3,000"
+                    status="Absent"
+                    statusColor="bg-[#f4f4f5] text-[#71717a]"
+                    checked
+                  />
+                  <tr className="h-4"></tr>
+                  <SalaryRow
+                    img="https://i.pravatar.cc/150?u=5"
+                    name="Daria Yurchenko"
+                    role="UX/UI Designer"
+                    salary="$1,500"
+                    status="Pending"
+                    statusColor="bg-[#ecfdf5] text-[#10b981]"
+                  />
+                  <tr className="h-4"></tr>
+                  <SalaryRow
+                    img="https://i.pravatar.cc/150?u=5"
+                    name="Daria Yurchenko"
+                    role="UX/UI Designer"
+                    salary="$1,500"
+                    status="Pending"
+                    statusColor="bg-[#ecfdf5] text-[#10b981]"
+                  />
+                  <tr className="h-4"></tr>
+                  <SalaryRow
+                    img="https://i.pravatar.cc/150?u=5"
+                    name="Daria Yurchenko"
+                    role="UX/UI Designer"
+                    salary="$1,500"
+                    status="Pending"
+                    statusColor="bg-[#ecfdf5] text-[#10b981]"
+                  />
+                  <tr className="h-4"></tr>
+                  <SalaryRow
+                    img="https://i.pravatar.cc/150?u=5"
+                    name="Daria Yurchenko"
+                    role="UX/UI Designer"
+                    salary="$1,500"
+                    status="Pending"
+                    statusColor="bg-[#ecfdf5] text-[#10b981]"
+                  />
                 </tbody>
               </table>
             </div>
           </div>
 
-          {/* Hiring Statistics - FROSTED GLASS */}
-          <div className="bg-white/40 backdrop-blur-xl rounded-[32px] p-5 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.02)] h-[240px] flex flex-col border border-white/20">
-            <div className="flex justify-between items-center mb-0">
-              <div className="flex items-center gap-6">
-                <h3 className="text-lg font-normal text-brand-primary">
-                  {t("hiringStats.title")}
+          <div className="flex flex-col gap-2">
+            <div className="bg-brand-dark text-white h-[260px] relative overflow-hidden rounded-[32px] p-7 shadow-lg col-span-1">
+              <div className="flex justify-between items-center mb-6 relative z-10">
+                <h3 className="text-[17px] font-bold">Attendance Report</h3>
+                <button className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/80 hover:bg-white/10 transition-colors">
+                  <ArrowUpRight size={14} strokeWidth={2} />
+                </button>
+              </div>
+
+              <div className="flex gap-6 mb-8 relative z-10">
+                <div className="flex flex-col">
+                  <div className="text-[36px] font-light leading-none flex items-start gap-1">
+                    63
+                    <span className="text-base text-brand-primary font-normal mt-1">
+                      ↗
+                    </span>
+                  </div>
+                </div>
+                <div className="flex flex-col opacity-50">
+                  <div className="text-[36px] font-light leading-none flex items-start gap-1">
+                    12
+                    <span className="text-base text-white/60 font-normal mt-1">
+                      ↘
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dot Matrix - Custom Grid */}
+              <div className="absolute bottom-7 left-7 right-7">
+                <div className="grid grid-cols-[repeat(12,1fr)] gap-x-2 gap-y-2">
+                  {Array.from({ length: 48 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className={clsx(
+                        "aspect-square rounded-full w-1.5 h-1.5",
+                        i >= 28
+                          ? "bg-brand-primary shadow-[0_0_5px_#fcd34d]"
+                          : "bg-white/10",
+                      )}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-[32px] p-7 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] flex-1 flex flex-col items-center justify-center">
+              <h3 className="text-[17px] font-bold text-brand-dark w-full mb-4 text-left">
+                Employee Composition
+              </h3>
+
+              <div className="relative w-[180px] h-[180px] mb-8">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={employeeData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={70}
+                      outerRadius={86}
+                      startAngle={90}
+                      endAngle={450}
+                      dataKey="value"
+                      stroke="none"
+                      cornerRadius={8}
+                      paddingAngle={4}
+                    >
+                      <Cell fill="#1a1a1a" />
+                      <Cell fill="var(--color-brand-primary)" />
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+
+                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                  <div className="text-[32px] font-bold text-brand-dark leading-none mb-1">
+                    345
+                  </div>
+                  <div className="text-[11px] text-[#999] font-medium">
+                    Total
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-8 text-[13px] font-medium">
+                <span className="flex items-center gap-2 text-[#666]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-dark"></span>
+                  70% ♀
+                </span>
+                <span className="flex items-center gap-2 text-[#666]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-primary"></span>
+                  30% ♂
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          {/* Hiring Statistics */}
+          <div className="bg-white rounded-[32px] p-7 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] flex-1 flex flex-col min-h-[280px]">
+            <div className="flex justify-between items-start mb-4">
+              <div className="flex gap-6 items-center">
+                <h3 className="text-[17px] font-bold text-brand-dark">
+                  Hiring Statistics
                 </h3>
-                <div className="flex items-center gap-4 text-[10px] font-medium uppercase tracking-wide">
-                  <span className="flex items-center gap-1.5 text-neutral-400">
-                    <div className="w-2 h-2 rounded-full bg-brand-primary" />{" "}
-                    {t("hiringStats.others")}
+                <div className="flex gap-4 text-[11px] font-medium pt-1">
+                  <span className="flex items-center gap-1.5 text-[#666]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-primary"></span>
+                    Others
                   </span>
-                  <span className="flex items-center gap-1.5 text-brand-primary">
-                    <div className="w-2 h-2 rounded-full bg-brand-rich" />{" "}
-                    {t("hiringStats.design")}
+                  <span className="flex items-center gap-1.5 text-[#666]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-dark"></span>
+                    Design
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-xs font-medium text-neutral-600 bg-white border border-white/20 px-3 py-1.5 rounded-full cursor-pointer hover:bg-white dark:hover:bg-white/10 transition shadow-sm">
-                2024 <ArrowUpRight className="w-3 h-3 text-neutral-400" />
+              <div className="flex gap-2">
+                <div className="px-3 py-1.5 rounded-[12px] bg-[#f5f5f7] text-[11px] font-bold text-brand-dark flex items-center gap-1 cursor-pointer">
+                  2024{" "}
+                  <span className="text-[8px] opacity-40 translate-y-px">
+                    ▼
+                  </span>
+                </div>
+                <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-colors">
+                  <ArrowUpRight size={14} strokeWidth={2} />
+                </button>
               </div>
             </div>
 
-            <div className="flex-1 w-full min-h-0 relative -ml-4 mt-2">
-              <ResponsiveContainer width="102%" height="100%">
-                <LineChart data={hiringStatsData}>
-                  <CartesianGrid
-                    vertical={false}
-                    strokeDasharray="3 3"
-                    stroke="#e5e5e5"
-                  />
-                  <XAxis
-                    dataKey="name"
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fontSize: 10, fill: "#9ca3af" }}
-                    dy={10}
-                    interval={0}
-                  />
-                  <YAxis
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fontSize: 10, fill: "#9ca3af" }}
-                    dx={-10}
-                  />
+            <div className="flex-1 w-full -ml-2">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart
+                  data={hiringData}
+                  margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
+                >
+                  <defs>
+                    <linearGradient
+                      id="colorDesign"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="5%"
+                        stopColor="var(--color-brand-primary)"
+                        stopOpacity={0.05}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor="var(--color-brand-primary)"
+                        stopOpacity={0}
+                      />
+                    </linearGradient>
+                  </defs>
                   <Tooltip
-                    content={({ active, payload }) => {
+                    content={({ active, payload, label }) => {
                       if (active && payload && payload.length) {
                         return (
-                          <div className="bg-brand-rich text-white text-xs py-1.5 px-3 rounded-lg shadow-xl flex items-center justify-center">
-                            <span className="font-medium mr-1">
-                              {t("hiringStats.others")}
-                            </span>
-                            <span className="opacity-70">12</span>
+                          <div className="bg-brand-dark text-white text-[10px] py-1.5 px-3 rounded-lg shadow-xl text-center">
+                            <div className="mb-1 font-semibold">{label}</div>
+                            <div>Others: {payload[0].value}</div>
                           </div>
                         );
                       }
                       return null;
                     }}
                   />
-                  <Line
+
+                  {/* Others - Dotted Yellow */}
+                  <Area
                     type="monotone"
                     dataKey="others"
                     stroke="var(--color-brand-primary)"
                     strokeWidth={2}
-                    dot={false}
                     strokeDasharray="4 4"
+                    fill="transparent"
+                    activeDot={{
+                      r: 4,
+                      fill: "var(--color-brand-primary)",
+                      strokeWidth: 0,
+                    }}
+                    dot={false}
                   />
-                  <Line
+
+                  {/* Design - Solid Black */}
+                  <Area
                     type="monotone"
                     dataKey="design"
-                    stroke="var(--color-brand-rich)"
+                    stroke="#1a1a1a"
                     strokeWidth={2}
-                    dot={false}
+                    fill="url(#colorDesign)"
                     activeDot={{
-                      r: 6,
-                      fill: "var(--color-brand-rich)",
+                      r: 4,
+                      fill: "#1a1a1a",
                       stroke: "#fff",
                       strokeWidth: 2,
                     }}
+                    dot={false}
                   />
-                </LineChart>
+                  <XAxis
+                    dataKey="name"
+                    axisLine={false}
+                    tickLine={false}
+                    tick={({ x, y, payload }) => {
+                      const isJuly = payload.value === "Jul";
+                      return (
+                        <g transform={`translate(${x},${y})`}>
+                          {isJuly ? (
+                            <foreignObject
+                              x="-14"
+                              y="10"
+                              width="28"
+                              height="20"
+                            >
+                              <div className="bg-[#f5f5f7] rounded-[6px] text-brand-dark text-[10px] font-bold text-center leading-[20px]">
+                                {payload.value}
+                              </div>
+                            </foreignObject>
+                          ) : (
+                            <text
+                              x={0}
+                              y={22}
+                              textAnchor="middle"
+                              fill="#999"
+                              fontSize={10}
+                            >
+                              {payload.value}
+                            </text>
+                          )}
+                        </g>
+                      );
+                    }}
+                  />
+                  <YAxis
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: "#999", fontSize: 10 }}
+                  />
+                </AreaChart>
               </ResponsiveContainer>
-
-              {/* Floating Label Highlight Mock */}
-              <div className="absolute top-[35%] left-[45%] pointer-events-none flex flex-col items-center">
-                <div className="mb-1.5 bg-brand-rich text-white text-[10px] py-1 px-3 rounded-full shadow-lg">
-                  {t("hiringStats.others")} 12
-                </div>
-                <div className="h-[100px] w-px bg-border border-l border-dashed border-border-strong"></div>
-              </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
 
-        {/* Right Column (Span 3) */}
-        <div className="col-span-1 md:col-span-4 lg:col-span-3 flex flex-col gap-5">
-          {/* Attendance Report */}
-          <div className="bg-brand-rich text-white rounded-[32px] p-6 shadow-xl flex flex-col justify-between h-[220px] relative overflow-hidden group">
-            {/* Shine effect on card */}
-            <div className="absolute top-[-50%] right-[-50%] w-full h-full bg-white/5 blur-3xl rounded-full" />
+// --- Components ---
 
-            <div className="flex justify-between items-start z-10">
-              <h3 className="text-[17px] font-light opacity-90">
-                {t("attendance.title")}
-              </h3>
-              <button className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition backdrop-blur-sm">
-                <ArrowUpRight className="w-3.5 h-3.5 opacity-80" />
-              </button>
-            </div>
+const StatItem = ({
+  label,
+  value,
+  icon,
+}: {
+  label: string;
+  value: string;
+  icon: string;
+}) => (
+  <div className="flex flex-col gap-0.5">
+    <div className="text-5xl font-light text-brand-dark">{value}</div>
+    <div className="text-[11px] text-[#999] uppercase tracking-wider flex items-center gap-1.5 font-medium">
+      <span className="opacity-70 grayscale">{icon}</span>
+      {label}
+    </div>
+  </div>
+);
 
-            <div className="z-10 mt-1">
-              <div className="flex items-baseline gap-3">
-                <span className="text-[36px] font-light leading-none">63</span>
-                <ArrowUpRight className="w-4 h-4 opacity-50" />
-
-                <span className="text-[36px] font-light opacity-40 leading-none ml-4">
-                  12
-                </span>
-                <TrendingDown className="w-4 h-4 opacity-40" />
-              </div>
-            </div>
-
-            {/* Dot Matrix Visualization */}
-            <div className="z-10 mt-auto flex justify-between items-end pb-0 opacity-90">
-              {renderDotMatrix()}
-            </div>
-          </div>
-
-          {/* Employee Composition - FROSTED GLASS */}
-          <div className="bg-white/40 backdrop-blur-xl rounded-[32px] p-5 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.02)] flex-1 flex flex-col items-center justify-center relative border border-white/20">
-            <h3 className="absolute top-6 left-6 text-[17px] font-normal text-brand-primary">
-              {t("employeeComposition.title")}
-            </h3>
-
-            <div className="w-[150px] h-[150px] relative mt-4">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={employeeCompositionData}
-                    innerRadius={50}
-                    outerRadius={60}
-                    paddingAngle={0}
-                    dataKey="value"
-                    startAngle={90}
-                    endAngle={-270}
-                    stroke="none"
-                    cornerRadius={8}
-                  >
-                    <Cell key="male" fill="var(--color-brand-rich)" />
-                    <Cell key="female" fill="var(--color-brand-primary)" />
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
-
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-[32px] font-light text-brand-primary">
-                  345
-                </span>
-                <span className="text-[9px] text-neutral-400 font-bold uppercase tracking-wider mt-0.5">
-                  Total
-                </span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-6 mt-4 w-full justify-center">
-              <div className="flex items-center gap-2">
-                <span className="text-base text-brand-primary font-normal">
-                  70%
-                </span>
-                <div className="bg-brand-rich rounded-full p-1">
-                  <MarsIcon className="w-2.5 h-2.5 text-white" />
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="text-base text-brand-primary font-normal">
-                  30%
-                </span>
-                <div className="bg-brand-primary rounded-full p-1">
-                  <VenusIcon className="w-2.5 h-2.5 text-white" />
-                </div>
-              </div>
-            </div>
-          </div>
+const EventCard = ({
+  time,
+  endTime,
+  title,
+  theme,
+}: {
+  time: string;
+  endTime: string;
+  title: string;
+  theme: "black" | "white" | "minimal";
+}) => {
+  if (theme === "minimal") {
+    return (
+      <div className="flex gap-5 items-start pl-[2px] relative z-10 w-full">
+        <div className="w-[34px] flex justify-center pt-2">
+          <div className="w-[9px] h-[9px] bg-brand-dark rounded-full ring-4 ring-white" />
         </div>
-      </m.div>
+        <div className="pt-0.5">
+          <div className="text-[13px] font-bold text-brand-dark mb-0.5">
+            {title}
+          </div>
+          <div className="text-[11px] text-[#999]">{endTime}</div>
+        </div>
+      </div>
+    );
+  }
+
+  const isBlack = theme === "black";
+  return (
+    <div className="flex gap-5 items-start relative z-10 w-full mb-2">
+      <div className="w-[40px] flex justify-center">
+        {/* Time Pill */}
+        <div
+          className={clsx(
+            "h-[22px] px-2.5 rounded-full text-[10px] font-bold flex items-center justify-center shadow-sm z-20",
+            isBlack
+              ? "bg-brand-dark text-white"
+              : "bg-[#fcd34d] text-brand-dark",
+          )}
+        >
+          {time}
+        </div>
+      </div>
+      <div
+        className={clsx(
+          "flex-1 rounded-[20px] p-5 w-full",
+          isBlack
+            ? "bg-brand-dark text-white shadow-xl shadow-black/10"
+            : "bg-white text-brand-dark shadow-[0_4px_20px_-5px_rgba(0,0,0,0.08)]",
+        )}
+      >
+        <div className="flex justify-between items-start mb-1">
+          <span className="text-[13px] font-bold">{title}</span>
+          <span
+            className={clsx(
+              "w-1.5 h-1.5 rounded-full",
+              isBlack ? "bg-[#fcd34d]" : "bg-brand-dark",
+            )}
+          ></span>
+        </div>
+        <div
+          className={clsx(
+            "text-[11px]",
+            isBlack ? "opacity-60" : "text-[#999]",
+          )}
+        >
+          {endTime}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default DashboardPage;
+const SalaryRow = ({
+  img,
+  name,
+  role,
+  salary,
+  status,
+  statusColor,
+  checked,
+}: any) => (
+  <tr
+    className={`group border-b border-transparent hover:bg-gray-50/50 rounded-full ${checked ? "bg-brand-primary/20" : ""}`}
+  >
+    <td className="py-2.5 pl-1">
+      <div
+        className={clsx(
+          "w-4 h-4 rounded-[5px] flex items-center justify-center transition-all cursor-pointer",
+          checked ? "bg-black text-white" : "border border-gray-300 bg-white",
+        )}
+      >
+        {checked && <span className="text-[8px] font-bold">✓</span>}
+      </div>
+    </td>
+    <td className="py-2.5 pl-2">
+      <div className="flex items-center gap-3">
+        <img
+          src={img}
+          alt={name}
+          className="w-8 h-8 rounded-full object-cover shadow-sm bg-gray-100"
+        />
+        <span className="text-[13px] font-bold text-brand-dark">{name}</span>
+      </div>
+    </td>
+    <td className="py-2.5 text-[12px] font-medium text-[#999]">{role}</td>
+    <td className="py-2.5 text-[13px] font-bold text-brand-dark">{salary}</td>
+    <td className="py-2.5">
+      <span
+        className={clsx(
+          "h-6 px-3 rounded-[10px] text-[10px] font-bold flex w-fit items-center gap-1.5",
+          statusColor,
+        )}
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40" />
+        {status}
+      </span>
+    </td>
+  </tr>
+);

@@ -24,7 +24,7 @@ export function LanguageDropdown({
 
   // Find current lang based on URL locale
   const [currentLang, setCurrentLang] = useState<Language>(
-    languages.find((l) => l.code === locale) || languages[0]
+    languages.find((l) => l.code === locale) || languages[0],
   );
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -132,7 +132,7 @@ export function LanguageDropdown({
       <div ref={dropdownRef} className={`relative ${className}`}>
         <button
           onClick={toggleDropdown}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-white/40 backdrop-blur-xl border border-white/20 hover:bg-white/50 dark:hover:bg-white/10 transition-colors shadow-sm text-brand-primary"
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-white/40 backdrop-blur-xl border border-white/20 hover:bg-white/50 dark:hover:bg-white/10 transition-colors text-brand-primary"
           aria-label="Change language"
           aria-expanded={isOpen}
           aria-haspopup="menu"
