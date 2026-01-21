@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@gboue/use-scroll-fades':
+        specifier: ^3.4.0
+        version: 3.4.0(react@19.2.3)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -207,6 +210,12 @@ packages:
 
   '@formatjs/intl-localematcher@0.6.2':
     resolution: {integrity: sha512-XOMO2Hupl0wdd172Y06h6kLpBz6Dv+J4okPLl4LPtzbr8f66WbIoy4ev98EBuZ6ZK4h5ydTN6XneT4QVpD7cdA==}
+
+  '@gboue/use-scroll-fades@3.4.0':
+    resolution: {integrity: sha512-O2nf6YNYkE61NRFgnHMAIiluSvTQdWmU2GdPYbNGVAR9U8Ubak6hurrUIM87UMuhAREXMusk2XRqT3hDjIKooA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8.0'
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2570,6 +2579,10 @@ snapshots:
   '@formatjs/intl-localematcher@0.6.2':
     dependencies:
       tslib: 2.8.1
+
+  '@gboue/use-scroll-fades@3.4.0(react@19.2.3)':
+    dependencies:
+      react: 19.2.3
 
   '@humanfs/core@0.19.1': {}
 
