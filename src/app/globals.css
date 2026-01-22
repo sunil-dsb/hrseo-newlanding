@@ -12,6 +12,8 @@
     --color-brand-rich: #050e30;
     --color-brand-grey: #c4c4c4;
     --color-brand-light: #e2e2e2;
+    --color-brand-dark: #000;
+    --color-brand-background: #eeeeee;
 
     --animate-marquee: marquee var(--duration) infinite linear;
     --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
@@ -293,6 +295,10 @@ body {
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
+}
+
+.container {
+    @apply mx-auto max-w-7xl;
 }
 
 @layer base {

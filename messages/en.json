@@ -56,5 +56,73 @@
     "title": "Page <highlight>Not Found</highlight>",
     "description": "The page you’re looking for doesn’t exist or may have been moved.",
     "homeButton": "Back to Home"
+  },
+  "Dashboard": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "people": "People",
+      "hiring": "Hiring",
+      "devices": "Devices",
+      "apps": "Apps",
+      "salary": "Salary",
+      "calendar": "Calendar",
+      "reviews": "Reviews",
+      "settings": "Settings"
+    },
+    "header": {
+      "greeting": "Hello {name}",
+      "interviews": "Interviews",
+      "hired": "Hired",
+      "projectTime": "Project time",
+      "output": "Output",
+      "employee": "Employee",
+      "hirings": "Hirings",
+      "projects": "Projects"
+    },
+    "salaryTable": {
+      "title": "Salary",
+      "searchPlaceholder": "Search",
+      "headers": {
+        "name": "Name",
+        "jobTitle": "Job Title",
+        "netSalary": "Net Salary",
+        "status": "Status"
+      },
+      "status": {
+        "paid": "Paid For",
+        "absent": "Absent",
+        "pending": "Pending"
+      }
+    },
+    "hiringStats": {
+      "title": "Hiring Statistics",
+      "others": "Others",
+      "design": "Design"
+    },
+    "attendance": {
+      "title": "Attendance Report"
+    },
+    "employeeComposition": {
+      "title": "Employee Composition"
+    },
+    "schedule": {
+      "title": "Schedule",
+      "days": {
+        "sun": "Sun",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat"
+      }
+    },
+    "footer": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "help": "Help Center",
+      "copyright": "© 2024 Crextio. All rights reserved.",
+      "status": "System Status: Operational"
+    }
   }
 }
