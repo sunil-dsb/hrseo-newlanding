@@ -1,13 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { Mail, Lock, ChevronRight } from "lucide-react"
+import { Mail,User, Lock, ChevronRight } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-export default function LoginPage() {
+export default function RegisterPage() {
+    const router=useRouter()
   const [email, setEmail] = useState("")
+  const [name, setName] = useState("")
   const [password, setPassword] = useState("")
-  const router=useRouter()
+
   return (
     <div
       className="min-h-screen w-full bg-cover bg-center relative overflow-hidden"
@@ -26,7 +28,7 @@ export default function LoginPage() {
 
           {/* LEFT CONTAINER - 50% width */}
           <div className="w-full lg:w-1/2 relative">
-            {/* LEFT CARD - Login Form */}
+            {/* LEFT CARD - Register Form */}
             <div
               className="backdrop-blur-xl  rounded-[20px] sm:rounded-[24px] lg:rounded-[32px] p-3 sm:p-4 lg:p-5 bord flex flex-col relative mb-2"
               style={{
@@ -37,14 +39,14 @@ export default function LoginPage() {
               {/* Top Header */}
               <div className="flex justify-between items-center mb-3">
                 <h1 className="text-[12px] font-normal text-gray-700">HRSeo</h1>
-                <button className=" cursor-pointer text-sm font-normal text-gray-700 hover:text-gray-900 transition-colors"  onClick={()=>{
-                    router.push('/en/register')
-                }}>Sign up</button>
+                <button className="text-sm cursor-pointer font-normal text-gray-700 hover:text-gray-900 transition-colors" onClick={()=>{
+                    router.push('/en/login')
+                }}>Sign In</button>
               </div>
 
               {/* Log in title and Facebook button - same row */}
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 sm:gap-0 mb-3 sm:mb-6">
-                <h2 className="text-[28px] sm:text-[32px] lg:text-[37px] text-gray-800 leading-none">Log in</h2>
+                <h2 className="text-[28px] sm:text-[32px] lg:text-[37px] text-gray-800 leading-none">Register</h2>
                 {/* <button className="group border border-solid border-black px-2 sm:px-3 py-1 sm:py-2 rounded-full flex items-center gap-1 transition-colors shadow-md hover:bg-gray-900">
   <span 
     className="h-3 w-3 sm:h-5 sm:w-5 bg-black flex justify-center items-center rounded-full text-white font-bold text-xs sm:text-[15px] leading-none transition-colors group-hover:bg-white group-hover:text-black" 
@@ -57,6 +59,22 @@ export default function LoginPage() {
   </span>
 </button> */}
 
+              </div>
+              <div className="mb-3">
+                <div className="relative">
+                  <div className="absolute left-1 top-1/2 transform -translate-y-1/2 w-6 h-6 sm:w-10 sm:h-10 rounded-full bg-white flex items-center justify-center">
+                    {/* <Mail size={18} className="text-gray-700" />
+       */}
+                    <span className="text-sm sm:text-base font-bold text-gray-700"><User size={17}/></span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="full name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full pl-12 sm:pl-14 pr-4 py-3 sm:py-3.5 rounded-full bg-[#e3dcd4] border-none placeholder-gray-800 focus:outline-none focus:ring-0 text-gray-800 font-normal text-sm sm:text-[12px]"
+                  />
+                </div>
               </div>
 
               {/* Email Input */}
@@ -101,7 +119,7 @@ export default function LoginPage() {
 
               {/* Bottom section */}
               <div className="space-y-4 ">
-                {/* Login Button - small rounded black button on right */}
+                {/* Register Button - small rounded black button on right */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
                   <p className="text-[8px] sm:text-[9px] w-full sm:w-3/4 mb-0 sm:mb-10 text-black-600 leading-relaxed font-light">
                     For use by adults only (18 years of age and older). Keep out of reach of children and pets. In case of
@@ -122,7 +140,7 @@ export default function LoginPage() {
 
             {/* BOTTOM LEFT CARD - New in */}
             <div
-              className="hidden lg:block w-full  backdrop-blur-xl rounded-[15px] sm:rounded-[19px] lg:rounded-[25px] p-2 sm:p-3 border border-white/20 shadow-2xl flex flex-col"
+              className="hidden lg:block w-full  backdrop-blur-xl rounded-[20px] sm:rounded-[24px] lg:rounded-[30px] p-2 sm:p-3 border border-white/20 shadow-2xl flex flex-col"
               style={{
                 backgroundColor: 'rgba(0, 0, 0, 0.75)'
               }}
@@ -139,8 +157,8 @@ export default function LoginPage() {
 
           {/* RIGHT CONTAINER - 50% width */}
           <div className="hidden lg:block relative w-full lg:w-1/2" >
-            <div className="relative shadow-white lg:absolute z-20 lg:h-[95%] w-full lg:w-1/2 backdrop-blur-2xl rounded-[20px] sm:rounded-[24px] lg:rounded-[32px] p-4 sm:p-5 border border-white/50 shadow-2xl flex flex-col my-3 mx-0 lg:mx-2 justify-between" style={{
-               backgroundColor: 'rgba(244, 244, 244, 0.4)',
+            <div className="relative shadow-white lg:absolute z-20 lg:h-[96%] w-full lg:w-1/2 backdrop-blur-2xl rounded-[20px] sm:rounded-[24px] lg:rounded-[32px] p-4 sm:p-5 border border-white/50 shadow-2xl flex flex-col my-3 mx-0 lg:mx-2 justify-between" style={{
+               backgroundColor: 'rgb(237 214 185 / 24%)',
               alignItems:"center"
 
             }}>
@@ -148,7 +166,7 @@ export default function LoginPage() {
               <div className="flex flex-col">
                 {/* Date Display */}
                 <div >
-                  <h1 className="font-light text-[50px] sm:text-[60px] lg:text-[70px] pb-2 text-gray-800 leading-none">Thu</h1>
+                  <h1 className=" font-light text-[50px] sm:text-[60px] lg:text-[70px] pb-2 text-gray-800 leading-none">Thu</h1>
                   <p className="font-light text-[42px] sm:text-[52px] lg:text-[60px] text-gray-400 leading-none -mt-2 sm:-mt-3">24th</p>
                 </div>
 
@@ -181,11 +199,11 @@ export default function LoginPage() {
             >
               {/* Orange gradient circle - right side, extending off edge */}
               {/* <div className="absolute top-1/2 -right-20 transform -translate-y-1/2 w-[280px] h-[280px] rounded-full bg-gradient-to-br from-orange-300 via-orange-400 to-orange-600 opacity-75 blur-3xl" /> */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[130px] h-[130px] sm:w-[180px] sm:h-[1800px] lg:w-[230px] lg:h-[230px] rounded-full bg-gradient-to-br from-orange-400 to-orange-500 opacity-85" />
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] lg:w-[250px] lg:h-[250px] rounded-full bg-gradient-to-br from-orange-400 to-orange-500 opacity-85" />
 
 
               {/* Content */}
-              <div className="relative z-10 p-4 sm:p-5 h-full flex flex-col justify-between min-h-[400px] lg:min-h-[530px]">
+              <div className="relative z-10 p-4 sm:p-5 h-full flex flex-col justify-between min-h-[580px]">
                 {/* Top Right - Grand opening */}
                 <div className="text-right self-end">
                   <p className="text-xs sm:text-sm font-normal text-gray-600 mb-0.5">Grand opening</p>
@@ -196,15 +214,15 @@ export default function LoginPage() {
 
 
                 {/* Bottom */}
-                <div className="flex flex-col sm:flex-row justify-end items-end gap-3 sm:gap-0">
+                <div className="cursor-pointer flex flex-col sm:flex-row justify-end items-end gap-3 sm:gap-0">
                   {/* C.Lab Logo - icon above text */}
 
 
                   {/* Join in Button */}
                   <button className=" cursor-pointer px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-black flex items-center gap-2 hover:bg-gray-900 transition-colors shadow-lg">
-                    <span className="text-white font-normal text-xs sm:text-sm"  onClick={()=>{
-                    router.push('/en/register')
-                }}>Join in</span>
+                    <span className="text-white font-normal text-xs sm:text-sm "  onClick={()=>{
+                    router.push('/en/login')
+                }} >Login</span>
                     {/* <ChevronRight size={18} className="text-white" strokeWidth={2} /> */}
                   </button>
                   <button className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black flex items-center justify-center hover:bg-gray-900 transition-colors shadow-lg">

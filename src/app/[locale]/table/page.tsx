@@ -207,7 +207,7 @@ const PeoplePage = () => {
                backgroundColor: '##fdf6e9',
               alignItems:"center"
 
-            }} className=" bg-white/40 backdrop-blur-xl  flex gap-2 backdrop-blur-2xl bg-white py-2 pt-6 px-10  rounded-tl-3xl rounded-tr-full">
+            }} className=" bg-white/40 backdrop-blur-xl  flex gap-2 backdrop-blur-2xl bg-white  p-[19px_115px_10px_22px]  rounded-tl-3xl inverted-radius ">
               <button className="px-3.5 py-1.5 bg-white rounded-4xl text-sm text-gray-600 hover:bg-gray-50 border border-none flex items-center gap-1.5 shadow-sm">
                 Columns <ChevronDown className="w-3.5 h-3.5" />
               </button>
@@ -236,7 +236,7 @@ const PeoplePage = () => {
               </div>
             </div>
             
-            <div className="flex gap-2 mb-1">
+            <div className="flex gap-2 mb-1 relative right-[41px]">
               <button style={{
                backgroundColor: '##fdf6e9',
               alignItems:"center"
@@ -264,7 +264,8 @@ const PeoplePage = () => {
           
         <div style={{
                backgroundColor: '##fdf6e9',
-              alignItems:"center"
+              alignItems:"center",
+          
 
             }} className=" bg-white/40 backdrop-blur-xl  rounded-b-2xl rounded-tr-4xl shadow-lg overflow-hidden border-gray-200/50 pt-4" >
           <table className="w-full border rounded-2xl overflow-hidden">
