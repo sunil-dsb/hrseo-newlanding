@@ -104,11 +104,11 @@ export default function DashboardPage() {
         <nav className="flex items-center justify-between bg-white rounded-full px-6 py-3 shadow-[0_2px_15px_rgba(0,0,0,0.03)]">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 flex items-center justify-center text-blue-600">
+            <div className="w-10 h-10 flex items-center justify-center text-brand-primary">
               {/* Hexagon/Flower Logo approximation */}
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
                 <path d="M12 2L14.5 6.5H19.5L15.5 10.5L17 15.5L12 13L7 15.5L8.5 10.5L4.5 6.5H9.5L12 2Z" />
-                <circle cx="12" cy="12" r="3" className="text-blue-200" />
+                <circle cx="12" cy="12" r="3" className="text-white/60" />
               </svg>
             </div>
             <span className="text-xl font-bold tracking-tight text-slate-800">
@@ -124,7 +124,7 @@ export default function DashboardPage() {
                 className={cn(
                   "px-6 py-2.5 rounded-full text-sm font-semibold transition-all",
                   tab === "Dashboard"
-                    ? "bg-[#3B82F6] text-white shadow-lg shadow-blue-500/30"
+                    ? "bg-brand-primary text-white shadow-lg shadow-brand-primary/20"
                     : "text-gray-500 hover:bg-gray-50 hover:text-gray-900",
                 )}
               >
@@ -140,7 +140,7 @@ export default function DashboardPage() {
             </button>
             <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors relative">
               <Bell size={22} strokeWidth={1.5} />
-              <span className="absolute top-2 right-2.5 w-2 h-2 bg-blue-500 rounded-full border border-white"></span>
+              <span className="absolute top-2 right-2.5 w-2 h-2 bg-brand-primary rounded-full border border-white"></span>
             </button>
             <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-md">
               <img
@@ -157,7 +157,7 @@ export default function DashboardPage() {
           <h1 className="text-3xl font-bold text-slate-800 tracking-tight">
             Good Morning, Selena!
           </h1>
-          <button className="flex items-center gap-2 px-6 py-3 bg-[#3B82F6] text-white rounded-full text-sm font-semibold shadow-lg shadow-blue-500/30 hover:bg-blue-600 transition-all active:scale-95">
+          <button className="flex items-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-full text-sm font-semibold shadow-lg shadow-brand-primary/20 hover:bg-brand-primary/80 transition-all active:scale-95">
             <Plus size={18} /> Check new
           </button>
         </div>
@@ -198,7 +198,7 @@ export default function DashboardPage() {
               <h3 className="text-lg font-bold text-slate-800">
                 Health Report Pending
               </h3>
-              <button className="text-xs font-semibold px-3 py-1 bg-blue-50 text-blue-600 rounded-full">
+              <button className="text-xs font-semibold px-3 py-1 bg-brand-primary/10 text-brand-primary rounded-full">
                 Report
               </button>
             </div>
@@ -207,7 +207,7 @@ export default function DashboardPage() {
               <span className="px-3 py-1.5 bg-[#1e293b] text-white rounded-full text-[10px] font-bold shadow-md">
                 15 Report
               </span>
-              <span className="px-3 py-1.5 bg-white border border-blue-100 text-blue-400 rounded-full text-[10px] font-bold">
+              <span className="px-3 py-1.5 bg-white border border-blue-100 text-brand-primary rounded-full text-[10px] font-bold">
                 10 No Report
               </span>
             </div>
@@ -243,15 +243,15 @@ export default function DashboardPage() {
                   <Line
                     type="monotone"
                     dataKey="report"
-                    stroke="#3b82f6"
+                    stroke="#f15a29"
                     strokeWidth={2}
                     dot={{
                       r: 4,
-                      fill: "#3b82f6",
+                      fill: "#f15a29",
                       strokeWidth: 2,
                       stroke: "#fff",
                     }}
-                    activeDot={{ r: 6, fill: "#3b82f6", strokeWidth: 0 }}
+                    activeDot={{ r: 6, fill: "#f15a29", strokeWidth: 0 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -261,11 +261,7 @@ export default function DashboardPage() {
           </Card>
 
           {/* Row 1, Col 2: News From The Doctor */}
-          <Card className="col-span-1 lg:col-span-2 xl:col-span-3 bg-[#3B82F6] text-white border-none relative overflow-hidden flex flex-col justify-between min-h-[320px]">
-            {/* Decorative circles */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-400 opacity-20 rounded-full blur-xl"></div>
-
+          <Card className="col-span-1 lg:col-span-2 xl:col-span-3 bg-linear-to-tr from-brand-primary to-brand-primary/70 text-white border-none relative overflow-hidden flex flex-col justify-between min-h-[320px]">
             <div className="relative z-10 flex justify-between items-start">
               <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
                 <div className="w-6 h-6 bg-white rounded-full"></div>
@@ -303,7 +299,7 @@ export default function DashboardPage() {
 
             <div className="flex items-baseline gap-3 mb-2">
               <span className="text-4xl font-bold text-slate-800">85%</span>
-              <span className="px-2 py-0.5 bg-blue-50 text-blue-500 text-[10px] font-bold rounded-full">
+              <span className="px-2 py-0.5 bg-brand-primary/10 text-brand-primary text-[10px] font-bold rounded-full">
                 +0.75%
               </span>
             </div>
@@ -313,8 +309,8 @@ export default function DashboardPage() {
                 <AreaChart data={trendData}>
                   <defs>
                     <linearGradient id="colorTrend" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.1} />
-                      <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
+                      <stop offset="5%" stopColor="#f15a29" stopOpacity={0.1} />
+                      <stop offset="95%" stopColor="#f15a29" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid
@@ -334,7 +330,7 @@ export default function DashboardPage() {
                   <Area
                     type="basis"
                     dataKey="value"
-                    stroke="#3B82F6"
+                    stroke="#f15a29"
                     strokeWidth={2}
                     fill="url(#colorTrend)"
                   />
@@ -356,30 +352,30 @@ export default function DashboardPage() {
               {/* Item 1 */}
               <div>
                 <div className="flex items-center gap-4 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500">
+                  <div className="w-10 h-10 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary">
                     <Calendar size={18} />
                   </div>
                   <span className="font-bold text-sm text-slate-700">
                     22 Agustus, 2024
                   </span>
                 </div>
-                <div className="h-2 w-full bg-blue-50 rounded-full overflow-hidden">
-                  <div className="h-full bg-blue-600 w-[30%] rounded-full"></div>
+                <div className="h-2 w-full bg-brand-primary/10 rounded-full overflow-hidden">
+                  <div className="h-full bg-brand-primary w-[30%] rounded-full"></div>
                 </div>
               </div>
 
               {/* Item 2 */}
               <div>
                 <div className="flex items-center gap-4 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500">
+                  <div className="w-10 h-10 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary">
                     <ClipboardList size={18} />
                   </div>
                   <span className="font-bold text-sm text-slate-700">
                     16 Agustus, 2024
                   </span>
                 </div>
-                <div className="h-2 w-full bg-blue-50 rounded-full overflow-hidden">
-                  <div className="h-full bg-blue-600 w-[65%] rounded-full"></div>
+                <div className="h-2 w-full bg-brand-primary/10 rounded-full overflow-hidden">
+                  <div className="h-full bg-brand-primary w-[65%] rounded-full"></div>
                 </div>
               </div>
             </div>
@@ -391,7 +387,7 @@ export default function DashboardPage() {
               <h3 className="text-lg font-bold text-slate-800">
                 Medical Information
               </h3>
-              <button className="text-blue-500 text-xs font-bold hover:underline">
+              <button className="text-brand-primary text-xs font-bold hover:underline">
                 See Details
               </button>
             </div>
@@ -464,12 +460,12 @@ export default function DashboardPage() {
                   <span className="text-xs text-gray-400">Progress</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                  <div className="w-2 h-2 rounded-full bg-brand-primary"></div>
                   <span className="text-xs text-gray-500 font-medium">
                     Recovery
                   </span>
                 </div>
-                <button className="text-blue-500 text-xs font-bold hover:underline ml-4">
+                <button className="text-brand-primary text-xs font-bold hover:underline ml-4">
                   See Details
                 </button>
               </div>
@@ -483,7 +479,7 @@ export default function DashboardPage() {
                   Monday
                 </span>
                 <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-brand-primary"></div>
                   <span className="text-[10px] font-medium">
                     towards recovery
                   </span>
@@ -530,7 +526,7 @@ export default function DashboardPage() {
                         key={`cell-\${index}`}
                         fill={
                           entry.status === "recovery"
-                            ? "url(#blueGradient)"
+                            ? "url(#orangeGradient)"
                             : "#F8FAFC"
                         }
                         stroke={
@@ -541,16 +537,16 @@ export default function DashboardPage() {
                   </Bar>
                   <defs>
                     <linearGradient
-                      id="blueGradient"
+                      id="orangeGradient"
                       x1="0"
                       y1="0"
                       x2="0"
                       y2="1"
                     >
-                      <stop offset="0%" stopColor="#3B82F6" stopOpacity={1} />
+                      <stop offset="0%" stopColor="#f15a29" stopOpacity={1} />
                       <stop
                         offset="100%"
-                        stopColor="#60A5FA"
+                        stopColor="#FFEDD5"
                         stopOpacity={0.8}
                       />
                     </linearGradient>
@@ -564,7 +560,7 @@ export default function DashboardPage() {
           <Card className="col-span-1 lg:col-span-2 xl:col-span-3">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-lg font-bold text-slate-800">My Doctor</h3>
-              <button className="text-blue-500 text-xs font-bold hover:underline">
+              <button className="text-brand-primary text-xs font-bold hover:underline">
                 See Details
               </button>
             </div>

@@ -80,7 +80,7 @@ export default function Dashboard() {
               {/* Progress Widgets */}
               <div className="flex flex-wrap gap-2 flex-1 w-full">
                 {/* Interviews (Black) */}
-                <div className="relative flex flex-col justify-center h-[90px] rounded-[24px] px-6 bg-linear-to-tr from-brand-dark to-brand-dark/20 text-white w-[240px] shrink-0 shadow-lg shadow-black/5">
+                <div className="relative flex flex-col justify-center h-[90px] rounded-[24px] px-6 bg-linear-to-tr from-brand-dark to-brand-dark/20 text-white w-[240px] shrink-0 shadow-lg shadow-black/10">
                   <div className="text-xs mb-2 opacity-70 font-medium tracking-wide">
                     Interviews
                   </div>
@@ -110,7 +110,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Project time (Striped) */}
-                <div className="relative flex flex-col justify-center h-[90px] rounded-[24px] px-6 bg-linear-to-tr from-white to-white/20 text-brand-dark w-[180px] shrink-0">
+                <div className="relative flex flex-col justify-center h-[90px] rounded-[24px] px-6 bg-linear-to-tr from-white to-white/20 text-brand-dark w-[180px] shrink-0 shadow-lg shadow-white/20">
                   <div className="text-xs mb-2 opacity-60 font-medium tracking-wide">
                     Project time
                   </div>

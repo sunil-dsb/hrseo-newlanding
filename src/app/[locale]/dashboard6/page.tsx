@@ -723,7 +723,7 @@ export default function Dashboard6() {
                 </h4>
                 <span
                   style={{
-                    backgroundColor: "#d9f27e",
+                    backgroundColor: "#ffe0d6",
                     color: "#1a1a1a",
                     fontSize: "11px",
                     fontWeight: "700",
@@ -954,7 +954,7 @@ export default function Dashboard6() {
                         {activityData.map((entry, index) => (
                           <Cell
                             key={`cell-${index}`}
-                            fill={entry.day === "Fri" ? "#d9f27e" : "#f1f5f9"}
+                            fill={entry.day === "Fri" ? "#f15a29" : "#f1f5f9"}
                           />
                         ))}
                       </Bar>
@@ -973,7 +973,7 @@ export default function Dashboard6() {
                       position: "absolute",
                       top: "10%",
                       left: "60%",
-                      backgroundColor: "#d9f27e",
+                      backgroundColor: "#ffe0d6",
                       padding: "4px 10px",
                       borderRadius: "12px",
                       fontSize: "11px",
@@ -1061,7 +1061,7 @@ export default function Dashboard6() {
                       <span
                         style={{
                           fontSize: "12px",
-                          color: "#16a34a",
+                          color: "#f15a29",
                           fontWeight: "500",
                           display: "flex",
                           alignItems: "center",
@@ -1070,7 +1070,7 @@ export default function Dashboard6() {
                       >
                         <span
                           style={{
-                            backgroundColor: "#dcfce7",
+                            backgroundColor: "#ffe0d6",
                             borderRadius: "50%",
                             width: "16px",
                             height: "16px",
@@ -1164,7 +1164,7 @@ export default function Dashboard6() {
                 <div style={{ position: "relative" }}>
                   <div
                     style={{
-                      backgroundColor: "#d1e4dc",
+                      backgroundColor: "#ffe0d6",
                       borderRadius: "24px",
                       padding: "24px",
                       height: "100%",
@@ -1462,7 +1462,7 @@ export default function Dashboard6() {
                         top: "20%",
                         left: "50%",
                         transform: "translateX(-50%)",
-                        backgroundColor: "#d9f27e",
+                        backgroundColor: "#ffe0d6",
                         padding: "4px 10px",
                         borderRadius: "12px",
                         fontSize: "11px",
@@ -1568,14 +1568,14 @@ export default function Dashboard6() {
                         width: "100px",
                         height: "100px",
                         borderRadius: "50%",
-                        backgroundColor: "#76c7b3",
+                        backgroundColor: "#f15a29",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         fontSize: "24px",
-                        color: "#1a1a1a",
+                        color: "#fff",
                         fontWeight: "500",
-                        boxShadow: "0 10px 30px rgba(118, 199, 179, 0.4)",
+                        boxShadow: "0 10px 30px #fbcfc1",
                         zIndex: 2,
                       }}
                     >
@@ -1585,12 +1585,12 @@ export default function Dashboard6() {
                     <div
                       style={{
                         position: "absolute",
-                        bottom: 10,
+                        bottom: 0,
                         left: 0,
                         width: "60px",
                         height: "60px",
                         borderRadius: "50%",
-                        backgroundColor: "#fff",
+                        backgroundColor: "#fff6",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -1598,9 +1598,10 @@ export default function Dashboard6() {
                         color: "#94a3b8",
                         fontWeight: "500",
                         border: "1px solid #f1f5f9",
-                        boxShadow: "0 4px 10px rgba(0,0,0,0.02)",
-                        zIndex: 1,
+                        boxShadow: "0 4px 10px #00000014",
+                        zIndex: 2,
                       }}
+                      className="backdrop-blur-lg"
                     >
                       4%
                     </div>
@@ -1608,11 +1609,23 @@ export default function Dashboard6() {
                     <div
                       style={{
                         position: "absolute",
-                        top: 0,
-                        right: -10,
-                        fontSize: "12px",
+                        top: -20,
+                        right: -20,
+                        width: "60px",
+                        height: "60px",
+                        borderRadius: "50%",
+                        backgroundColor: "#fff6",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "14px",
                         color: "#94a3b8",
+                        fontWeight: "500",
+                        border: "1px solid #f1f5f9",
+                        boxShadow: "0 4px 10px #00000014",
+                        zIndex: 2,
                       }}
+                      className="backdrop-blur-lg"
                     >
                       10%
                     </div>

@@ -22,7 +22,7 @@ export const DashboardNavbar = () => {
     <nav className="flex items-center justify-between px-8 py-5 w-full relative z-20">
       <div className="flex items-center gap-12">
         {/* Logo - Frosted */}
-        <div className="bg-white backdrop-blur-xl px-6 py-2 rounded-full border border-white/20">
+        <div className="bg-white backdrop-blur-xl px-6 py-2 rounded-full border border-white/20 shadow-2xl">
           <h1 className="text-xl font-medium tracking-tight text-brand-primary">
             Crextio
           </h1>
@@ -31,7 +31,7 @@ export const DashboardNavbar = () => {
 
       <div className="flex items-center gap-1.5">
         {/* Navigation Pills - Frosted */}
-        <div className="hidden lg:flex items-center bg-white backdrop-blur-xl p-1 rounded-full border border-white/20">
+        <div className="hidden lg:flex items-center bg-white backdrop-blur-xl p-1 rounded-full border border-white/20 shadow-2xl">
           {navItems.map((item) => (
             <button
               key={item.name}
@@ -49,15 +49,15 @@ export const DashboardNavbar = () => {
           <LanguageDropdown variant="dashboard" align="right" />
         </div>
 
-        <button className="flex items-center justify-center rounded-full bg-brand-primary backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/10 transition-colors relative text-white p-3">
+        <button className="flex items-center justify-center rounded-full bg-brand-primary backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/10 transition-colors relative text-white p-3 shadow-2xl">
           <Bell className="w-5 h-5" />
           <span className="absolute top-2.5 right-3 w-1.5 h-1.5 bg-[#EF4444] rounded-full ring-1 ring-white" />
         </button>
-        <button className="flex items-center justify-center rounded-full bg-brand-primary backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/10 transition-colors text-white p-3">
+        <button className="flex items-center justify-center rounded-full bg-brand-primary backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/10 transition-colors text-white p-3 shadow-2xl">
           <User className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center gap-1 bg-brand-primary rounded-full">
+        <div className="flex items-center gap-1 bg-brand-primary rounded-full shadow-2xl">
           <button className="flex items-center justify-center rounded-full bg-brand-primary backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/10 transition-colors relative text-white p-3">
             <Bell className="w-5 h-5" />
             <span className="absolute top-2.5 right-3 w-1.5 h-1.5 bg-[#EF4444] rounded-full ring-1 ring-white" />
@@ -67,7 +67,7 @@ export const DashboardNavbar = () => {
           </button>
         </div>
 
-        <div className="flex items-center gap-1 bg-white rounded-full p-1 border border-dashed border-brand-primary/20">
+        <div className="flex items-center gap-1 bg-white rounded-full p-1 border border-dashed border-brand-primary/20 shadow-2xl">
           <button className="flex items-center justify-center rounded-full bg-brand-primary backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/10 transition-colors relative text-white p-3">
             <Bell className="w-5 h-5" />
             <span className="absolute top-2.5 right-3 w-1.5 h-1.5 bg-[#EF4444] rounded-full ring-1 ring-white" />
