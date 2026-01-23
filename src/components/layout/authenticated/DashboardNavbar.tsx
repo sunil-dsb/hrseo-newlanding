@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Bell, Settings, User } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
@@ -7,6 +8,18 @@ import { LanguageDropdown } from "@/components/ui/LanguageDropdown";
 
 export const DashboardNavbar = () => {
   const t = useTranslations("Dashboard.nav");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const navItems = [
     { name: t("dashboard"), active: true },
     { name: t("people"), active: false },
@@ -19,10 +32,15 @@ export const DashboardNavbar = () => {
   ];
 
   return (
-    <nav className="flex items-center justify-between px-8 py-5 w-full relative z-20">
+    <nav className="flex items-center justify-between px-8 py-4 w-full z-20 fixed top-0 left-0 transition-shadow duration-300 ease-in-out">
       <div className="flex items-center gap-12">
         {/* Logo - Frosted */}
-        <div className="bg-white backdrop-blur-xl px-6 py-2 rounded-full border border-white/20 shadow-2xl">
+        <div
+          className={cn(
+            "bg-white backdrop-blur-xl px-6 py-2 rounded-full border border-white/20 transition-shadow duration-300 ease-in-out",
+            isScrolled ? "shadow-2xl" : "shadow-none",
+          )}
+        >
           <h1 className="text-xl font-medium tracking-tight text-brand-primary">
             Crextio
           </h1>
@@ -31,7 +49,12 @@ export const DashboardNavbar = () => {
 
       <div className="flex items-center gap-1.5">
         {/* Navigation Pills - Frosted */}
-        <div className="hidden lg:flex items-center bg-white backdrop-blur-xl p-1 rounded-full border border-white/20 shadow-2xl">
+        <div
+          className={cn(
+            "hidden lg:flex items-center bg-white backdrop-blur-xl p-1 rounded-full border border-white/20 transition-shadow duration-300 ease-in-out",
+            isScrolled ? "shadow-2xl" : "shadow-none",
+          )}
+        >
           {navItems.map((item) => (
             <button
               key={item.name}
@@ -46,7 +69,16 @@ export const DashboardNavbar = () => {
             </button>
           ))}
           <hr className="h-5 w-px bg-neutral-200" />
-          <LanguageDropdown variant="navbar" align="right" />
+          <div className="flex flex-row gap-1 px-2">
+            <LanguageDropdown variant="navbar" align="right" />
+            <button className="p-1 md:p-2 text-zinc-500 hover:text-brand-dark transition-colors rounded-full hover:bg-zinc-100/50 relative">
+              <Bell className="w-5 h-5" />
+              <span className="absolute top-1.5 right-2 w-1.5 h-1.5 bg-[#EF4444] rounded-full ring-1 ring-white" />
+            </button>
+            <button className="p-1 md:p-2 text-zinc-500 hover:text-brand-dark transition-colors rounded-full hover:bg-zinc-100/50">
+              <User className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* <button className="flex items-center justify-center rounded-full bg-brand-primary backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/10 transition-colors relative text-white p-3 shadow-2xl">
@@ -67,7 +99,12 @@ export const DashboardNavbar = () => {
           </button>
         </div> */}
 
-        <div className="flex items-center gap-1 bg-white rounded-full p-1 border border-dashed border-brand-primary/20 shadow-2xl">
+        {/* <div
+          className={cn(
+            "flex items-center gap-1 bg-white rounded-full p-1 border border-dashed border-brand-primary/20 transition-shadow duration-300 ease-in-out",
+            isScrolled ? "shadow-2xl" : "shadow-none",
+          )}
+        >
           <button className="flex items-center justify-center rounded-full bg-brand-primary backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/10 transition-colors relative text-white p-3">
             <Bell className="w-5 h-5" />
             <span className="absolute top-2.5 right-3 w-1.5 h-1.5 bg-[#EF4444] rounded-full ring-1 ring-white" />
@@ -75,7 +112,7 @@ export const DashboardNavbar = () => {
           <button className="flex items-center justify-center rounded-full bg-brand-primary backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/10 transition-colors text-white p-3">
             <User className="w-5 h-5" />
           </button>
-        </div>
+        </div> */}
       </div>
     </nav>
   );
