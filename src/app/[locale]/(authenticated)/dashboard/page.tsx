@@ -47,14 +47,7 @@ import {
 } from "recharts";
 import CardsComponent from "@/components/ui/cards-component";
 import Image from "next/image";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { TransactionsTable } from "@/components/dashboard/transactions-table";
 import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
@@ -79,47 +72,47 @@ const trafficData = [
 
 const keywordTrendData = [
   { value: 120 },
-  { value: 132 },
-  { value: 145 },
-  { value: 160 },
-  { value: 155 },
-  { value: 168 },
+  { value: 250 },
   { value: 180 },
-  { value: 195 },
+  { value: 300 },
+  { value: 150 },
+  { value: 280 },
   { value: 190 },
-  { value: 205 },
-  { value: 215 },
-  { value: 230 },
+  { value: 350 },
+  { value: 210 },
+  { value: 400 },
+  { value: 250 },
+  { value: 500 },
 ];
 
 const backlinkTrendData = [
   { value: 850 },
-  { value: 860 },
-  { value: 855 },
-  { value: 870 },
-  { value: 890 },
-  { value: 885 },
-  { value: 900 },
+  { value: 1100 },
   { value: 920 },
-  { value: 940 },
-  { value: 960 },
-  { value: 955 },
+  { value: 1250 },
   { value: 980 },
+  { value: 1400 },
+  { value: 1050 },
+  { value: 1300 },
+  { value: 1150 },
+  { value: 1600 },
+  { value: 1200 },
+  { value: 1800 },
 ];
 
 const healthScoreTrend = [
+  { value: 75 },
   { value: 92 },
-  { value: 91 },
-  { value: 92 },
-  { value: 93 },
-  { value: 93 },
-  { value: 94 },
-  { value: 92 },
+  { value: 68 },
+  { value: 88 },
+  { value: 72 },
   { value: 95 },
+  { value: 81 },
+  { value: 65 },
+  { value: 89 },
+  { value: 75 },
   { value: 96 },
-  { value: 96 },
-  { value: 97 },
-  { value: 98 },
+  { value: 82 },
 ];
 
 const trafficSparkline = [
@@ -148,7 +141,7 @@ const topKeywords = [
     volume: "12.5K",
     difficulty: "Hard",
     traffic: "4.2K",
-    trend: "+2",
+    cpc: "$2.50",
   },
   {
     id: "#kw-2",
@@ -157,7 +150,7 @@ const topKeywords = [
     volume: "8.1K",
     difficulty: "Medium",
     traffic: "1.8K",
-    trend: "0",
+    cpc: "$1.20",
   },
   {
     id: "#kw-3",
@@ -166,7 +159,7 @@ const topKeywords = [
     volume: "22K",
     difficulty: "Hard",
     traffic: "950",
-    trend: "-1",
+    cpc: "$4.85",
   },
   {
     id: "#kw-4",
@@ -175,7 +168,7 @@ const topKeywords = [
     volume: "5.4K",
     difficulty: "Easy",
     traffic: "2.1K",
-    trend: "+4",
+    cpc: "$0.90",
   },
 ];
 
@@ -247,15 +240,15 @@ export default function Dashboard() {
     );
   };
   return (
-    <div className="w-full min-h-screen pt-40 flex justify-center">
+    <div className="w-full min-h-screen pt-32 sm:pt-40 flex justify-center">
       {/* Main Content */}
       <main className="w-full max-w-[1600px] mx-auto">
         {/* Content Area */}
-        <div className="px-10 pb-8">
+        <div className="px-4 sm:px-10 pb-8">
           {/* Header Section: Welcome & Project Context */}
-          <div className="flex flex-col md:flex-row justify-between items-end md:items-center mb-8 gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
-              <div className="flex items-center gap-3 mb-1">
+              <div className="flex items-center gap-3 mb-1 flex-wrap">
                 <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
                 <div className="h-6 w-px bg-gray-300 mx-1"></div>
                 <div className="h-6 w-px bg-gray-300 mx-1"></div>
@@ -325,7 +318,7 @@ export default function Dashboard() {
           </div>
 
           <div className="grid grid-cols-1 gap-4">
-            <div className="grid grid-cols-12 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
               <CardsComponent
                 title="Summary"
                 description="Track your performance."
@@ -365,7 +358,7 @@ export default function Dashboard() {
                 className="col-span-12 lg:col-span-5 bg-brand-background"
               >
                 <div className="bg-white rounded-4xl h-full overflow-hidden pt-2">
-                  <div className="flex gap-0 h-full">
+                  <div className="flex flex-col md:flex-row gap-0 h-full">
                     {/* Organic Traffic Chart */}
                     <div className="w-full flex flex-col items-center justify-between -mb-2">
                       <div className="flex items-center justify-center gap-3 p-4 border-r w-full">
@@ -483,36 +476,41 @@ export default function Dashboard() {
                     </DropdownMenu>
                   </>
                 }
-                className="col-span-7 bg-brand-background"
+                className="col-span-12 lg:col-span-7 bg-brand-background"
               >
                 {/* Metric Cards Row */}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {/* Keywords Card */}
-                  <div className="bg-white p-5 rounded-4xl flex flex-col gap-4 justify-between">
-                    <div className="flex flex-row gap-2 items-center">
-                      <span className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center">
-                        <Search size={25} className="text-gray-600" />
-                      </span>
-                      <span className="text-sm font-medium text-gray-500 mb-0.5">
-                        Keywords
-                      </span>
-                    </div>
-
-                    <div className="flex flex-col gap-1">
-                      <div className="flex items-center gap-1.5 mb-0.5">
-                        <ArrowUpRight size={25} className="text-[#F15A29]" />
-                        <span className="text-xs font-medium text-[#F15A29]">
-                          +5.2%
+                  <div className="bg-white rounded-4xl flex flex-col justify-between overflow-hidden">
+                    <div className="p-5 flex flex-col gap-4">
+                      <div className="flex flex-row gap-2 items-center">
+                        <span className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center">
+                          <Search size={25} className="text-gray-600" />
+                        </span>
+                        <span className="text-sm font-medium text-gray-500 mb-0.5">
+                          Keywords
                         </span>
                       </div>
-                      <div className="text-2xl font-bold text-gray-900">
-                        842
+
+                      <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <ArrowUpRight size={25} className="text-[#F15A29]" />
+                          <span className="text-xs font-medium text-[#F15A29]">
+                            +5.2%
+                          </span>
+                        </div>
+                        <div className="text-2xl font-bold text-gray-900">
+                          842
+                        </div>
                       </div>
                     </div>
 
                     <div className="h-24 w-full -mb-1 mt-4">
                       <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={keywordTrendData}>
+                        <AreaChart
+                          data={keywordTrendData}
+                          margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+                        >
                           <defs>
                             <linearGradient
                               id="keywordsGradient"
@@ -546,31 +544,36 @@ export default function Dashboard() {
                   </div>
 
                   {/* Backlinks Card */}
-                  <div className="bg-white p-5 rounded-4xl flex flex-col gap-4 justify-between">
-                    <div className="flex flex-row gap-2 items-center">
-                      <span className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center">
-                        <Share2 size={25} className="text-gray-600" />
-                      </span>
-                      <span className="text-sm font-medium text-gray-500 mb-0.5">
-                        Backlinks
-                      </span>
-                    </div>
-
-                    <div className="flex flex-col gap-1">
-                      <div className="flex items-center gap-1.5 mb-0.5">
-                        <ArrowUpRight size={25} className="text-[#F15A29]" />
-                        <span className="text-xs font-medium text-[#F15A29]">
-                          +12%
+                  <div className="bg-white rounded-4xl flex flex-col justify-between overflow-hidden">
+                    <div className="p-5 flex flex-col gap-4">
+                      <div className="flex flex-row gap-2 items-center">
+                        <span className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center">
+                          <Share2 size={25} className="text-gray-600" />
+                        </span>
+                        <span className="text-sm font-medium text-gray-500 mb-0.5">
+                          Backlinks
                         </span>
                       </div>
-                      <div className="text-2xl font-bold text-gray-900">
-                        12.5K
+
+                      <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <ArrowUpRight size={25} className="text-[#F15A29]" />
+                          <span className="text-xs font-medium text-[#F15A29]">
+                            +12%
+                          </span>
+                        </div>
+                        <div className="text-2xl font-bold text-gray-900">
+                          12.5K
+                        </div>
                       </div>
                     </div>
 
                     <div className="h-24 w-full -mb-1">
                       <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={backlinkTrendData}>
+                        <AreaChart
+                          data={backlinkTrendData}
+                          margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+                        >
                           <defs>
                             <linearGradient
                               id="backlinksGradient"
@@ -604,31 +607,36 @@ export default function Dashboard() {
                   </div>
 
                   {/* Site Health Card (Dark) */}
-                  <div className="bg-[#3d2c23] p-5 rounded-4xl flex flex-col gap-4 justify-between">
-                    <div className="flex flex-row gap-2 items-center">
-                      <span className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center">
-                        <Activity size={25} className="text-white" />
-                      </span>
-                      <span className="text-sm font-medium text-white/60 mb-0.5">
-                        Site Health
-                      </span>
-                    </div>
-
-                    <div className="flex flex-col gap-1">
-                      <div className="flex items-center gap-1.5 mb-0.5">
-                        <ArrowUpRight size={25} className="text-[#F15A29]" />
-                        <span className="text-xs font-medium text-[#F15A29]">
-                          +2pts
+                  <div className="bg-[#3d2c23] rounded-4xl flex flex-col justify-between overflow-hidden col-span-2 md:col-span-1">
+                    <div className="p-5 flex flex-col gap-4">
+                      <div className="flex flex-row gap-2 items-center">
+                        <span className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center">
+                          <Activity size={25} className="text-white" />
+                        </span>
+                        <span className="text-sm font-medium text-white/60 mb-0.5">
+                          Site Health
                         </span>
                       </div>
-                      <div className="text-2xl font-bold text-white">
-                        98/100
+
+                      <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <ArrowUpRight size={25} className="text-[#F15A29]" />
+                          <span className="text-xs font-medium text-[#F15A29]">
+                            +2pts
+                          </span>
+                        </div>
+                        <div className="text-2xl font-bold text-white">
+                          98/100
+                        </div>
                       </div>
                     </div>
 
                     <div className="h-24 w-full z-10 relative -mb-1">
                       <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={healthScoreTrend}>
+                        <AreaChart
+                          data={healthScoreTrend}
+                          margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+                        >
                           <defs>
                             <linearGradient
                               id="healthGradient"
@@ -664,13 +672,16 @@ export default function Dashboard() {
               </CardsComponent>
             </div>
 
-            <div className="grid grid-cols-12 gap-4">
-              <CardsComponent buttons={[]} className="col-span-5 p-0">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+              <CardsComponent
+                buttons={[]}
+                className="col-span-12 lg:col-span-5 p-0"
+              >
                 <div className="w-full flex flex-col gap-4 shrink-0">
                   {/* Summary Card - Outer container with cream/beige background */}
 
                   {/* Bottom Left Small Cards Top Row */}
-                  <div className="flex gap-3">
+                  <div className="grid grid-cols-2 gap-3">
                     <div className="w-full bg-brand-background rounded-4xl p-5">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="p-1.5 rounded-full flex items-center justify-center bg-white">
@@ -712,7 +723,7 @@ export default function Dashboard() {
                   </div>
 
                   {/* Bottom Left Small Cards Bottom Row */}
-                  <div className="flex gap-3">
+                  <div className="grid grid-cols-2 gap-3">
                     <div className="w-full bg-brand-background rounded-4xl p-5">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="p-1.5 rounded-full flex items-center justify-center bg-white">
@@ -789,53 +800,12 @@ export default function Dashboard() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 }
-                className="col-span-7 bg-brand-background"
+                className="col-span-12 lg:col-span-7 bg-brand-background"
               >
                 {/* Transactions History */}
-                <Table>
-                  <TableHeader>
-                    <TableRow className="hover:bg-transparent">
-                      <TableHead className="w-[40%]">Keyword</TableHead>
-                      <TableHead className="w-[15%]">Position</TableHead>
-                      <TableHead className="w-[15%]">Volume</TableHead>
-                      <TableHead className="w-[15%]">Difficulty</TableHead>
-                      <TableHead className="w-[15%] text-right">
-                        Traffic
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {topKeywords.map((item, i) => (
-                      <TableRow key={i} className="hover:bg-gray-50/50">
-                        <TableCell className="w-[40%] font-medium text-gray-900">
-                          {item.keyword}
-                        </TableCell>
-                        <TableCell className="w-[15%] text-gray-600 font-medium">
-                          #{item.position}
-                        </TableCell>
-                        <TableCell className="w-[15%] text-gray-600">
-                          {item.volume}
-                        </TableCell>
-                        <TableCell className="w-[15%]">
-                          <span
-                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                              item.difficulty === "Hard"
-                                ? "bg-red-50 text-red-700 border border-red-100"
-                                : item.difficulty === "Medium"
-                                  ? "bg-yellow-50 text-yellow-700 border border-yellow-100"
-                                  : "bg-green-50 text-green-700 border border-green-100"
-                            }`}
-                          >
-                            {item.difficulty}
-                          </span>
-                        </TableCell>
-                        <TableCell className="w-[15%] text-right font-semibold text-gray-900">
-                          {item.traffic}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                <div className="overflow-x-auto bg-white rounded-4xl">
+                  <TransactionsTable data={topKeywords} />
+                </div>
               </CardsComponent>
             </div>
           </div>

@@ -349,9 +349,11 @@ export function DashboardNavbar2() {
               className="bg-white rounded-full border border-zinc-200/50 p-1.5 flex items-center gap-3 cursor-pointer group hover:bg-zinc-50 transition-colors pr-4 outline-none"
             >
               <div className="relative">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=100&h=100&q=80"
+                <Image
+                  src="/assets/avatar-3.jpg"
                   alt="User"
+                  width={40}
+                  height={40}
                   className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm"
                 />
                 <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
@@ -423,7 +425,7 @@ export function DashboardNavbar2() {
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="absolute top-full left-0 w-full px-4 overflow-hidden pointer-events-auto xl:hidden z-40"
       >
-        <div className="bg-white/95 backdrop-blur-md rounded-2xl border border-zinc-200 shadow-xl p-4 flex flex-col gap-2 mx-4 mt-2">
+        <div className="bg-white/95 backdrop-blur-md rounded-2xl border border-zinc-200 shadow-xl p-4 flex flex-col gap-2 mx-2 sm:mx-4 mt-2">
           {/* Mobile Main Nav */}
           <div>
             <Link
@@ -454,9 +456,11 @@ export function DashboardNavbar2() {
 
           {/* Mobile Profile View */}
           <div className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl mt-2 mb-2">
-            <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=100&h=100&q=80"
+            <Image
+              src="/assets/avatar-3.jpg"
               alt="User"
+              width={40}
+              height={40}
               className="w-10 h-10 rounded-full object-cover"
             />
             <div>

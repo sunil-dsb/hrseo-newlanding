@@ -169,7 +169,7 @@ const salaryData = [
   },
 ];
 
-export default function Dashboard20() {
+export default function Dashboard4() {
   const [selectedSalaryIds, setSelectedSalaryIds] = useState<number[]>([2]);
 
   const toggleSalarySelection = (id: number) => {
@@ -180,7 +180,7 @@ export default function Dashboard20() {
   return (
     <div className="container flex min-h-screen pt-28">
       {/* Left Sidebar - Vertical Icons */}
-      <aside className="fixed left-10 top-0 h-screen flex flex-col items-center justify-center z-50">
+      <aside className="hidden lg:flex fixed left-10 top-0 h-screen flex-col items-center justify-center z-50">
         <div className="flex flex-col gap-1.5 rounded-full bg-brand-background p-2">
           <SidebarIcon icon={Search} />
           <SidebarIcon icon={Share2} />
@@ -191,7 +191,7 @@ export default function Dashboard20() {
       </aside>
 
       {/* Main Content */}
-      <main className="pl-[72px] w-full">
+      <main className="pl-0 lg:pl-[72px] w-full">
         {/* Top Navigation Bar */}
         {/* <header className="flex justify-between items-center px-10 py-5 bg-[#f4f5f7]">
           <div className="flex items-center gap-14">
@@ -244,9 +244,9 @@ export default function Dashboard20() {
         </header> */}
 
         {/* Content Area */}
-        <div className="px-10 pb-8">
+        <div className="px-4 md:px-10 pb-8">
           {/* Welcome Section */}
-          <div className="flex justify-between items-end mb-6">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-6 gap-4 lg:gap-0">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-1">
                 Welcome back, Uzui!
@@ -257,20 +257,20 @@ export default function Dashboard20() {
             </div>
 
             <div className="flex items-center gap-3">
-              <button className="px-5 py-3 bg-white text-gray-600 rounded-full flex items-center gap-2 text-sm font-medium border border-gray-100 hover:bg-gray-50">
+              <button className="px-5 py-3 bg-white text-gray-600 rounded-full flex items-center gap-2 text-sm font-medium border border-gray-100 hover:bg-gray-50 cursor-pointer">
                 <Filter size={16} strokeWidth={1.5} /> Filters
               </button>
-              <button className="px-5 py-3 bg-white text-gray-600 rounded-full flex items-center gap-2 text-sm font-medium border border-gray-100 hover:bg-gray-50">
+              <button className="px-5 py-3 bg-white text-gray-600 rounded-full flex items-center gap-2 text-sm font-medium border border-gray-100 hover:bg-gray-50 cursor-pointer">
                 <Download size={16} strokeWidth={1.5} /> Exports
               </button>
-              <button className="px-5 py-3 bg-[#F15A29] text-white rounded-full flex items-center gap-2 text-sm font-semibold hover:bg-[#d64a1d] transition-colors">
+              <button className="px-5 py-3 bg-[#F15A29] text-white rounded-full flex items-center gap-2 text-sm font-semibold hover:bg-[#d64a1d] transition-colors cursor-pointer">
                 <Plus size={18} strokeWidth={2} /> Add card
               </button>
             </div>
           </div>
 
           <div className="grid grid-cols-1 gap-4">
-            <div className="grid grid-cols-12 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
               <CardsComponent
                 title="Summary"
                 description="Track your performance."
@@ -281,10 +281,10 @@ export default function Dashboard20() {
                     onClick: () => {},
                   },
                 ]}
-                className="col-span-5 bg-brand-background"
+                className="col-span-1 lg:col-span-5 bg-brand-background"
               >
                 <div className="bg-white rounded-4xl h-full overflow-hidden pt-2">
-                  <div className="flex gap-0 h-full">
+                  <div className="flex flex-col md:flex-row gap-0 h-full">
                     {/* Total Income with Chart */}
                     <div className="w-full flex flex-col items-center justify-between -mb-2">
                       <div className="flex items-center justify-center gap-3 p-4 border-r w-full">
@@ -363,10 +363,10 @@ export default function Dashboard20() {
                     onClick: () => {},
                   },
                 ]}
-                className="col-span-7 bg-brand-background"
+                className="col-span-1 lg:col-span-7 bg-brand-background"
               >
                 {/* Activity Cards Row */}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* Receipts Card */}
                   <div className="bg-white p-5 rounded-4xl flex flex-col gap-4 justify-between">
                     <div className="flex flex-row gap-2 items-center">
@@ -546,13 +546,16 @@ export default function Dashboard20() {
               </CardsComponent>
             </div>
 
-            <div className="grid grid-cols-12 gap-4">
-              <CardsComponent buttons={[]} className="col-span-5 p-0">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+              <CardsComponent
+                buttons={[]}
+                className="col-span-1 lg:col-span-5 p-0"
+              >
                 <div className="w-full flex flex-col gap-4 shrink-0">
                   {/* Summary Card - Outer container with cream/beige background */}
 
                   {/* Bottom Left Small Cards */}
-                  <div className="flex gap-3">
+                  <div className="flex flex-col md:flex-row gap-3">
                     <div className="w-full bg-brand-background rounded-4xl p-5">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="p-1.5 rounded-full flex items-center justify-center bg-white">
@@ -600,7 +603,7 @@ export default function Dashboard20() {
                         How is your business management going?
                       </p>
                     </div>
-                    <button className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-200">
+                    <button className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-200 cursor-pointer">
                       <X size={14} />
                     </button>
                   </div>
@@ -617,65 +620,67 @@ export default function Dashboard20() {
                     onClick: () => {},
                   },
                 ]}
-                className="col-span-7 bg-brand-background"
+                className="col-span-1 lg:col-span-7 bg-brand-background"
               >
                 {/* Transactions History */}
-                <Table>
-                  <TableHeader>
-                    <TableRow className="hover:bg-transparent">
-                      <TableHead className="w-[25%]">Name</TableHead>
-                      <TableHead className="w-[17%]">ID</TableHead>
-                      <TableHead className="w-[25%]">Status</TableHead>
-                      <TableHead className="w-[17%]">Date</TableHead>
-                      <TableHead className="w-[16%] text-right">
-                        Amount
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {transactions.map((tx, i) => (
-                      <TableRow key={i}>
-                        <TableCell className="w-[25%]">
-                          <div className="flex items-center gap-3">
-                            <Image
-                              src={tx.avatar}
-                              alt={tx.name}
-                              width={32}
-                              height={32}
-                              className="w-8 h-8 rounded-full object-cover"
-                            />
-                            <span className="font-semibold text-gray-900">
-                              {tx.name}
-                            </span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="w-[17%] font-semibold text-gray-900">
-                          {tx.id}
-                        </TableCell>
-                        <TableCell className="w-[25%]">
-                          <span
-                            className={`inline-flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-medium ${
-                              tx.status === "Completed"
-                                ? "border border-green-200 text-green-600"
-                                : "border border-orange-200 text-orange-500"
-                            }`}
-                          >
-                            <span
-                              className={`w-1 h-1 rounded-full ${tx.status === "Completed" ? "bg-green-500" : "bg-orange-400"}`}
-                            ></span>
-                            {tx.status}
-                          </span>
-                        </TableCell>
-                        <TableCell className="w-[17%] font-medium text-gray-900">
-                          {tx.date}
-                        </TableCell>
-                        <TableCell className="w-[16%] text-right font-semibold text-[#F15A29]">
-                          {tx.amount}
-                        </TableCell>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="hover:bg-transparent">
+                        <TableHead className="w-[25%]">Name</TableHead>
+                        <TableHead className="w-[17%]">ID</TableHead>
+                        <TableHead className="w-[25%]">Status</TableHead>
+                        <TableHead className="w-[17%]">Date</TableHead>
+                        <TableHead className="w-[16%] text-right">
+                          Amount
+                        </TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {transactions.map((tx, i) => (
+                        <TableRow key={i}>
+                          <TableCell className="w-[25%]">
+                            <div className="flex items-center gap-3">
+                              <Image
+                                src={tx.avatar}
+                                alt={tx.name}
+                                width={32}
+                                height={32}
+                                className="w-8 h-8 rounded-full object-cover"
+                              />
+                              <span className="font-semibold text-gray-900">
+                                {tx.name}
+                              </span>
+                            </div>
+                          </TableCell>
+                          <TableCell className="w-[17%] font-semibold text-gray-900">
+                            {tx.id}
+                          </TableCell>
+                          <TableCell className="w-[25%]">
+                            <span
+                              className={`inline-flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-medium ${
+                                tx.status === "Completed"
+                                  ? "border border-green-200 text-green-600"
+                                  : "border border-orange-200 text-orange-500"
+                              }`}
+                            >
+                              <span
+                                className={`w-1 h-1 rounded-full ${tx.status === "Completed" ? "bg-green-500" : "bg-orange-400"}`}
+                              ></span>
+                              {tx.status}
+                            </span>
+                          </TableCell>
+                          <TableCell className="w-[17%] font-medium text-gray-900">
+                            {tx.date}
+                          </TableCell>
+                          <TableCell className="w-[16%] text-right font-semibold text-[#F15A29]">
+                            {tx.amount}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               </CardsComponent>
             </div>
 
@@ -693,133 +698,135 @@ export default function Dashboard20() {
                 </div>
               </div>
 
-              <table className="w-full">
-                <thead>
-                  <tr className="text-left text-[#9CA3AF] text-[11px] font-medium border-b border-dashed border-[#E5E7EB]">
-                    <th className="pb-3 pl-2 w-10">
-                      <div className="w-4 h-4 rounded border border-[#E5E7EB] bg-white" />
-                    </th>
-                    <th className="pb-3 font-normal">Name</th>
-                    <th className="pb-3 font-normal">Job Title</th>
-                    <th className="pb-3 font-normal">Net Salary</th>
-                    <th className="pb-3 font-normal">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="text-sm">
-                  {salaryData.map((row) => {
-                    const isSelected = selectedSalaryIds.includes(row.id);
-                    return (
-                      <tr
-                        key={row.id}
-                        onClick={() => toggleSalarySelection(row.id)}
-                        className={cn(
-                          "group transition-all cursor-pointer",
-                          isSelected
-                            ? "bg-[#1A1B26] rounded-[16px]"
-                            : "hover:bg-white/50",
-                        )}
-                      >
-                        <td
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="text-left text-[#9CA3AF] text-[11px] font-medium border-b border-dashed border-[#E5E7EB]">
+                      <th className="pb-3 pl-2 w-10">
+                        <div className="w-4 h-4 rounded border border-[#E5E7EB] bg-white" />
+                      </th>
+                      <th className="pb-3 font-normal">Name</th>
+                      <th className="pb-3 font-normal">Job Title</th>
+                      <th className="pb-3 font-normal">Net Salary</th>
+                      <th className="pb-3 font-normal">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-sm">
+                    {salaryData.map((row) => {
+                      const isSelected = selectedSalaryIds.includes(row.id);
+                      return (
+                        <tr
+                          key={row.id}
+                          onClick={() => toggleSalarySelection(row.id)}
                           className={cn(
-                            "py-3 pl-2",
-                            isSelected && "rounded-l-[16px]",
+                            "group transition-all cursor-pointer",
+                            isSelected
+                              ? "bg-[#1A1B26] rounded-[16px]"
+                              : "hover:bg-white/50",
                           )}
                         >
-                          <div
+                          <td
                             className={cn(
-                              "w-4 h-4 rounded border flex items-center justify-center",
-                              isSelected
-                                ? "bg-[#F5C542] border-[#F5C542]"
-                                : "border-[#E5E7EB] bg-white",
-                            )}
-                          >
-                            {isSelected && (
-                              <svg
-                                width="10"
-                                height="10"
-                                viewBox="0 0 12 12"
-                                fill="none"
-                              >
-                                <path
-                                  d="M2 6l3 3 5-5"
-                                  stroke="#1A1B26"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            )}
-                          </div>
-                        </td>
-                        <td className="py-3">
-                          <div className="flex items-center gap-2.5">
-                            <div className="w-8 h-8 rounded-full overflow-hidden bg-[#F5F5F5]">
-                              <Image
-                                src={row.avatar}
-                                alt={row.name}
-                                width={32}
-                                height={32}
-                              />
-                            </div>
-                            <span
-                              className={cn(
-                                "font-medium text-[13px]",
-                                isSelected ? "text-white" : "text-[#1A1B26]",
-                              )}
-                            >
-                              {row.name}
-                            </span>
-                          </div>
-                        </td>
-                        <td
-                          className={cn(
-                            "py-3 text-[12px]",
-                            isSelected ? "text-white/60" : "text-[#6B7280]",
-                          )}
-                        >
-                          {row.role}
-                        </td>
-                        <td
-                          className={cn(
-                            "py-3 font-medium text-[13px]",
-                            isSelected ? "text-white" : "text-[#1A1B26]",
-                          )}
-                        >
-                          {row.salary}
-                        </td>
-                        <td
-                          className={cn(
-                            "py-3",
-                            isSelected && "rounded-r-[16px]",
-                          )}
-                        >
-                          <span
-                            className={cn(
-                              "px-3 py-1.5 rounded-full text-[11px] font-medium flex items-center gap-1.5 w-fit",
-                              row.status === "Paid For" &&
-                                "bg-[#F3E8FF] text-[#9333EA]",
-                              row.status === "Absent" &&
-                                "bg-[#F3F4F6] text-[#6B7280]",
-                              row.status === "Pending" &&
-                                "bg-[#ECFDF5] text-[#10B981]",
+                              "py-3 pl-2",
+                              isSelected && "rounded-l-[16px]",
                             )}
                           >
                             <div
                               className={cn(
-                                "w-1.5 h-1.5 rounded-full",
-                                row.status === "Paid For" && "bg-[#9333EA]",
-                                row.status === "Absent" && "bg-[#6B7280]",
-                                row.status === "Pending" && "bg-[#10B981]",
+                                "w-4 h-4 rounded border flex items-center justify-center",
+                                isSelected
+                                  ? "bg-[#F5C542] border-[#F5C542]"
+                                  : "border-[#E5E7EB] bg-white",
                               )}
-                            />
-                            {row.status}
-                          </span>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                            >
+                              {isSelected && (
+                                <svg
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 12 12"
+                                  fill="none"
+                                >
+                                  <path
+                                    d="M2 6l3 3 5-5"
+                                    stroke="#1A1B26"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+                                </svg>
+                              )}
+                            </div>
+                          </td>
+                          <td className="py-3">
+                            <div className="flex items-center gap-2.5">
+                              <div className="w-8 h-8 rounded-full overflow-hidden bg-[#F5F5F5]">
+                                <Image
+                                  src={row.avatar}
+                                  alt={row.name}
+                                  width={32}
+                                  height={32}
+                                />
+                              </div>
+                              <span
+                                className={cn(
+                                  "font-medium text-[13px]",
+                                  isSelected ? "text-white" : "text-[#1A1B26]",
+                                )}
+                              >
+                                {row.name}
+                              </span>
+                            </div>
+                          </td>
+                          <td
+                            className={cn(
+                              "py-3 text-[12px]",
+                              isSelected ? "text-white/60" : "text-[#6B7280]",
+                            )}
+                          >
+                            {row.role}
+                          </td>
+                          <td
+                            className={cn(
+                              "py-3 font-medium text-[13px]",
+                              isSelected ? "text-white" : "text-[#1A1B26]",
+                            )}
+                          >
+                            {row.salary}
+                          </td>
+                          <td
+                            className={cn(
+                              "py-3",
+                              isSelected && "rounded-r-[16px]",
+                            )}
+                          >
+                            <span
+                              className={cn(
+                                "px-3 py-1.5 rounded-full text-[11px] font-medium flex items-center gap-1.5 w-fit",
+                                row.status === "Paid For" &&
+                                  "bg-[#F3E8FF] text-[#9333EA]",
+                                row.status === "Absent" &&
+                                  "bg-[#F3F4F6] text-[#6B7280]",
+                                row.status === "Pending" &&
+                                  "bg-[#ECFDF5] text-[#10B981]",
+                              )}
+                            >
+                              <div
+                                className={cn(
+                                  "w-1.5 h-1.5 rounded-full",
+                                  row.status === "Paid For" && "bg-[#9333EA]",
+                                  row.status === "Absent" && "bg-[#6B7280]",
+                                  row.status === "Pending" && "bg-[#10B981]",
+                                )}
+                              />
+                              {row.status}
+                            </span>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

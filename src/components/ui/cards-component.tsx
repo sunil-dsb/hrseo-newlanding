@@ -34,7 +34,7 @@ const CardsComponent = ({
                 <button
                   key={index}
                   onClick={button.onClick}
-                  className="p-3 bg-white text-gray-700 rounded-full text-xs font-medium flex items-center gap-1 hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-200"
+                  className="p-3 bg-white text-gray-700 rounded-full text-xs font-medium flex items-center gap-1 hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-200 cursor-pointer"
                 >
                   {button.label}
                   {button.icon && button.icon}

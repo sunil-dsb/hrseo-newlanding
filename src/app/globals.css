@@ -464,3 +464,22 @@ html {
         transition: none !important;
     }
 }
+
+/* Recharts Outline Fix */
+.recharts-wrapper,
+.recharts-wrapper *,
+.recharts-surface,
+.recharts-surface *,
+.recharts-layer,
+.recharts-layer *,
+.recharts-sector,
+.recharts-sector * {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.recharts-wrapper:focus,
+.recharts-wrapper:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
