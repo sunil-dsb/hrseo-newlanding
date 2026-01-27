@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MotionProvider } from "@/lib/motion";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import localFont from "next/font/local";
 import "../globals.css";
 import { NextIntlClientProvider } from "next-intl";
@@ -170,7 +171,9 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning>
       <body className={`${hrseFont.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <MotionProvider>{children}</MotionProvider>
+          <ReactQueryProvider>
+            <MotionProvider>{children}</MotionProvider>
+          </ReactQueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>

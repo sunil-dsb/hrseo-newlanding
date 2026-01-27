@@ -251,7 +251,6 @@ export default function Dashboard() {
               <div className="flex items-center gap-3 mb-1 flex-wrap">
                 <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
                 <div className="h-6 w-px bg-gray-300 mx-1"></div>
-                <div className="h-6 w-px bg-gray-300 mx-1"></div>
                 {/* Project Switcher */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -305,7 +304,7 @@ export default function Dashboard() {
 
             <div className="flex items-center gap-3">
               {/* Date Range Picker Mockup */}
-              <button className="px-4 py-2 bg-white text-gray-600 rounded-full flex items-center gap-2 text-sm font-medium border border-gray-100 hover:bg-gray-50 shadow-sm">
+              <button className="px-4 py-2 bg-white text-gray-600 rounded-full flex items-center gap-2 text-sm font-medium border border-gray-100 hover:bg-gray-50 shadow-xl shadow-black/5">
                 <Calendar size={16} className="text-gray-400" />
                 <span>Last 30 Days</span>
                 <ChevronDown size={14} className="text-gray-400" />

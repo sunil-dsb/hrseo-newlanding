@@ -4,7 +4,12 @@ import { ArrowUpRight } from "lucide-react";
 export interface RelatedKeywordData {
   id: string;
   keyword: string;
-  intent: "Informational" | "Commercial" | "Transactional" | "Navigational";
+  intent?:
+    | "Informational"
+    | "Commercial"
+    | "Transactional"
+    | "Navigational"
+    | null;
   cpc: string;
   volume: string;
   difficulty: number;
@@ -44,19 +49,32 @@ export function RelatedKeywordsTable({
                 </span>
               </td>
               <td className="px-5 py-4 align-middle">
-                <span
-                  className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    item.intent === "Informational"
-                      ? "bg-blue-50 text-blue-600"
-                      : item.intent === "Commercial"
-                        ? "bg-purple-50 text-purple-600"
-                        : item.intent === "Transactional"
-                          ? "bg-green-50 text-green-600"
-                          : "bg-gray-50 text-gray-600"
-                  }`}
-                >
-                  {item.intent}
-                </span>
+                {item.intent ? (
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      item.intent === "Informational"
+                        ? "bg-blue-50 text-blue-600"
+                        : item.intent === "Commercial"
+                          ? "bg-purple-50 text-purple-600"
+                          : item.intent === "Transactional"
+                            ? "bg-green-50 text-green-600"
+                            : "bg-gray-50 text-gray-600"
+                    }`}
+                  >
+                    {item.intent}
+                  </span>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // Handle reveal logic here, for now it's just a button as requested
+                    }}
+                    className="cursor-pointer text-xs font-bold text-[#F15A29] bg-white hover:bg-linear-to-r hover:from-[#F15A29] hover:to-[#ff7e5f] hover:text-white hover:border-transparent px-3 py-1.5 rounded-lg border border-[#F15A29]/20 shadow-sm transition-all duration-300 hover:shadow-md active:scale-95 flex items-center gap-1.5 group/btn"
+                  >
+                    <span className="group-hover/btn:animate-pulse">✨</span>
+                    <span>Analyze</span>
+                  </button>
+                )}
               </td>
               <td className="px-5 py-4 align-middle">
                 <span className="text-sm text-gray-600 font-medium tabular-nums">
