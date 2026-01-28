@@ -1,54 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Search,
   Share2,
   Calendar,
   Star,
-  MapPin,
-  CornerDownLeft,
-  Mail,
-  Bell,
-  Home,
-  HandHelping,
-  Wallet,
-  Settings,
-  Filter,
   Download,
   Plus,
   ChevronDown,
   SlidersHorizontal,
   ArrowUpRight,
   ArrowDownLeft,
-  X,
   Clock,
-  RefreshCw,
   DollarSign,
   Flame,
-  CircleDollarSign,
   Settings2,
-  Hourglass,
   CornerRightUp,
-  CornerRightDown,
   Activity,
   Check,
 } from "lucide-react";
-import {
-  BarChart,
-  Bar,
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  PieChart,
-  Pie,
-  Cell,
-  Label,
-} from "recharts";
+import { BarChart, Bar, ResponsiveContainer, AreaChart, Area } from "recharts";
 import CardsComponent from "@/components/ui/cards-component";
-import Image from "next/image";
 import { TransactionsTable } from "@/components/dashboard/transactions-table";
-import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -57,6 +31,7 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
+import useUser from "@/hooks/useUser";
 
 // --- Mock SEO Data ---
 
@@ -174,32 +149,6 @@ const topKeywords = [
 
 // --- Components ---
 
-const siteAuditIssues = [
-  {
-    id: 1,
-    issue: "Broken Internal Links (404)",
-    category: "Critical",
-    count: "12",
-    impact: "High",
-    status: "Pending",
-  },
-  {
-    id: 2,
-    issue: "Missing Meta Descriptions",
-    category: "Warning",
-    count: "45",
-    impact: "Medium",
-    status: "Ignored",
-  },
-  {
-    id: 3,
-    issue: "Slow Page Speed (Mobile)",
-    category: "Performance",
-    count: "8",
-    impact: "High",
-  },
-];
-
 const projects = [
   {
     id: "p1",
@@ -239,6 +188,10 @@ export default function Dashboard() {
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   };
+
+  const { user, isLoggedIn, isLoading, logout } = useUser();
+
+  console.log(user, "----user");
   return (
     <div className="w-full min-h-screen pt-32 sm:pt-40 flex justify-center">
       {/* Main Content */}

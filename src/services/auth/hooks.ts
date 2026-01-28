@@ -1,17 +1,27 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import * as api from "./api";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+
+// Re-export types
+export type {
+  LoginCredentials,
+  LoginResponse,
+  RegisterCredentials,
+  RegisterResponse,
+} from "./api";
 
 export const useLogin = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: api.login,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["me"] });
-      // Redirect or other actions can be added here
-      router.push("/"); // Example redirect
+      // Check for redirect parameter, otherwise go to dashboard
+      const redirectPath = searchParams.get("redirect") || "/dashboard";
+      router.push(redirectPath);
     },
   });
 };
@@ -29,8 +39,15 @@ export const useLogout = () => {
   return useMutation({
     mutationFn: api.logout,
     onSuccess: () => {
+      // Clear all cached queries
       queryClient.clear();
-      router.push("/login");
+      router.push("/auth/login");
+    },
+    onError: () => {
+      // Even on error, clear cookies and redirect
+      // (cookies are already cleared in api.logout)
+      queryClient.clear();
+      router.push("/auth/login");
     },
   });
 };
