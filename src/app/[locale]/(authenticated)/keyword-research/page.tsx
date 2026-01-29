@@ -51,6 +51,7 @@ import {
   Plus,
   Equal,
   Download,
+  ChevronsRight,
 } from "lucide-react"; // Import Gauge icon
 import CardsComponent from "@/components/ui/cards-component";
 // import AdvanceTable, { Column } from "@/components/keyword-research/table";
@@ -69,77 +70,6 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
-import { InitialResearchContent } from "@/components/keyword-research/initial-content";
-
-function ResearchSkeleton() {
-  return (
-    <div className="flex flex-col gap-6 w-full">
-      {/* 1. Metrics & Keyword Difficulty */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Metrics Section Skeleton */}
-        <div className="bg-white/40 backdrop-blur-sm rounded-4xl p-6 border border-white/50 col-span-1 lg:col-span-2 shadow-sm h-full min-h-[400px]">
-          <div className="flex items-center gap-4 mb-6">
-            <Skeleton className="h-8 w-48" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Mimic the layout of metrics cards */}
-            <Skeleton className="col-span-1 md:col-span-2 h-[240px] rounded-[2rem]" />
-            <Skeleton className="col-span-1 h-[240px] rounded-[2rem]" />
-            <Skeleton className="col-span-1 h-[240px] rounded-[2rem]" />
-            <Skeleton className="col-span-1 md:col-span-2 h-[240px] rounded-[2rem]" />
-          </div>
-        </div>
-
-        {/* Keyword Difficulty Skeleton */}
-        <div className="bg-white/40 backdrop-blur-sm rounded-4xl p-6 border border-white/50 lg:row-span-2 shadow-sm h-full min-h-[500px]">
-          <Skeleton className="h-8 w-48 mb-8" />
-          <div className="flex flex-col items-center justify-between h-[80%]">
-            <Skeleton className="w-[220px] h-[220px] rounded-full" />
-            <Skeleton className="w-full h-24 rounded-2xl mt-4" />
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Related Keywords & Volume */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Related Table */}
-        <div className="lg:col-span-8 bg-white/40 backdrop-blur-sm rounded-4xl p-6 border border-white/50 shadow-sm h-[400px]">
-          <Skeleton className="h-8 w-48 mb-6" />
-          <div className="space-y-4">
-            <Skeleton className="h-10 w-full rounded-xl" />
-            <Skeleton className="h-12 w-full rounded-xl" />
-            <Skeleton className="h-12 w-full rounded-xl" />
-            <Skeleton className="h-12 w-full rounded-xl" />
-            <Skeleton className="h-12 w-full rounded-xl" />
-            <Skeleton className="h-12 w-full rounded-xl" />
-          </div>
-        </div>
-
-        {/* Volume Chart */}
-        <div className="lg:col-span-4 bg-white/40 backdrop-blur-sm rounded-4xl p-6 border border-white/50 shadow-sm h-full">
-          <Skeleton className="h-8 w-32 mb-6" />
-          <Skeleton className="w-full h-[200px] rounded-xl mb-6" />
-          <div className="grid grid-cols-2 gap-4">
-            <Skeleton className="h-[100px] w-full rounded-[1.5rem]" />
-            <Skeleton className="h-[100px] w-full rounded-[1.5rem]" />
-          </div>
-        </div>
-      </div>
-
-      {/* 3. SERP Analysis */}
-      <div className="bg-white/40 backdrop-blur-sm rounded-4xl p-6 border border-white/50 shadow-sm h-[500px]">
-        <Skeleton className="h-8 w-48 mb-8" />
-        <div className="space-y-4">
-          <Skeleton className="h-12 w-full rounded-xl" />
-          {[1, 2, 3, 4, 5].map((i) => (
-            <Skeleton key={i} className="h-16 w-full rounded-xl" />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // --- Mock Data ---
 
@@ -199,6 +129,86 @@ const relatedKeywords: RelatedKeywordData[] = [
     volume: "12K",
     difficulty: 30,
   },
+  {
+    id: "6",
+    keyword: "google keyword planner",
+    intent: "Informational",
+    cpc: "$0.00",
+    volume: "100K",
+    difficulty: 55,
+  },
+  {
+    id: "7",
+    keyword: "semrush vs ahrefs",
+    intent: "Commercial",
+    cpc: "$5.20",
+    volume: "9.8K",
+    difficulty: 72,
+  },
+  {
+    id: "8",
+    keyword: "local seo services",
+    intent: "Transactional",
+    cpc: "$12.50",
+    volume: "3.2K",
+    difficulty: 65,
+  },
+  {
+    id: "9",
+    keyword: "what is technical seo",
+    intent: "Informational",
+    cpc: "$2.10",
+    volume: "6.5K",
+    difficulty: 40,
+  },
+  {
+    id: "10",
+    keyword: "backlink checker tool",
+    intent: "Informational",
+    cpc: "$1.80",
+    volume: "18K",
+    difficulty: 50,
+  },
+  {
+    id: "11",
+    keyword: "on page seo checklist",
+    intent: "Educational",
+    cpc: "$0.90",
+    volume: "4.2K",
+    difficulty: 35,
+  },
+  {
+    id: "12",
+    keyword: "best seo audit tools",
+    intent: "Commercial",
+    cpc: "$3.80",
+    volume: "2.1K",
+    difficulty: 58,
+  },
+  {
+    id: "13",
+    keyword: "keyword difficulty checker",
+    intent: "Informational",
+    cpc: "$1.10",
+    volume: "5.5K",
+    difficulty: 42,
+  },
+  {
+    id: "14",
+    keyword: "wordpress seo plugins",
+    intent: "Commercial",
+    cpc: "$2.40",
+    volume: "15K",
+    difficulty: 48,
+  },
+  {
+    id: "15",
+    keyword: "seo writing assistant",
+    intent: "Transactional",
+    cpc: "$4.10",
+    volume: "1.2K",
+    difficulty: 62,
+  },
 ];
 
 const serpCompetitors: SerpCompetitorData[] = [
@@ -251,6 +261,76 @@ const serpCompetitors: SerpCompetitorData[] = [
     pa: 75,
     spamScore: 3,
     links: 6200,
+  },
+  {
+    id: "6",
+    rank: 6,
+    url: "https://neilpatel.com/what-is-seo/",
+    title: "What is SEO? Your Complete Step-by-Step Guide - Neil Patel",
+    da: 88,
+    pa: 76,
+    spamScore: 4,
+    links: 5800,
+  },
+  {
+    id: "7",
+    rank: 7,
+    url: "https://mailchimp.com/marketing-glossary/seo/",
+    title: "What is SEO? - Mailchimp",
+    da: 93,
+    pa: 81,
+    spamScore: 0,
+    links: 11000,
+  },
+  {
+    id: "8",
+    rank: 8,
+    url: "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+    title: "Search Engine Optimization (SEO) Starter Guide - Google Developers",
+    da: 98,
+    pa: 90,
+    spamScore: 0,
+    links: 45000,
+  },
+  {
+    id: "9",
+    rank: 9,
+    url: "https://www.semrush.com/blog/what-is-seo/",
+    title: "What Is SEO? - Semrush Blog",
+    da: 87,
+    pa: 74,
+    spamScore: 2,
+    links: 7500,
+  },
+  {
+    id: "10",
+    rank: 10,
+    url: "https://www.wordstream.com/seo",
+    title: "SEO - WordStream",
+    da: 85,
+    pa: 72,
+    spamScore: 1,
+    links: 4200,
+  },
+  {
+    id: "11",
+    rank: 11,
+    url: "https://buffer.com/library/seo-guide/",
+    title: "The Ultimate Guide to SEO for Beginners - Buffer",
+    da: 84,
+    pa: 70,
+    spamScore: 0,
+    links: 3100,
+  },
+  {
+    id: "12",
+    rank: 12,
+    url: "https://hubspot.com/marketing/seo",
+    title: "The Ultimate Guide to SEO in 2025 - HubSpot",
+    da: 91,
+    pa: 83,
+    spamScore: 1,
+    links: 9800,
   },
 ];
 
@@ -423,158 +503,148 @@ function SearchVolumeCard() {
   );
 
   return (
-    <div className="bg-white rounded-4xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-200/60 flex flex-col justify-between h-full min-h-[400px]">
+    <div className="bg-white rounded-4xl p-4 border border-slate-200/60 flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold text-gray-900">Search Volume</h2>
-        <div className="bg-gray-100/80 p-1 rounded-full flex text-xs font-semibold relative">
+      <div className="flex justify-between items-center mb-2 shrink-0">
+        <div className="flex items-center gap-2">
+          <h2 className="text-lg font-bold text-gray-900">Search Volume</h2>
+        </div>
+        <div className="bg-gray-50 p-1 rounded-full flex text-[10px] font-bold relative border border-gray-100">
           <button
             onClick={() => setTimeRange("6m")}
-            className={`px-3 py-1.5 rounded-full transition-all duration-300 z-10 ${
+            className={`px-3 py-1 rounded-full transition-all duration-300 ${
               timeRange === "6m"
-                ? "bg-white text-[#F15A29] shadow-sm"
-                : "text-gray-500 hover:text-gray-700"
+                ? "bg-white text-brand-primary shadow-sm ring-1 ring-black/5"
+                : "text-gray-400 hover:text-gray-600"
             }`}
           >
-            6 Months
+            6M
           </button>
           <button
             onClick={() => setTimeRange("1y")}
-            className={`px-3 py-1.5 rounded-full transition-all duration-300 z-10 ${
+            className={`px-3 py-1 rounded-full transition-all duration-300 ${
               timeRange === "1y"
-                ? "bg-white text-[#F15A29] shadow-sm"
-                : "text-gray-500 hover:text-gray-700"
+                ? "bg-white text-brand-primary shadow-sm ring-1 ring-black/5"
+                : "text-gray-400 hover:text-gray-600"
             }`}
           >
-            1 Year
+            1Y
           </button>
         </div>
       </div>
 
-      {/* Chart Area */}
-      <div className="flex-1 min-h-[200px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={displayData} barSize={timeRange === "1y" ? 20 : 32}>
-            <defs>
-              <linearGradient
-                id="searchVolumeGradient"
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
-              >
-                <stop offset="0%" stopColor="#f15a29" stopOpacity={1} />
-                <stop offset="100%" stopColor="#FFEDD5" stopOpacity={0.8} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid
-              strokeDasharray="3 3"
-              vertical={false}
-              stroke="#E5E7EB"
-            />
-            <XAxis
-              dataKey="monthName"
-              axisLine={false}
-              tickLine={false}
-              tick={{
-                fill: "#9CA3AF",
-                fontSize: 11,
-                fontWeight: 500,
-              }}
-              dy={10}
-            />
-            <YAxis
-              axisLine={false}
-              tickLine={false}
-              tick={{
-                fill: "#9CA3AF",
-                fontSize: 11,
-                fontWeight: 500,
-              }}
-              tickFormatter={(value) =>
-                value === 0
-                  ? "0"
-                  : value >= 1000000
-                    ? `${(value / 1000000).toFixed(1)}M`
-                    : value >= 1000
-                      ? `${value / 1000}k`
-                      : `${value}`
-              }
-              width={35}
-            />
-            <Tooltip
-              cursor={{ fill: "transparent" }}
-              offset={20}
-              content={({ active, payload, label }) => {
-                if (active && payload && payload.length) {
-                  return (
-                    <div className="bg-white p-4 rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-gray-100 min-w-[160px] animate-in fade-in zoom-in-95 duration-200">
-                      <p className="text-sm font-semibold text-gray-900 mb-2">
-                        {label} {payload[0].payload.year}
-                      </p>
-                      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-1 gap-4 min-h-0">
+        {/* Left Side: Graph */}
+        <div className="flex-1 min-w-0 h-full w-3/4">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={displayData} barSize={timeRange === "1y" ? 16 : 28}>
+              <defs>
+                <linearGradient
+                  id="searchVolumeGradient"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop offset="0%" stopColor="#f15a29" stopOpacity={1} />
+                  <stop offset="100%" stopColor="#FFEDD5" stopOpacity={0.8} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid
+                strokeDasharray="3 3"
+                vertical={false}
+                stroke="#F3F4F6"
+              />
+              <XAxis
+                dataKey="monthName"
+                axisLine={false}
+                tickLine={false}
+                tick={{
+                  fill: "#9CA3AF",
+                  fontSize: 10,
+                  fontWeight: 600,
+                }}
+                dy={10}
+                interval="preserveStartEnd"
+              />
+              <YAxis
+                axisLine={false}
+                tickLine={false}
+                tick={{
+                  fill: "#9CA3AF",
+                  fontSize: 10,
+                  fontWeight: 500,
+                }}
+                tickFormatter={(value) =>
+                  value === 0
+                    ? "0"
+                    : value >= 1000000
+                      ? `${(value / 1000000).toFixed(1)}M`
+                      : value >= 1000
+                        ? `${value / 1000}k`
+                        : `${value}`
+                }
+                width={30}
+              />
+              <Tooltip
+                cursor={{ fill: "transparent" }}
+                offset={20}
+                content={({ active, payload, label }) => {
+                  if (active && payload && payload.length) {
+                    return (
+                      <div className="bg-white/90 backdrop-blur-sm p-3 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-gray-100 min-w-[140px] animate-in fade-in zoom-in-95 duration-200">
+                        <p className="text-xs font-semibold text-gray-500 mb-1">
+                          {label} {payload[0].payload.year}
+                        </p>
                         <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-[#F15A29] shadow-[0_0_8px_rgba(241,90,41,0.5)]"></div>
-                          <span className="text-xs font-medium text-gray-500">
-                            Volume
+                          <div className="w-1.5 h-1.5 rounded-full bg-brand-primary"></div>
+                          <span className="text-lg font-bold text-gray-900">
+                            {(payload[0].value as number).toLocaleString()}
                           </span>
                         </div>
-                        <span className="text-sm font-bold text-gray-900">
-                          {(payload[0].value as number).toLocaleString()}
-                        </span>
                       </div>
-                    </div>
-                  );
-                }
-                return null;
-              }}
-            />
-            <Bar dataKey="search_volume" radius={[6, 6, 6, 6]}>
-              {displayData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={
-                    entry.search_volume === peakVolume
-                      ? "url(#searchVolumeGradient)"
-                      : "#F3F4F6"
+                    );
                   }
-                  className="transition-all duration-300 hover:opacity-80"
-                />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* Bottom Stats */}
-      <div className="grid grid-cols-2 gap-4 mt-6">
-        {/* Peak Volume */}
-        <div className="bg-linear-to-br from-slate-50 via-white to-slate-50 rounded-[1.5rem] flex flex-col justify-between overflow-hidden h-full border border-slate-200/60 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 p-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-              Peak Volume
-            </span>
-          </div>
-          <div className="flex items-end justify-between">
-            <span className="text-lg font-extrabold text-slate-900 tracking-tight leading-none">
-              {(peakVolume / 1000000).toFixed(1)}M
-            </span>
-            {/* Removed the generic "12%" badge */}
-          </div>
+                  return null;
+                }}
+              />
+              <Bar dataKey="search_volume" radius={[4, 4, 4, 4]}>
+                {displayData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      entry.search_volume === peakVolume
+                        ? "url(#searchVolumeGradient)"
+                        : "#F3F4F6"
+                    }
+                    className="transition-all duration-300 hover:opacity-80"
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
         </div>
 
-        {/* Monthly Avg */}
-        <div className="bg-linear-to-br from-slate-50 via-white to-slate-50 rounded-[1.5rem] flex flex-col justify-between overflow-hidden h-full border border-slate-200/60 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 p-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-              Monthly Avg
+        {/* Right Side: Stats Stacked */}
+        <div className="w-1/4 flex flex-col gap-2 shrink-0">
+          {/* Peak Volume */}
+          <div className="flex-1 bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-center items-start group hover:border-orange-100 hover:bg-orange-50/30 transition-colors">
+            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1 flex items-center gap-1">
+              <TrendingUp size={12} /> Peak
+            </span>
+            <span className="text-xl font-extrabold text-slate-900 tracking-tight truncate w-full">
+              {(peakVolume / 1000000).toFixed(1)}M
             </span>
           </div>
-          <div className="flex items-end justify-between">
-            <span className="text-lg font-extrabold text-slate-900 tracking-tight leading-none">
+
+          {/* Monthly Avg */}
+          <div className="flex-1 bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-center items-start group hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
+            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1 flex items-center gap-1">
+              <Equal size={12} /> Average
+            </span>
+            <span className="text-xl font-extrabold text-slate-900 tracking-tight truncate w-full">
               {(avgVolume / 1000000).toFixed(1)}M
             </span>
-            {/* Removed the generic "Stable" badge */}
           </div>
         </div>
       </div>
@@ -668,762 +738,586 @@ export default function KeywordResearchPage() {
   };
 
   return (
-    <div className="w-full min-h-screen pt-24 sm:pt-32 flex justify-center">
-      <main className="w-full max-w-[1600px] mx-auto px-4 sm:px-10 pb-12">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
-          <div className="w-full">
-            <div className="mb-2 ml-4">
-              <h1 className="text-3xl font-bold text-gray-900">
-                Keyword Research
-              </h1>
-              <p className="text-gray-400 text-sm mt-1">
-                Analyze keyword performance and competition.
-              </p>
+    <div className="fixed inset-0 z-100 bg-[#f8f9fc] flex flex-col font-sans text-slate-900 overflow-hidden">
+      {/* Custom App Navbar */}
+      <header className="h-14 bg-[#1a1a1a] flex items-center justify-between px-4 shrink-0 shadow-md z-50">
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-linear-to-br from-brand-prtext-brand-primary to-[#d64a1d] rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-lg">
+              K
             </div>
-
-            {/* Search Bar Container */}
-            <div className="w-full mt-6 bg-linear-to-br from-slate-50 via-white to-slate-50 p-2 rounded-[2rem] border border-slate-200/60 flex flex-col lg:flex-row items-center gap-1 group transition-all duration-300 shadow-[0_8px_40px_rgb(0,0,0,0.08)]">
-              {/* Keyword Input Section */}
-              <label
-                htmlFor="keyword-search"
-                className="relative flex-1 w-full lg:w-auto h-16 flex items-center px-4 group/input bg-zinc-100/70 hover:bg-slate-200/70 focus-within:bg-white rounded-3xl transition-all duration-300 cursor-text ring-2 ring-transparent focus-within:ring-[#F15A29]/10 focus-within:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)]"
-              >
-                <div className="mr-4 w-11 h-11 rounded-2xl bg-white text-[#F15A29] flex items-center justify-center shrink-0 shadow-xs border border-slate-100 group-focus-within/input:scale-105 transition-transform duration-300">
-                  <Search size={20} className="stroke-[2.5px]" />
-                </div>
-                <div className="flex flex-col flex-1 h-full justify-center">
-                  <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-0.5 pointer-events-none select-none">
-                    Target Keyword
-                  </span>
-                  <input
-                    id="keyword-search"
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleSearch(e)}
-                    placeholder="e.g. best coffee machine"
-                    className="w-full bg-transparent border-none p-0 text-slate-800 placeholder:text-slate-400 font-bold text-base focus:outline-none focus:ring-0 leading-tight"
-                    autoComplete="off"
-                  />
-                </div>
-              </label>
-
-              {/* Divider */}
-              <div className="w-px h-10 bg-slate-200/60 hidden lg:block mx-1" />
-
-              {/* Country Selection */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className="w-full lg:w-56 h-16 flex items-center px-4 cursor-pointer outline-none text-left rounded-3xl hover:bg-slate-100 transition-all duration-300 group/btn">
-                    <div className="mr-4 w-11 h-11 rounded-2xl bg-slate-50 text-slate-500 flex items-center justify-center shrink-0 shadow-sm border border-slate-100 transition-transform duration-300">
-                      <MapPin size={20} className="stroke-[2.5px]" />
-                    </div>
-                    <div className="flex flex-col flex-1 h-full justify-center">
-                      <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-0.5">
-                        Location
-                      </span>
-                      <span className="text-slate-800 font-bold text-sm leading-tight truncate">
-                        {selectedCountry}
-                      </span>
-                    </div>
-                    <ChevronDown size={16} className="text-slate-400 ml-2" />
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="start"
-                  className="w-56 p-2 rounded-2xl border-slate-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]"
-                >
-                  {[
-                    "United States",
-                    "United Kingdom",
-                    "Canada",
-                    "Australia",
-                    "India",
-                    "Germany",
-                    "France",
-                  ].map((country) => (
-                    <DropdownMenuItem
-                      key={country}
-                      onClick={() => setSelectedCountry(country)}
-                      className="rounded-xl font-medium text-slate-600 focus:text-[#F15A29] focus:bg-orange-50 cursor-pointer py-2.5"
-                    >
-                      {country}
-                      {selectedCountry === country && (
-                        <Check size={14} className="ml-auto text-[#F15A29]" />
-                      )}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              {/* Divider */}
-              <div className="w-px h-10 bg-slate-200/60 hidden lg:block mx-1" />
-
-              {/* Language Selection */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className="w-full lg:w-48 h-16 flex items-center px-4 cursor-pointer outline-none text-left rounded-3xl hover:bg-slate-100 transition-all duration-300 group/btn">
-                    <div className="mr-4 w-11 h-11 rounded-2xl bg-slate-50 text-slate-500 flex items-center justify-center shrink-0 shadow-sm border border-slate-100 transition-transform duration-300">
-                      <Globe size={20} className="stroke-[2.5px]" />
-                    </div>
-                    <div className="flex flex-col flex-1 h-full justify-center">
-                      <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-0.5">
-                        Language
-                      </span>
-                      <span className="text-slate-800 font-bold text-sm leading-tight truncate">
-                        {selectedLanguage}
-                      </span>
-                    </div>
-                    <ChevronDown size={16} className="text-slate-400 ml-2" />
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="end"
-                  className="w-48 p-2 rounded-2xl border-slate-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]"
-                >
-                  {[
-                    "English",
-                    "Spanish",
-                    "French",
-                    "German",
-                    "Italian",
-                    "Portuguese",
-                  ].map((lang) => (
-                    <DropdownMenuItem
-                      key={lang}
-                      onClick={() => setSelectedLanguage(lang)}
-                      className="rounded-xl font-medium text-slate-600 focus:text-[#F15A29] focus:bg-orange-50 cursor-pointer py-2.5"
-                    >
-                      {lang}
-                      {selectedLanguage === lang && (
-                        <Check size={14} className="ml-auto text-[#F15A29]" />
-                      )}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              {/* Search Button */}
-              <div className="p-1 w-full lg:w-auto">
-                <button
-                  onClick={handleSearch}
-                  className="w-full lg:w-auto h-14 lg:h-14 px-8 bg-[#F15A29] hover:bg-[#d64a1d] text-white rounded-[1.5rem] font-bold shadow-[0_4px_20px_rgba(241,90,41,0.25)] hover:shadow-[0_6px_25px_rgba(241,90,41,0.35)] active:scale-95 transition-all flex items-center justify-center gap-2 group/search cursor-pointer"
-                >
-                  <CircleChevronLeft
-                    size={20}
-                    className="text-white bg-transparent"
-                    strokeWidth={3}
-                  />
-                  <span>Analyze</span>
-                </button>
-              </div>
-            </div>
+            <span className="text-white font-bold text-lg tracking-tight">
+              Keyword<span className="text-brand-primary">Pro</span>
+            </span>
           </div>
+          <nav className="hidden md:flex items-center gap-1">
+            {["Research", "SERP", "Tracking", "Backlinks"].map((item) => (
+              <button
+                key={item}
+                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                  item === "Research"
+                    ? "bg-[#333] text-white"
+                    : "text-gray-400 hover:text-white hover:bg-[#333]"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </nav>
         </div>
+        <div className="flex items-center gap-3">
+          <div className="h-8 w-8 rounded-full bg-linear-to-tr from-gray-700 to-gray-600 border border-gray-500/30"></div>
+        </div>
+      </header>
 
-        {/* Content Section with Conditional Rendering */}
-        <div className="mt-8">
-          <AnimatePresence mode="wait">
-            {!hasSearched ? (
-              <InitialResearchContent
-                key="initial-content"
-                onSearch={handleQuickSearch}
-              />
-            ) : isAnalyzing ? (
-              // Skeleton State
-              <m.div
-                key="skeleton"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
-                transition={{ duration: 0.5 }}
-              >
-                <ResearchSkeleton />
-              </m.div>
-            ) : (
-              // Main Content State
-              <m.div
-                key="results"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="flex flex-col gap-6"
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                  {/* 1. Bento Grid - Metrics */}
-                  <CardsComponent
-                    title="Metrics"
-                    description={`SEO Metrics for "${currentKeyword}"`}
-                    buttons={[]}
-                    className="bg-brand-background col-span-1 lg:col-span-2"
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {/* Top of Page Bid - Premium Design */}
-                      <div className="col-span-1 md:col-span-2">
-                        <div className="bg-linear-to-br from-slate-50 via-white to-slate-50 rounded-[2rem] flex flex-col justify-between overflow-hidden h-full border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group">
-                          <div className="p-6 flex flex-col h-full relative">
-                            {/* Background Decor */}
-                            <div className="absolute top-0 right-0 p-32 bg-orange-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+      {/* Main Content Area */}
+      <main className="flex-1 flex overflow-hidden relative">
+        <AnimatePresence mode="wait">
+          {!hasSearched ? (
+            // --- INITIAL STATE: CENTERED SEARCH ---
+            <m.div
+              key="hero"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
+              transition={{ duration: 0.4 }}
+              className="w-full h-full flex flex-col items-center justify-center p-4"
+            >
+              <div className="w-full max-w-3xl flex flex-col items-center text-center -mt-20">
+                <m.h1
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.1 }}
+                  className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight"
+                >
+                  Keyword Research Tool
+                </m.h1>
+                <m.p
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-lg text-slate-500 mb-10 max-w-xl"
+                >
+                  Find easy-to-rank keywords with high search volume and low
+                  competition.
+                </m.p>
 
-                            {/* Header */}
-                            <div className="flex items-center justify-between mb-2 z-10">
-                              <span className="text-[11px] uppercase font-bold text-slate-400 tracking-[0.15em]">
-                                Top of Page Bid
-                              </span>
-
-                              {/* Ad Competition Badge */}
-                              <div className="flex items-center gap-2 bg-white border border-slate-100 px-3 py-1 rounded-full shadow-xs">
-                                <div className="flex items-center gap-1">
-                                  <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                                  </span>
-                                  <span className="text-[10px] font-bold text-slate-600 uppercase">
-                                    Comp: {adCompetitionLevel}
-                                  </span>
-                                </div>
-                                <div className="w-px h-3 bg-slate-200"></div>
-                                <span className="text-[10px] font-medium text-slate-400">
-                                  {adCompetitionIndex}/100
-                                </span>
-                              </div>
-                            </div>
-
-                            {/* Content Container */}
-                            <div className="flex-1 flex flex-col justify-center z-10">
-                              <div className="flex items-end justify-between w-full">
-                                {/* Low Bid */}
-                                <div className="flex flex-col">
-                                  <span className="text-2xl font-extrabold text-slate-900 tracking-tight">
-                                    <AnimatedNumber
-                                      value={1.75}
-                                      prefix="$"
-                                      decimals={2}
-                                    />
-                                  </span>
-                                  <span className="text-xs font-semibold text-slate-400 mt-1">
-                                    Low Range
-                                  </span>
-                                </div>
-
-                                {/* Visual Range Connector */}
-                                <div className="flex-1 mx-4 sm:mx-8 mb-4 flex flex-col items-center">
-                                  <div className="w-full h-1.5 bg-slate-100 rounded-full relative overflow-visible">
-                                    {/* Gradient Bar representing the spread */}
-                                    <m.div
-                                      initial={{ width: 0, opacity: 0 }}
-                                      animate={{ width: "100%", opacity: 0.3 }}
-                                      transition={{
-                                        duration: 1.5,
-                                        ease: "easeOut",
-                                      }}
-                                      className="absolute inset-y-0 left-0 right-0 bg-linear-to-r from-slate-300 to-[#F15A29] rounded-full"
-                                    ></m.div>
-
-                                    {/* Dots */}
-                                    <m.div
-                                      initial={{ left: "50%" }}
-                                      animate={{ left: "0%" }}
-                                      transition={{
-                                        duration: 1.2,
-                                        ease: "easeOut",
-                                        delay: 0.2,
-                                      }}
-                                      className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-2 border-slate-300 rounded-full shadow-xs"
-                                    ></m.div>
-                                    <m.div
-                                      initial={{ right: "50%" }}
-                                      animate={{ right: "0%" }}
-                                      transition={{
-                                        duration: 1.2,
-                                        ease: "easeOut",
-                                        delay: 0.2,
-                                      }}
-                                      className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-2 border-[#F15A29] rounded-full shadow-xs"
-                                    ></m.div>
-                                  </div>
-                                </div>
-
-                                {/* High Bid */}
-                                <div className="flex flex-col items-end">
-                                  <span className="text-2xl font-extrabold text-slate-900 tracking-tight">
-                                    <AnimatedNumber
-                                      value={5.2}
-                                      prefix="$"
-                                      decimals={2}
-                                    />
-                                  </span>
-                                  <span className="text-xs font-semibold text-slate-400 mt-1 text-right">
-                                    High Range
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Average CPC - Premium Design without Chart */}
-                      <div className="">
-                        <div className="bg-linear-to-br from-slate-50 via-white to-slate-50 rounded-4xl flex flex-col justify-between overflow-hidden h-full border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] transition-all duration-300 relative group">
-                          {/* Background Icon Decoration */}
-                          <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500 transform rotate-12">
-                            <CircleDollarSign
-                              size={180}
-                              strokeWidth={1}
-                              className="text-[#F15A29]"
-                            />
-                          </div>
-
-                          <div className="p-5 flex flex-col h-full justify-between z-10 relative">
-                            {/* Header */}
-                            <div className="flex items-center justify-between">
-                              <span className="text-[11px] uppercase font-bold text-slate-400 tracking-[0.15em]">
-                                Average CPC
-                              </span>
-                              <div className="bg-slate-100 p-1.5 rounded-lg text-slate-400">
-                                <DollarSign size={14} strokeWidth={2.5} />
-                              </div>
-                            </div>
-
-                            {/* Bottom Stats */}
-                            <div className="pb-0 pt-8 flex items-end justify-between">
-                              <div>
-                                <span className="text-4xl font-extrabold text-slate-900 tracking-tight">
-                                  <AnimatedNumber
-                                    value={apiData.cpc}
-                                    prefix="$"
-                                    decimals={2}
-                                  />
-                                </span>
-                              </div>
-                              <div className="bg-amber-500/10 text-amber-600 text-[11px] font-bold px-3 py-1.5 rounded-xl border border-amber-100">
-                                Commercial
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Search Intent - "Out of the Box" Radar Scan Design (Light Mode Compatible) */}
-                      <div className="">
-                        <div className="bg-white rounded-4xl flex flex-col justify-between overflow-hidden h-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.08)] transition-all duration-300 relative group border border-slate-200/60">
-                          {/* Grid Background Effect - Subtle Gray for Light Mode */}
-                          <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-size-[30px_30px] mask-[radial-gradient(ellipse_at_center,black_60%,transparent_100%)] pointer-events-none"></div>
-
-                          {/* Revealed State - using mocked real API data structure */}
-                          {/* Revealed State - using mocked real API data structure */}
-                          {/* Main Content (Always rendered, but ignored by screen readers when blurred) */}
-                          <div className="absolute inset-0 p-6 flex flex-col bg-white z-10 h-full w-full">
-                            <div className="flex items-center justify-between mb-2">
-                              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-[0.15em]">
-                                Search Intent
-                              </span>
-                            </div>
-
-                            <div className="flex-1 flex flex-col justify-center min-h-0">
-                              <h3 className="text-2xl font-extrabold text-[#F15A29] tracking-tight capitalize mb-1 truncate">
-                                Navigational
-                              </h3>
-                              <div className="flex items-center gap-2 mb-2">
-                                <span className="text-[10px] font-bold text-slate-600">
-                                  Probability:
-                                </span>
-                                <span className="text-[10px] font-medium text-slate-500">
-                                  63.4%
-                                </span>
-                              </div>
-
-                              {/* Divider */}
-                              <div className="w-full h-px bg-slate-100 my-2 shrink-0"></div>
-
-                              <div className="mt-auto">
-                                <p className="text-[9px] uppercase font-bold text-slate-400 mb-1">
-                                  Alternatives
-                                </p>
-                                <div className="flex items-center justify-between text-[11px]">
-                                  <span className="text-slate-700 font-medium capitalize">
-                                    Commercial
-                                  </span>
-                                  <span className="text-slate-400 font-mono">
-                                    56.7%
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Blurred Overlay - Reveal Interaction */}
-                          <m.div
-                            initial={false}
-                            animate={{
-                              opacity: isIntentRevealed ? 0 : 1,
-                              pointerEvents: isIntentRevealed ? "none" : "auto",
-                              backdropFilter: isIntentRevealed
-                                ? "blur(0px)"
-                                : "blur(8px)",
-                            }}
-                            transition={{ duration: 0.5, ease: "easeInOut" }}
-                            className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center bg-white/60 backdrop-blur-md"
-                          >
-                            <div className="relative z-10 flex flex-col items-center gap-4">
-                              {isIntentLoading ? (
-                                <div className="flex flex-col items-center">
-                                  {/* Loading Spinner */}
-                                  <div className="w-8 h-8 relative mb-3">
-                                    <m.div
-                                      animate={{ rotate: 360 }}
-                                      transition={{
-                                        duration: 1,
-                                        repeat: Infinity,
-                                        ease: "linear",
-                                      }}
-                                      className="w-full h-full border-2 border-slate-300 border-t-[#F15A29] rounded-full"
-                                    />
-                                  </div>
-                                  <span className="text-slate-800 font-bold text-xs animate-pulse">
-                                    Analyzing Content...
-                                  </span>
-                                </div>
-                              ) : (
-                                <>
-                                  <div>
-                                    <h3 className="text-slate-800 font-bold text-sm mb-1">
-                                      Search Intent
-                                    </h3>
-                                    <p className="text-slate-500 text-[10px] font-medium max-w-[150px] leading-relaxed">
-                                      Click to analyze the content intent for
-                                      this keyword
-                                    </p>
-                                  </div>
-                                  <button
-                                    onClick={handleIntentReveal}
-                                    className="mt-2 px-5 py-2 bg-white border border-slate-200 shadow-sm rounded-full text-[10px] font-bold text-slate-700 hover:text-[#F15A29] hover:border-[#F15A29] transition-all cursor-pointer"
-                                  >
-                                    Reveal Intent
-                                  </button>
-                                </>
-                              )}
-                            </div>
-                          </m.div>
-                        </div>
-                      </div>
-
-                      {/* Average Search Volume - Premium Design */}
-                      <div className="col-span-1 md:col-span-2">
-                        <div className="relative bg-linear-to-br from-slate-50 via-white to-slate-50 rounded-[2rem] overflow-hidden h-full border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group">
-                          <div className="relative p-7 h-full flex flex-row items-center justify-between">
-                            {/* Left Side: Content */}
-                            <div className="flex flex-col justify-between h-full z-10 w-[45%]">
-                              <div>
-                                <div className="flex items-center justify-between mb-3">
-                                  <span className="text-[11px] uppercase font-bold text-slate-400 tracking-[0.15em]">
-                                    Average Search Volume
-                                  </span>
-                                </div>
-                                <h3 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
-                                  <AnimatedNumber
-                                    value={formattedVolume.val}
-                                    suffix={formattedVolume.suffix}
-                                    decimals={1}
-                                  />
-                                </h3>
-                              </div>
-
-                              <div className="mt-auto">
-                                <p className="text-sm text-slate-500 font-medium leading-snug">
-                                  <span
-                                    className={`${isPositiveChange ? "text-emerald-500 bg-emerald-50" : "text-rose-600 bg-rose-50"} font-bold px-1 rounded-sm mr-1`}
-                                  >
-                                    {isPositiveChange ? "+" : ""}
-                                    {quarterChange.toFixed(1)}%
-                                  </span>
-                                  {isPositiveChange ? "increase" : "decrease"}{" "}
-                                  from the previous quarter.
-                                </p>
-                              </div>
-                            </div>
-
-                            {/* Right Side: Graph */}
-                            <div className="absolute right-[-20px] bottom-0 top-[20%] w-[65%] h-[90%] overflow-visible">
-                              {/* Fade Overlay */}
-                              <div className="absolute left-0 top-0 bottom-0 w-32 bg-linear-to-r from-white via-slate-50/80 to-transparent z-10 pointer-events-none" />
-                              <ResponsiveContainer width="100%" height="100%">
-                                <AreaChart
-                                  data={[
-                                    { month: "J", volume: 40 },
-                                    { month: "F", volume: 35 },
-                                    { month: "M", volume: 55 },
-                                    { month: "A", volume: 45 },
-                                    { month: "M", volume: 70 },
-                                    { month: "J", volume: 85 },
-                                    { month: "J", volume: 65 },
-                                    { month: "A", volume: 80 },
-                                    { month: "S", volume: 75 },
-                                    { month: "O", volume: 90 },
-                                    { month: "N", volume: 85 },
-                                    { month: "D", volume: 95 },
-                                  ]}
-                                  margin={{
-                                    top: 15,
-                                    right: 0,
-                                    left: 0,
-                                    bottom: 0,
-                                  }}
-                                >
-                                  <defs>
-                                    <linearGradient
-                                      id="volumeGradientLight"
-                                      x1="0"
-                                      y1="0"
-                                      x2="0"
-                                      y2="1"
-                                    >
-                                      <stop
-                                        offset="0%"
-                                        stopColor="#F15A29"
-                                        stopOpacity={0.3}
-                                      />
-                                      <stop
-                                        offset="100%"
-                                        stopColor="#F15A29"
-                                        stopOpacity={0.02}
-                                      />
-                                    </linearGradient>
-                                  </defs>
-                                  <Area
-                                    type="monotone"
-                                    dataKey="volume"
-                                    stroke="#F15A29"
-                                    strokeWidth={2.5}
-                                    fill="url(#volumeGradientLight)"
-                                    dot={false}
-                                  />
-                                </AreaChart>
-                              </ResponsiveContainer>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardsComponent>
-
-                  {/* Keyword Difficulty - Big Size (Row Span 2) - Sales Overview Style */}
-                  <CardsComponent
-                    title="Keyword Difficulty"
-                    description={`Keyword Difficulty for "${currentKeyword}"`}
-                    buttons={[]}
-                    className="bg-brand-background"
-                  >
-                    <div className="lg:row-span-2">
-                      <div className="bg-white rounded-[2rem] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] transition-all duration-300 border border-slate-200/60 flex flex-col justify-between h-full group relative overflow-hidden">
-                        <div className="relative h-[220px] w-full flex items-center justify-center -mt-4 z-10">
-                          {/* Segmented Gauge using PieChart */}
-                          <ResponsiveContainer width="100%" height="100%">
-                            <PieChart>
-                              <Pie
-                                data={(() => {
-                                  const totalSlices = 20;
-                                  const activeSlices = Math.round(
-                                    (keywordDifficulty / 100) * totalSlices,
-                                  );
-                                  const slices = [];
-                                  for (let i = 0; i < totalSlices; i++) {
-                                    // Calculate opacity or shade based on index if desired, or keep solid
-                                    // User asked for "primary color and it's shades"
-                                    // We can make the active slices have a gradient effect by index
-                                    const opacity =
-                                      0.4 + (i / activeSlices) * 0.6; // 0.4 to 1.0
-
-                                    slices.push({
-                                      value: 1,
-                                      fill:
-                                        i < activeSlices
-                                          ? "#F15A29" // Primary Orange
-                                          : "#fff1e3", // Very light orange/gray for inactive
-                                      style: {
-                                        opacity: i < activeSlices ? 1 : 1,
-                                      }, // Using solid color for now, logic below handles "shades" if we wanted unique colors
-                                    });
-                                  }
-                                  return slices;
-                                })()}
-                                cx="50%"
-                                cy="80%"
-                                startAngle={180}
-                                endAngle={0}
-                                innerRadius={90}
-                                outerRadius={120}
-                                paddingAngle={3}
-                                dataKey="value"
-                                stroke="none"
-                                cornerRadius={4}
-                              >
-                                {(() => {
-                                  const totalSlices = 20;
-                                  const activeSlices = Math.round(
-                                    (keywordDifficulty / 100) * totalSlices,
-                                  );
-                                  const slices = [];
-                                  for (let i = 0; i < totalSlices; i++) {
-                                    // Dynamic shade for active slices
-                                    const shadeOpacity =
-                                      0.5 + (i / totalSlices) * 0.5; // darkens as it goes
-
-                                    slices.push(
-                                      <Cell
-                                        key={`cell-${i}`}
-                                        fill={
-                                          i < activeSlices
-                                            ? "#F15A29" // Primary
-                                            : "#eeeeee" // Gray-100 placeholder
-                                        }
-                                        fillOpacity={
-                                          i < activeSlices ? shadeOpacity : 1
-                                        }
-                                      />,
-                                    );
-                                  }
-                                  return slices;
-                                })()}
-                              </Pie>
-                            </PieChart>
-                          </ResponsiveContainer>
-
-                          <div className="absolute top-[65%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                            <p className="text-4xl font-extrabold text-slate-900 tracking-tight">
-                              {keywordDifficulty}%
-                            </p>
-                            <p className="text-sm text-slate-400 font-semibold mt-1">
-                              {keywordDifficulty > 70
-                                ? "Hard to Rank"
-                                : keywordDifficulty > 40
-                                  ? "Moderate"
-                                  : "Easy to Rank"}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col items-center justify-center mt-auto z-10 px-2 pb-4">
-                          <span className="text-[11px] uppercase font-bold text-slate-400 tracking-[0.15em] mb-2">
-                            Ranking Difficulty
-                          </span>
-                          <div className="flex items-center gap-3 bg-white border border-slate-100 px-4 py-2 rounded-full shadow-xs">
-                            <span className="text-lg font-extrabold text-slate-900 tracking-tight">
-                              {keywordDifficulty > 70
-                                ? "High"
-                                : keywordDifficulty > 40
-                                  ? "Moderate"
-                                  : "Low"}
-                            </span>
-                            <div className="w-px h-4 bg-slate-200"></div>
-                            <span
-                              className={`text-xs font-bold ${keywordDifficulty > 70 ? "text-rose-500" : keywordDifficulty > 40 ? "text-[#F15A29]" : "text-emerald-500"}`}
-                            >
-                              {keywordDifficulty}/100
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardsComponent>
-                </div>
-
-                {/* 2. Related Keywords */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                  {/* Related Keywords Table on Left */}
-                  <div className="lg:col-span-8 order-2 lg:order-1">
-                    <CardsComponent
-                      title="Related Keywords"
-                      description={`Variations and related terms for "${currentKeyword}"`}
-                      buttons={[]}
-                      className="bg-brand-background"
-                    >
-                      <div className="bg-white rounded-4xl overflow-hidden border border-gray-100">
-                        <RelatedKeywordsTable
-                          data={relatedKeywords}
-                          onSelectKeyword={(kw) => {
-                            handleSearch({
-                              preventDefault: () => {},
-                            } as React.FormEvent);
-                            setSearchQuery(kw);
-                          }}
+                {/* Big Search Bar */}
+                <m.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="w-full max-w-4xl mx-auto relative z-30"
+                >
+                  <div className="bg-white p-2 rounded-[2rem] shadow-[0_20px_60px_-10px_rgba(0,0,0,0.1)] border border-slate-200/60 ring-4 ring-slate-50/50 transition-all hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.15)] hover:ring-slate-100 flex flex-col gap-2">
+                    {/* Top Row: Inputs & Actions */}
+                    <div className="flex flex-col lg:flex-row items-center gap-2">
+                      {/* Keyword Input */}
+                      <div className="flex-1 w-full lg:w-auto flex items-center h-[60px] bg-slate-50 hover:bg-slate-100/80 focus-within:bg-white rounded-[1.5rem] px-5 border border-transparent focus-within:border-brand-primary/20 focus-within:shadow-[0_0_0_4px_rgba(241,90,41,0.05)] transition-all group">
+                        <Search
+                          className="text-slate-400 mr-3 group-focus-within:text-brand-primary transition-colors"
+                          size={22}
+                          strokeWidth={2.5}
                         />
-                        <div className="p-4 border-t border-gray-100 flex justify-center">
-                          <button className="text-sm font-semibold text-[#F15A29] hover:text-[#d64a1d] transition-colors">
-                            View all related keywords
-                          </button>
-                        </div>
+                        <input
+                          type="text"
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          onKeyDown={(e) =>
+                            e.key === "Enter" && handleSearch(e)
+                          }
+                          placeholder="What do you want to rank for? (e.g. 'seo tools')"
+                          className="flex-1 bg-transparent border-none text-slate-800 font-semibold placeholder:text-slate-400 focus:ring-0 text-lg h-full"
+                          autoFocus
+                        />
                       </div>
-                    </CardsComponent>
-                  </div>
 
-                  {/* Search Volume Card on Right - Performance Overview Style */}
-                  {/* Search Volume Card on Right - Performance Overview Style */}
-                  <div className="lg:col-span-4 h-full order-1 lg:order-2">
-                    <SearchVolumeCard />
-                  </div>
-                </div>
+                      {/* Controls Group */}
+                      <div className="flex items-center gap-2 w-full lg:w-auto">
+                        {/* Country Dropdown */}
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <button className="h-[60px] px-4 rounded-[1.5rem] bg-slate-50 hover:bg-white border border-transparent hover:border-slate-200 flex items-center gap-3 text-slate-700 font-semibold text-sm transition-all whitespace-nowrap min-w-[140px] justify-between group/country">
+                              <div className="flex items-center gap-2.5">
+                                <div className="w-8 h-8 rounded-full bg-blue-100/50 flex items-center justify-center text-blue-600 group-hover/country:bg-blue-100 group-hover/country:scale-110 transition-all">
+                                  <MapPin size={16} strokeWidth={2.5} />
+                                </div>
+                                <span className="truncate max-w-[80px]">
+                                  {selectedCountry}
+                                </span>
+                              </div>
+                              <ChevronDown size={14} className="opacity-50" />
+                            </button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent className="max-h-[300px] overflow-y-auto min-w-[200px] p-2 rounded-2xl">
+                            {[
+                              "United States",
+                              "United Kingdom",
+                              "Canada",
+                              "Australia",
+                              "India",
+                              "Germany",
+                              "France",
+                              "Spain",
+                            ].map((c) => (
+                              <DropdownMenuItem
+                                key={c}
+                                onClick={() => setSelectedCountry(c)}
+                                className="rounded-xl py-2.5 px-3 cursor-pointer text-slate-600 font-medium focus:text-brand-primary focus:bg-orange-50 justify-between"
+                              >
+                                {c}
+                                {selectedCountry === c && (
+                                  <Check
+                                    size={16}
+                                    className="text-brand-primary"
+                                  />
+                                )}
+                              </DropdownMenuItem>
+                            ))}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
 
-                {/* 3. SERP Competitors */}
-                {/* <div className="grid grid-cols-1">
-                  <CardsComponent
-                    title="SERP Analysis"
-                    description={`Top ranking pages for "${currentKeyword}"`}
-                    buttons={[
-                      {
-                        label: "",
-                        icon: <Plus />,
-                        onClick: () => {},
-                      },
-                      {
-                        label: "",
-                        icon: <Equal />,
-                        onClick: () => {},
-                      },
-                      {
-                        label: "Export",
-                        icon: <Download />,
-                        onClick: () => {},
-                      },
-                      {
-                        label: "Export",
-                        icon: <Download />,
-                        onClick: () => {},
-                      },
-                    ]}
-                    className="bg-brand-background"
-                  >
-                    <AdvanceTable
-                      data={serpCompetitors}
-                      columns={serpColumns}
-                      title="SERP Analysis"
-                    />
-                  </CardsComponent>
-                </div> */}
+                        {/* Language Dropdown */}
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <button className="h-[60px] px-4 rounded-[1.5rem] bg-slate-50 hover:bg-white border border-transparent hover:border-slate-200 flex items-center gap-3 text-slate-700 font-semibold text-sm transition-all whitespace-nowrap min-w-[140px] justify-between group/lang">
+                              <div className="flex items-center gap-2.5">
+                                <div className="w-8 h-8 rounded-full bg-purple-100/50 flex items-center justify-center text-purple-600 group-hover/lang:bg-purple-100 group-hover/lang:scale-110 transition-all">
+                                  <Globe size={16} strokeWidth={2.5} />
+                                </div>
+                                <span className="truncate max-w-[80px]">
+                                  {selectedLanguage}
+                                </span>
+                              </div>
+                              <ChevronDown size={14} className="opacity-50" />
+                            </button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent className="max-h-[300px] overflow-y-auto min-w-[200px] p-2 rounded-2xl">
+                            {[
+                              "English",
+                              "Spanish",
+                              "French",
+                              "German",
+                              "Italian",
+                              "Portuguese",
+                            ].map((l) => (
+                              <DropdownMenuItem
+                                key={l}
+                                onClick={() => setSelectedLanguage(l)}
+                                className="rounded-xl py-2.5 px-3 cursor-pointer text-slate-600 font-medium focus:text-brand-primary focus:bg-orange-50 justify-between"
+                              >
+                                {l}
+                                {selectedLanguage === l && (
+                                  <Check
+                                    size={16}
+                                    className="text-brand-primary"
+                                  />
+                                )}
+                              </DropdownMenuItem>
+                            ))}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
 
-                <div className="grid grid-cols-1">
-                  <CardsComponent
-                    title="SERP Analysis"
-                    description={`Top ranking pages for "${currentKeyword}"`}
-                    buttons={[]}
-                    className="bg-brand-background"
-                  >
-                    <div className="bg-white rounded-4xl overflow-hidden border border-gray-100">
-                      <SerpCompetitorsTable data={serpCompetitors} />
-                      <div className="p-4 border-t border-gray-100 flex justify-center">
-                        <button className="text-sm font-semibold text-[#F15A29] hover:text-[#d64a1d] transition-colors">
-                          View full SERP report
+                        {/* Search Button */}
+                        <button
+                          onClick={handleSearch}
+                          className="h-[60px] px-8 bg-brand-primary hover:bg-[#d64a1d] text-white rounded-[1.5rem] font-bold shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 active:scale-95 transition-all flex items-center justify-center gap-2 min-w-[120px]"
+                        >
+                          <Search size={20} strokeWidth={3} />
+                          <span>Search</span>
                         </button>
                       </div>
                     </div>
-                  </CardsComponent>
+
+                    {/* Filter Extension Area - Easily expandable */}
+                    <div
+                      className="w-full hidden empty:hidden border-t border-slate-100 mt-1 pt-1"
+                      id="search-filters"
+                    >
+                      {/* Add your filters here. Example:
+                      <div className="flex gap-2 p-2">
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Filters:</span>
+                        ...
+                      </div>
+                      */}
+                    </div>
+                  </div>
+                </m.div>
+              </div>
+            </m.div>
+          ) : (
+            // --- APP STATE: SPLIT VIEW ---
+            <div className="w-full h-full flex flex-col md:flex-row">
+              {/* LEFT SIDEBAR (Search + Related) */}
+              <m.div
+                initial={{ x: -50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="w-full md:w-1/2 bg-zinc-200/70 flex flex-col gap-4 shrink-0 z-20 p-4"
+              >
+                {/* 1. Sidebar Search Header (Replaced with Modern Search Bar) */}
+                <div className="z-10">
+                  <div className="bg-white p-2 rounded-[1.5rem] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-200/60 ring-2 ring-slate-50/50 flex flex-col gap-2">
+                    {/* Top Row: Search Input */}
+                    <div className="flex items-center h-[50px] bg-slate-50 hover:bg-slate-100/80 focus-within:bg-white rounded-[1.2rem] px-4 border border-transparent focus-within:border-brand-primary/20 focus-within:shadow-[0_0_0_3px_rgba(241,90,41,0.05)] transition-all group">
+                      <Search
+                        className="text-slate-400 mr-2 group-focus-within:text-brand-primary transition-colors"
+                        size={18}
+                        strokeWidth={2.5}
+                      />
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && handleSearch(e)}
+                        placeholder="New keyword..."
+                        className="flex-1 bg-transparent border-none text-slate-800 font-semibold placeholder:text-slate-400 focus:ring-0 text-sm h-full"
+                      />
+                    </div>
+
+                    {/* Bottom Row: Controls */}
+                    <div className="flex items-center gap-1.5 justify-between">
+                      {/* Country Dropdown */}
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <button className="h-[46px] px-3 rounded-[1.2rem] bg-slate-50 hover:bg-white border border-transparent hover:border-slate-200 flex items-center gap-2 text-slate-700 font-semibold text-xs transition-all whitespace-nowrap min-w-[30%] justify-between group/country flex-1">
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-blue-100/50 flex items-center justify-center text-blue-600 group-hover/country:bg-blue-100 transition-all shrink-0">
+                                <MapPin size={14} strokeWidth={2.5} />
+                              </div>
+                              <span className="truncate">
+                                {selectedCountry}
+                              </span>
+                            </div>
+                            <ChevronDown
+                              size={12}
+                              className="opacity-50 shrink-0"
+                            />
+                          </button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="max-h-[300px] overflow-y-auto min-w-[200px] p-2 rounded-2xl z-50">
+                          {[
+                            "United States",
+                            "United Kingdom",
+                            "Canada",
+                            "Australia",
+                            "India",
+                            "Germany",
+                            "France",
+                            "Spain",
+                          ].map((c) => (
+                            <DropdownMenuItem
+                              key={c}
+                              onClick={() => setSelectedCountry(c)}
+                              className="rounded-xl py-2 px-3 cursor-pointer text-slate-600 font-medium focus:text-brand-primary focus:bg-orange-50 justify-between text-xs"
+                            >
+                              {c}
+                              {selectedCountry === c && (
+                                <Check
+                                  size={14}
+                                  className="text-brand-primary"
+                                />
+                              )}
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+
+                      {/* Language Dropdown */}
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <button className="h-[46px] px-3 rounded-[1.2rem] bg-slate-50 hover:bg-white border border-transparent hover:border-slate-200 flex items-center gap-2 text-slate-700 font-semibold text-xs transition-all whitespace-nowrap min-w-[30%] justify-between group/lang flex-1">
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-purple-100/50 flex items-center justify-center text-purple-600 group-hover/lang:bg-purple-100 transition-all shrink-0">
+                                <Globe size={14} strokeWidth={2.5} />
+                              </div>
+                              <span className="truncate">
+                                {selectedLanguage}
+                              </span>
+                            </div>
+                            <ChevronDown
+                              size={12}
+                              className="opacity-50 shrink-0"
+                            />
+                          </button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="max-h-[300px] overflow-y-auto min-w-[200px] p-2 rounded-2xl z-50">
+                          {[
+                            "English",
+                            "Spanish",
+                            "French",
+                            "German",
+                            "Italian",
+                            "Portuguese",
+                          ].map((l) => (
+                            <DropdownMenuItem
+                              key={l}
+                              onClick={() => setSelectedLanguage(l)}
+                              className="rounded-xl py-2 px-3 cursor-pointer text-slate-600 font-medium focus:text-brand-primary focus:bg-orange-50 justify-between text-xs"
+                            >
+                              {l}
+                              {selectedLanguage === l && (
+                                <Check
+                                  size={14}
+                                  className="text-brand-primary"
+                                />
+                              )}
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+
+                      {/* Search Button */}
+                      <button
+                        onClick={handleSearch}
+                        className="w-[46px] h-[46px] bg-brand-primary hover:bg-[#d64a1d] text-white rounded-[1.2rem] font-bold shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 active:scale-95 transition-all flex items-center justify-center shrink-0"
+                      >
+                        <Search size={18} strokeWidth={3} />
+                      </button>
+                    </div>
+
+                    {/* Filter Extension Area - Easily expandable */}
+                    <div
+                      className="w-full hidden empty:hidden border-t border-slate-100 mt-0.5 pt-1"
+                      id="sidebar-search-filters"
+                    >
+                      {/* Add your filters here. Example:
+                      <div className="flex gap-2 p-2">
+                         ...
+                      </div>
+                      */}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex-1 flex flex-col min-h-0 bg-white rounded-4xl overflow-hidden">
+                  {/* Tabs / Filters Header */}
+                  <div className="px-4 py-3 bg-white flex items-center justify-between">
+                    <h3 className="text-sm font-bold text-slate-800">
+                      Related Keywords
+                    </h3>
+                    <div className="flex gap-1">
+                      <button className="p-1.5 rounded-md hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors">
+                        <Download size={16} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Scrollable Table */}
+                  <div className="flex-1 overflow-y-auto overflow-x-hidden p-2">
+                    {isAnalyzing ? (
+                      <div className="space-y-3 p-2">
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+                          <Skeleton
+                            key={i}
+                            className="h-12 w-full rounded-xl"
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <RelatedKeywordsTable
+                        data={relatedKeywords}
+                        onSelectKeyword={(kw) => {
+                          handleQuickSearch({
+                            preventDefault: () => {},
+                          } as any); // Type cast mostly wrapper
+                          setSearchQuery(kw);
+                          performSearch(kw);
+                        }}
+                      />
+                    )}
+                  </div>
                 </div>
               </m.div>
-            )}
-          </AnimatePresence>
-        </div>
+
+              {/* RIGHT MAIN CONTENT (Analysis) */}
+              <div className="w-full md:w-1/2 flex flex-col min-h-0 bg-[#f8f9fc] overflow-y-auto md:overflow-hidden">
+                {isAnalyzing ? (
+                  // Custom Loading Skeleton for Right Side
+                  <div className="p-6 h-full flex flex-col gap-6 overflow-hidden">
+                    <div className="h-[320px] flex gap-6 shrink-0">
+                      <Skeleton className="w-1/3 h-full rounded-4xl" />
+                      <Skeleton className="w-2/3 h-full rounded-4xl" />
+                    </div>
+                    <Skeleton className="flex-1 w-full rounded-4xl" />
+                  </div>
+                ) : (
+                  <m.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="flex flex-col h-full gap-2 p-4 md:p-6 overflow-y-auto"
+                  >
+                    {/* Top Section: Header + Metrics - Adjusted for 25% height target */}
+                    <div className="shrink-0 flex flex-col gap-4">
+                      <div className="flex items-start justify-between shrink-0">
+                        <div className="flex flex-col gap-1">
+                          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+                            {currentKeyword}
+                          </h2>
+                          <div className="flex items-center gap-3 text-xs font-medium text-slate-500">
+                            <div className="flex items-center gap-1 bg-white px-2 py-1 rounded-md border border-slate-100">
+                              <MapPin
+                                size={12}
+                                className="text-brand-primary"
+                              />
+                              {selectedCountry}
+                            </div>
+                            <div className="flex items-center gap-1 bg-white px-2 py-1 rounded-md border border-slate-100">
+                              <Globe size={12} className="text-blue-500" />
+                              {selectedLanguage}
+                            </div>
+                            <div className="flex items-center gap-1 bg-purple-50 text-purple-700 px-2 py-1 rounded-md border border-purple-100">
+                              <Sparkles size={12} />
+                              Commercial
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-sm font-medium text-slate-400 px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                          Volume:{" "}
+                          <span className="text-slate-900 font-bold">
+                            {formattedVolume.val}
+                            {formattedVolume.suffix}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Metrics Grid */}
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 flex-1 min-h-0">
+                        {/* Difficulty Card */}
+                        <div className="lg:col-span-1 h-full min-h-0">
+                          <div className="bg-white rounded-4xl p-4 hover:shadow-xl transition-all duration-300 border border-slate-200/60 flex flex-col h-full group relative overflow-hidden">
+                            <div className="flex justify-between items-center mb-2 z-10">
+                              <div className="text-center gap-2 w-full">
+                                <h2 className="text-lg font-bold text-gray-900">
+                                  Keyword Difficulty
+                                </h2>
+                              </div>
+                            </div>
+
+                            <div className="relative flex-1 min-h-0 w-full flex flex-col items-center justify-center">
+                              {/* Segmented Gauge using PieChart */}
+                              <div className="flex-1 w-full min-h-0">
+                                <ResponsiveContainer width="100%" height="110%">
+                                  <PieChart>
+                                    <Pie
+                                      data={(() => {
+                                        const totalSlices = 20;
+                                        const activeSlices = Math.round(
+                                          (keywordDifficulty / 100) *
+                                            totalSlices,
+                                        );
+                                        const slices = [];
+                                        for (let i = 0; i < totalSlices; i++) {
+                                          slices.push({
+                                            value: 1,
+                                            fill:
+                                              i < activeSlices
+                                                ? "#F15A29"
+                                                : "#fff1e3",
+                                          });
+                                        }
+                                        return slices;
+                                      })()}
+                                      cx="50%"
+                                      cy="60%"
+                                      startAngle={180}
+                                      endAngle={0}
+                                      innerRadius="80%"
+                                      outerRadius="120%"
+                                      paddingAngle={3}
+                                      dataKey="value"
+                                      stroke="none"
+                                      cornerRadius={4}
+                                    >
+                                      {(() => {
+                                        const totalSlices = 20;
+                                        const activeSlices = Math.round(
+                                          (keywordDifficulty / 100) *
+                                            totalSlices,
+                                        );
+                                        const slices = [];
+                                        for (let i = 0; i < totalSlices; i++) {
+                                          const shadeOpacity =
+                                            0.5 + (i / totalSlices) * 0.5;
+
+                                          slices.push(
+                                            <Cell
+                                              key={`cell-${i}`}
+                                              fill={
+                                                i < activeSlices
+                                                  ? "#F15A29"
+                                                  : "#eeeeee"
+                                              }
+                                              fillOpacity={
+                                                i < activeSlices
+                                                  ? shadeOpacity
+                                                  : 1
+                                              }
+                                            />,
+                                          );
+                                        }
+                                        return slices;
+                                      })()}
+                                    </Pie>
+                                  </PieChart>
+                                </ResponsiveContainer>
+                              </div>
+
+                              <div className="absolute top-[65%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                                <p className="text-4xl font-extrabold text-slate-900 tracking-tight">
+                                  {keywordDifficulty}
+                                </p>
+                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-4">
+                                  /100
+                                </p>
+                                <span
+                                  className={`text-sm font-bold px-3 py-1.5 rounded-full border ${keywordDifficulty > 70 ? "bg-rose-50 text-rose-600 border-rose-100" : keywordDifficulty > 40 ? "bg-orange-50 text-orange-600 border-orange-100" : "bg-emerald-50 text-emerald-600 border-emerald-100"}`}
+                                >
+                                  {keywordDifficulty > 70
+                                    ? "Hard to Rank"
+                                    : keywordDifficulty > 40
+                                      ? "Moderate"
+                                      : "Easy to Rank"}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Volume & Trends */}
+                        <div className="lg:col-span-2 h-full min-h-0">
+                          <SearchVolumeCard />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Section: SERP - Takes remaining height (approx 72%) */}
+                    <div className="flex-1 min-h-0">
+                      <div className="bg-white rounded-4xl border border-slate-200/60  h-full flex flex-col overflow-hidden">
+                        <div className="p-2 border-b border-slate-100 flex items-center justify-between shrink-0">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-6 bg-brand-prtext-brand-primary rounded-full"></span>
+                            <h3 className="text-lg font-bold text-slate-900">
+                              SERP Overview
+                            </h3>
+                          </div>
+                          <button className="px-4 py-2 bg-brand-prtext-brand-primary/10 text-brand-primary rounded-xl text-xs font-bold hover:bg-brand-prtext-brand-primary/20 transition-colors">
+                            Analyze SERP
+                          </button>
+                        </div>
+                        <div className="flex-1 overflow-y-auto">
+                          <SerpCompetitorsTable data={serpCompetitors} />
+                        </div>
+                      </div>
+                    </div>
+                  </m.div>
+                )}
+              </div>
+            </div>
+          )}
+        </AnimatePresence>
       </main>
     </div>
   );

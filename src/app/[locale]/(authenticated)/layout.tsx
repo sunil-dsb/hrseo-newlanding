@@ -10,10 +10,10 @@ export default function DashboardLayout({
   return (
     <div className="min-h-screen bg-zinc-100/70 relative flex flex-col">
       {/* <DashboardNavbar /> */}
-      <DashboardNavbar2 />
+      {/* <DashboardNavbar2 /> */}
       {/* <Navbar /> */}
       <main className="relative z-10 flex-1">{children}</main>
-      <DashboardFooter />
+      {/* <DashboardFooter /> */}
     </div>
   );
 }
