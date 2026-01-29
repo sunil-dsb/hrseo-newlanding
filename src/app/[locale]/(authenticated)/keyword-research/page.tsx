@@ -486,11 +486,12 @@ export default function KeywordResearchPage() {
   };
 
   return (
-    <div className="w-full min-h-screen pt-32 sm:pt-32 flex justify-center">
-      <main className="w-full max-w-[1600px] mx-auto px-4 sm:px-10 pb-12">
+    <div className="w-full min-h-screen pt-32 flex justify-center bg-gray-50">
+      <main className="w-full mx-auto px-4 sm:px-10 pb-8">
+        <div className="bg-white rounded-[2rem] p-6">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
-          <div className="w-full">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-6">
+          <div className="w-full ">
             <div className="mb-2">
               <h1 className="text-3xl font-bold text-gray-900">
                 Keyword Research
@@ -501,14 +502,14 @@ export default function KeywordResearchPage() {
             </div>
 
             {/* Search Bar Container */}
-            <div className="w-full mt-6 bg-linear-to-br from-slate-50 via-white to-slate-50 p-2 rounded-[2rem] border border-slate-200/60 flex flex-col lg:flex-row items-center gap-1 group transition-all duration-300 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)]">
+            <div className="w-full mt-6 bg-white border border-slate-200/60 flex flex-col lg:flex-row items-center gap-3 rounded-2xl p-3 transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
               {/* Keyword Input Section */}
               <label
                 htmlFor="keyword-search"
-                className="relative flex-1 w-full lg:w-auto h-16 flex items-center px-4 group/input bg-zinc-100/70 hover:bg-slate-200/70 focus-within:bg-white rounded-3xl transition-all duration-300 cursor-text ring-2 ring-transparent focus-within:ring-[#F15A29]/10 focus-within:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)]"
+                className="relative flex-1 w-full lg:w-auto h-12 flex items-center px-4 group/input bg-slate-50/50 hover:bg-slate-100 focus-within:bg-white rounded-xl transition-all duration-300 cursor-text border border-transparent focus-within:border-slate-200"
               >
-                <div className="mr-4 w-11 h-11 rounded-2xl bg-white text-[#F15A29] flex items-center justify-center shrink-0 shadow-xs border border-slate-100 group-focus-within/input:scale-105 transition-transform duration-300">
-                  <Search size={20} className="stroke-[2.5px]" />
+                <div className="mr-3 w-9 h-9 rounded-lg bg-orange-50 text-[#F15A29] flex items-center justify-center shrink-0 border border-orange-100">
+                  <Search size={18} className="stroke-[2.5px]" />
                 </div>
                 <div className="flex flex-col flex-1 h-full justify-center">
                   <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-0.5 pointer-events-none select-none">
@@ -528,14 +529,14 @@ export default function KeywordResearchPage() {
               </label>
 
               {/* Divider */}
-              <div className="w-px h-10 bg-slate-200/60 hidden lg:block mx-1" />
+              <div className="w-px h-6 bg-slate-200 hidden lg:block" />
 
               {/* Country Selection */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="w-full lg:w-56 h-16 flex items-center px-4 cursor-pointer outline-none text-left rounded-3xl hover:bg-slate-100 transition-all duration-300 group/btn">
-                    <div className="mr-4 w-11 h-11 rounded-2xl bg-slate-50 text-slate-500 flex items-center justify-center shrink-0 shadow-sm border border-slate-100 transition-transform duration-300">
-                      <MapPin size={20} className="stroke-[2.5px]" />
+                  <button className="w-full lg:w-56 h-12 flex items-center px-4 cursor-pointer outline-none text-left rounded-xl hover:bg-slate-50 transition-all duration-300">
+                    <div className="mr-3 w-9 h-9 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center shrink-0 border border-slate-200">
+                      <MapPin size={18} className="stroke-[2.5px]" />
                     </div>
                     <div className="flex flex-col flex-1 h-full justify-center">
                       <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-0.5">
@@ -576,14 +577,14 @@ export default function KeywordResearchPage() {
               </DropdownMenu>
 
               {/* Divider */}
-              <div className="w-px h-10 bg-slate-200/60 hidden lg:block mx-1" />
+              <div className="w-px h-6 bg-slate-200 hidden lg:block" />
 
               {/* Language Selection */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="w-full lg:w-48 h-16 flex items-center px-4 cursor-pointer outline-none text-left rounded-3xl hover:bg-slate-100 transition-all duration-300 group/btn">
-                    <div className="mr-4 w-11 h-11 rounded-2xl bg-slate-50 text-slate-500 flex items-center justify-center shrink-0 shadow-sm border border-slate-100 transition-transform duration-300">
-                      <Globe size={20} className="stroke-[2.5px]" />
+                  <button className="w-full lg:w-48 h-12 flex items-center px-4 cursor-pointer outline-none text-left rounded-xl hover:bg-slate-50 transition-all duration-300">
+                    <div className="mr-3 w-9 h-9 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center shrink-0 border border-slate-200">
+                      <Globe size={18} className="stroke-[2.5px]" />
                     </div>
                     <div className="flex flex-col flex-1 h-full justify-center">
                       <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-0.5">
@@ -623,19 +624,17 @@ export default function KeywordResearchPage() {
               </DropdownMenu>
 
               {/* Search Button */}
-              <div className="p-1 w-full lg:w-auto">
-                <button
-                  onClick={handleSearch}
-                  className="w-full lg:w-auto h-14 lg:h-14 px-8 bg-[#F15A29] hover:bg-[#d64a1d] text-white rounded-[1.5rem] font-bold shadow-[0_4px_20px_rgba(241,90,41,0.25)] hover:shadow-[0_6px_25px_rgba(241,90,41,0.35)] active:scale-95 transition-all flex items-center justify-center gap-2 group/search cursor-pointer"
+              <button
+                onClick={handleSearch}
+                className="w-full lg:w-auto h-12 px-6 bg-[#F15A29] hover:bg-[#d64a1d] text-white rounded-xl font-semibold shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Search
-                    size={20}
+                    size={18}
                     className="text-white bg-transparent"
                     strokeWidth={3}
                   />
                   <span>Analyze</span>
                 </button>
-              </div>
             </div>
           </div>
         </div>
@@ -1164,6 +1163,7 @@ export default function KeywordResearchPage() {
               </div>
             </CardsComponent>
           </div>
+        </div>
         </div>
       </main>
     </div>

@@ -35,7 +35,7 @@ const SEO_TOOLS = [
   {
     title: "Keyword Research",
     description: "Exact search volumes, difficulty & ideas.",
-    href: "/dashboard/keywords",
+    href: "/keyword-research",
     icon: Key,
   },
   {
@@ -121,7 +121,7 @@ export function DashboardNavbar2() {
       transition={{ duration: 0.35, ease: "easeInOut" }}
       className="fixed top-6 left-0 w-full flex justify-center z-50 pointer-events-none px-4"
     >
-      <div className="w-full md:max-w-[87%] flex items-center justify-between gap-2 pointer-events-auto relative">
+      <div className="w-full md:max-w-[95%] flex items-center justify-between gap-2 pointer-events-auto relative">
         {/* --- Main Navbar Section --- */}
         <m.div
           initial={{ y: -20, opacity: 0 }}
@@ -132,14 +132,14 @@ export function DashboardNavbar2() {
           {/* Brand */}
           <Link
             href="/dashboard"
-            className="flex items-center group shrink-0 pl-1"
+            className="flex items-center group shrink-0 -pl-4"
           >
             <Image
               src="/hrseo-logo.png"
               alt="HRSEO"
               width={120}
               height={40}
-              className="h-9 w-auto object-contain group-hover:opacity-80 transition-opacity"
+              className="h-24 w-auto object-contain group-hover:opacity-80 transition-opacity -ml-3"
               priority
             />
             <span className="font-bold text-xl md:text-2xl tracking-tighter group-hover:opacity-80 transition-opacity text-black ml-1">

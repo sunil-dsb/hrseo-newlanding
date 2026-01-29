@@ -52,14 +52,14 @@ export function Navbar() {
         >
           <Link
             href="/"
-            className="flex items-center group shrink-0 pl-4 navbar-brand"
+            className="flex items-center group shrink-0 -pl-4 navbar-brand"
           >
             <Image
-              src="/hrseo-logoo.jpg"
+              src="/hrseo-logo.png"
               alt="HRSEO"
               width={120}
               height={100}
-              className="h-8 w-auto object-contain group-hover:opacity-80 transition-opacity navbar-brand-img"
+              className="h-24 w-auto object-contain group-hover:opacity-80 transition-opacity navbar-brand-img -ml-3"
               priority
             />
             {/* <span className="font-bold text-xl md:text-2xl tracking-tighter group-hover:opacity-80 transition-opacity navbar-brand-text">
