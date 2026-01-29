@@ -95,7 +95,7 @@ export default function proxy(request: NextRequest) {
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https://framerusercontent.com https://www.semrush.com https://cdn.prod.website-files.com;
     font-src 'self' data:;
-    connect-src 'self' http://localhost:5000 ws://localhost:5000;
+    connect-src 'self' http://localhost:5000 ws://localhost:5000 https://9zszm619-5000.inc1.devtunnels.ms;
     object-src 'none';
     base-uri 'self';
     form-action 'self';

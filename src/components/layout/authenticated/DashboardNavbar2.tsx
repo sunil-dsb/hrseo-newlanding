@@ -26,8 +26,10 @@ import {
   BookOpen,
   FileText,
   Layers,
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLogout } from "@/services/auth/hooks";
 
 // --- Navigation Definitions ---
 
@@ -35,7 +37,7 @@ const SEO_TOOLS = [
   {
     title: "Keyword Research",
     description: "Exact search volumes, difficulty & ideas.",
-    href: "/dashboard/keywords",
+    href: "/keyword-research",
     icon: Key,
   },
   {
@@ -110,6 +112,8 @@ export function DashboardNavbar2() {
     }
   });
 
+  const { mutate, isPending } = useLogout();
+
   return (
     <m.header
       variants={{
@@ -127,7 +131,7 @@ export function DashboardNavbar2() {
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-20 flex-1 h-14 pr-2 backdrop-blur-md bg-white/80 rounded-2xl shadow-lg shadow-black/[0.03] border border-zinc-200 flex items-center justify-between"
+          className="relative z-20 flex-1 h-14 pr-2 backdrop-blur-md bg-white/80 rounded-2xl shadow-lg shadow-black/3 border border-zinc-200 flex items-center justify-between"
         >
           {/* Brand */}
           <Link
@@ -394,9 +398,17 @@ export function DashboardNavbar2() {
                   </Link>
                 ))}
                 <div className="h-px bg-zinc-100 my-1" />
-                <button className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-xl transition-colors w-full text-left">
-                  <LogOut size={16} />
-                  Log Out
+                <button
+                  onClick={() => mutate()}
+                  disabled={isPending}
+                  className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-xl transition-colors w-full text-left disabled:opacity-50"
+                >
+                  {isPending ? (
+                    <Loader2 size={16} className="animate-spin" />
+                  ) : (
+                    <LogOut size={16} />
+                  )}
+                  {isPending ? "Logging Out..." : "Log Out"}
                 </button>
               </m.div>
             )}

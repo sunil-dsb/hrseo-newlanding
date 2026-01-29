@@ -191,7 +191,6 @@ export default function Dashboard() {
 
   const { user, isLoggedIn, isLoading, logout } = useUser();
 
-  console.log(user, "----user");
   return (
     <div className="w-full min-h-screen pt-32 sm:pt-40 flex justify-center">
       {/* Main Content */}
