@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   PieChart,
   Pie,
@@ -653,6 +653,14 @@ export default function KeywordResearchPage() {
   const [hasSearched, setHasSearched] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleIntentReveal = () => {
     setIsIntentLoading(true);
@@ -735,10 +743,10 @@ export default function KeywordResearchPage() {
           initial={false}
           animate={{
             top: hasSearched ? "16px" : "50%",
-            left: hasSearched ? "16px" : "50%",
-            x: hasSearched ? "0%" : "-50%",
+            left: hasSearched ? (isMobile ? "50%" : "16px") : "50%",
+            x: hasSearched ? (isMobile ? "-50%" : "0%") : "-50%",
             y: hasSearched ? "0%" : "-50%",
-            width: hasSearched ? "48%" : "60%",
+            width: isMobile ? "calc(100% - 32px)" : hasSearched ? "48%" : "60%",
           }}
           transition={{
             type: "tween",
@@ -755,7 +763,7 @@ export default function KeywordResearchPage() {
             selectedLanguage={selectedLanguage}
             setSelectedLanguage={setSelectedLanguage}
             onSearch={handleSearch}
-            className={`w-full ${!hasSearched ? "shadow-[0_20px_60px_-10px_rgba(0,0,0,0.15)]" : ""}`}
+            className={`w-full ${!hasSearched ? "shadow-xl shadow-black/5 rounded-4xl" : ""}`}
           />
         </m.div>
 
@@ -767,13 +775,12 @@ export default function KeywordResearchPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
-              className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
-              style={{ paddingBottom: "200px" }} // Offset to position above search bar
+              className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none pb-60"
             >
               <m.h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight text-center">
                 Keyword Research Tool
               </m.h1>
-              <m.p className="text-lg text-slate-500 max-w-xl text-center">
+              <m.p className="text-lg text-slate-500 text-center">
                 Find easy-to-rank keywords with high search volume and low
                 competition.
               </m.p>
@@ -796,7 +803,7 @@ export default function KeywordResearchPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.4 }}
-                className="w-full md:w-1/2 bg-zinc-200/70 flex flex-col gap-4 shrink-0 z-10 p-4 pt-[140px]" // pt accounts for search bar height
+                className="w-full md:w-1/2 bg-zinc-200/70 flex flex-col gap-4 shrink-0 z-10 p-4 pt-36" // pt accounts for search bar height
               >
                 {/* Related Keywords Table */}
                 <m.div

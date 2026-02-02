@@ -78,16 +78,16 @@ export function ModernSearchBar({
     <m.div
       layoutId={layoutId}
       transition={{ type: "spring", stiffness: 150, damping: 20 }}
-      className={`flex flex-col gap-2 z-30 ${className}`}
+      className={`flex flex-col gap-2 ${className}`}
     >
       {/* Main Bar */}
-      <div className="bg-white rounded-[1.5rem] shadow-xl">
+      <div className="bg-white rounded-4xl">
         <form
           onSubmit={onSearch}
           className="flex flex-col md:flex-row items-center p-1.5 gap-1.5"
         >
           {/* Input Area */}
-          <div className="flex-1 w-full flex items-center h-[52px] bg-slate-50 hover:bg-slate-100/80 focus-within:bg-white rounded-[1.2rem] px-4 border border-transparent focus-within:border-brand-primary/20 focus-within:shadow-[0_0_0_3px_rgba(241,90,41,0.05)] transition-all group">
+          <div className="flex-1 w-full flex items-center bg-slate-50 hover:bg-slate-100/80 focus-within:bg-white rounded-xl px-4 border border-transparent focus-within:border-brand-primary/20 focus-within:shadow-xl shadow-black/5 transition-all group">
             <Search
               className="text-slate-400 mr-3 group-focus-within:text-brand-primary transition-colors shrink-0"
               size={20}
@@ -98,7 +98,7 @@ export function ModernSearchBar({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Enter keyword..."
-              className="flex-1 bg-transparent border-none text-slate-800 font-semibold placeholder:text-slate-400 focus:ring-0 text-sm md:text-base h-full w-full min-w-0"
+              className="flex-1 bg-transparent border-none text-slate-800 font-semibold placeholder:text-slate-400 focus:ring-0 text-sm md:text-base py-3 w-full min-w-0 outline-0"
             />
           </div>
 
@@ -112,7 +112,7 @@ export function ModernSearchBar({
               <DropdownMenuTrigger asChild>
                 <button
                   type="button"
-                  className="h-[52px] px-2.5 rounded-[1.2rem] hover:bg-slate-50 border border-transparent hover:border-slate-200 flex items-center gap-2 text-slate-700 font-semibold text-xs transition-all whitespace-nowrap min-w-fit justify-center group/country"
+                  className="h-[52px] px-2.5 rounded-4xl hover:bg-slate-50 border border-transparent hover:border-slate-200 flex items-center gap-2 text-slate-700 font-semibold text-xs transition-all whitespace-nowrap min-w-fit justify-center group/country"
                 >
                   <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 group-hover/country:bg-blue-100 group-hover/country:scale-110 transition-all shrink-0">
                     <MapPin size={16} strokeWidth={2.5} />
@@ -157,7 +157,7 @@ export function ModernSearchBar({
               <DropdownMenuTrigger asChild>
                 <button
                   type="button"
-                  className="h-[52px] px-2.5 rounded-[1.2rem] hover:bg-slate-50 border border-transparent hover:border-slate-200 flex items-center gap-2 text-slate-700 font-semibold text-xs transition-all whitespace-nowrap min-w-fit justify-center group/lang"
+                  className="h-[52px] px-2.5 rounded-4xl hover:bg-slate-50 border border-transparent hover:border-slate-200 flex items-center gap-2 text-slate-700 font-semibold text-xs transition-all whitespace-nowrap min-w-fit justify-center group/lang"
                 >
                   <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 group-hover/lang:bg-purple-100 group-hover/lang:scale-110 transition-all shrink-0">
                     <Globe size={16} strokeWidth={2.5} />
@@ -194,7 +194,7 @@ export function ModernSearchBar({
             {/* Search Button (Icon Only) */}
             <button
               type="submit"
-              className="h-[52px] w-[52px] bg-brand-primary hover:bg-[#d64a1d] text-white rounded-[1.2rem] font-bold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 active:scale-95 transition-all flex items-center justify-center shrink-0 ml-1"
+              className="h-[52px] w-[52px] bg-brand-primary hover:bg-[#d64a1d] text-white rounded-4xl font-bold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 active:scale-95 transition-all flex items-center justify-center shrink-0 ml-1"
             >
               <Search size={22} strokeWidth={3} />
             </button>
