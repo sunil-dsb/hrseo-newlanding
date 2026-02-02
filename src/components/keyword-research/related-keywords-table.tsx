@@ -9,6 +9,7 @@ export interface RelatedKeywordData {
     | "Commercial"
     | "Transactional"
     | "Navigational"
+    | "Educational"
     | null;
   cpc: string;
   volume: string;
@@ -25,7 +26,7 @@ export function RelatedKeywordsTable({
   onSelectKeyword,
 }: RelatedKeywordsTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const paginatedData = data.slice(
@@ -40,16 +41,16 @@ export function RelatedKeywordsTable({
   };
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="w-full overflow-x-auto">
+    <div className="flex flex-col w-full h-full">
+      <div className="flex-1 w-full overflow-auto min-h-0">
         <table className="w-full text-left text-sm whitespace-nowrap border-collapse">
-          <thead>
+          <thead className="sticky top-0 bg-white z-10 shadow-sm">
             <tr className="text-[11px] font-semibold tracking-wide text-gray-500 uppercase border-b border-gray-100">
-              <th className="px-5 py-4 w-[40%] pl-6">Keyword</th>
-              <th className="px-5 py-4 w-[20%]">Intent</th>
-              <th className="px-5 py-4 w-[15%]">CPC</th>
-              <th className="px-5 py-4 w-[15%]">Volume</th>
-              <th className="px-5 py-4 w-[10%] text-right pr-6">KD %</th>
+              <th className="px-5 py-2 w-[40%] pl-6">Keyword</th>
+              <th className="px-5 py-2 w-[20%]">Intent</th>
+              <th className="px-5 py-2 w-[15%]">CPC</th>
+              <th className="px-5 py-2 w-[15%]">Volume</th>
+              <th className="px-5 py-2 w-[10%] text-right pr-6">KD %</th>
             </tr>
           </thead>
           <tbody>

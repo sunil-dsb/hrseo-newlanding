@@ -18,7 +18,7 @@ interface SerpCompetitorsTableProps {
 
 export function SerpCompetitorsTable({ data }: SerpCompetitorsTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const paginatedData = data.slice(
