@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { m, LayoutGroup } from "framer-motion";
 
 interface SegmentedControlProps<T extends string> {
-  options: { label: string; value: T }[];
+  options: { label: React.ReactNode; value: T }[];
   value: T;
   onChange: (value: T) => void;
   className?: string;
@@ -19,6 +19,8 @@ export function SegmentedControl<T extends string>({
   className,
   size = "xs",
 }: SegmentedControlProps<T>) {
+  const uniqueId = React.useId();
+
   return (
     <div
       className={cn(
@@ -30,27 +32,32 @@ export function SegmentedControl<T extends string>({
       {options.map((option) => {
         const isActive = value === option.value;
         return (
-          <button
+          <m.button
             key={option.value}
             type="button"
             onClick={() => onChange(option.value)}
+            whileTap={{ scale: 0.95 }}
             className={cn(
-              "relative z-10 rounded-full transition-colors duration-300 flex-1 md:flex-none text-center",
+              "relative z-10 rounded-full transition-colors duration-300 flex-1 md:flex-none text-center cursor-pointer",
               size === "xs" ? "px-3 py-1" : "px-4 py-1.5",
               isActive
                 ? "text-brand-primary"
-                : "text-gray-400 hover:text-gray-600",
+                : "text-gray-400 hover:text-gray-600 hover:bg-gray-200/50",
             )}
           >
             {isActive && (
               <m.div
-                layoutId={`segmented-bg-${options.map((o) => o.value).join("-")}`}
+                layoutId={`segmented-indicator-${uniqueId}`}
                 className="absolute inset-0 bg-white rounded-full shadow-sm ring-1 ring-black/5 -z-10"
-                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 250,
+                  damping: 25,
+                }}
               />
             )}
-            {option.label}
-          </button>
+            <span className="relative z-20">{option.label}</span>
+          </m.button>
         );
       })}
     </div>

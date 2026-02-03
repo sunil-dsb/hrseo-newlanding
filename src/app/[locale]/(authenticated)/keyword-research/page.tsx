@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   PieChart,
   Pie,
@@ -52,9 +52,8 @@ import {
   Equal,
   Download,
   ChevronsRight,
-} from "lucide-react"; // Import Gauge icon
-import CardsComponent from "@/components/ui/cards-component";
-// import AdvanceTable, { Column } from "@/components/keyword-research/table";
+  Loader2,
+} from "lucide-react";
 import {
   RelatedKeywordsTable,
   RelatedKeywordData,
@@ -65,32 +64,12 @@ import {
   SerpCompetitorsTable,
 } from "@/components/keyword-research/serp-competitors-table";
 import { ModernSearchBar } from "@/components/keyword-research/modern-search-bar";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AnimatedNumber } from "@/components/ui/animated-number";
 
 // --- Mock Data ---
 
-const keywordVolumeHistory = [
-  { month: "Jan", volume: 12000 },
-  { month: "Feb", volume: 13500 },
-  { month: "Mar", volume: 11000 },
-  { month: "Apr", volume: 14500 },
-  { month: "May", volume: 16000 },
-  { month: "Jun", volume: 15500 },
-  { month: "Jul", volume: 17000 },
-  { month: "Aug", volume: 16500 },
-  { month: "Sep", volume: 18500 },
-  { month: "Oct", volume: 19000 },
-  { month: "Nov", volume: 21000 },
-  { month: "Dec", volume: 22500 },
-];
-
-const relatedKeywords: RelatedKeywordData[] = [
+const FULL_RELATED_KEYWORDS: RelatedKeywordData[] = [
   {
     id: "1",
     keyword: "seo tools for beginners",
@@ -366,116 +345,6 @@ const apiData = {
   },
 };
 
-const intentData = [
-  { name: "Informational", value: 85, color: "#9333ea" }, // Purple
-  { name: "Educational", value: 45, color: "#3b82f6" }, // Blue
-  { name: "Commercial", value: 20, color: "#F15A29" }, // Orange
-];
-
-// const serpColumns: Column<SerpCompetitorData>[] = [
-//   {
-//     header: "Rank",
-//     accessorKey: "rank",
-//     render: (item) => (
-//       <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-xs font-bold text-gray-600 group-hover:bg-orange-100 group-hover:text-orange-600 transition-colors">
-//         {item.rank}
-//       </div>
-//     ),
-//     className: "w-[5%] pl-6",
-//   },
-//   {
-//     header: "URL / Title",
-//     render: (item) => (
-//       <div className="flex flex-col truncate max-w-[300px]">
-//         <a
-//           href={item.url}
-//           target="_blank"
-//           rel="noopener noreferrer"
-//           className="text-sm font-semibold text-gray-900 truncate hover:text-orange-600 transition-colors flex items-center gap-1"
-//         >
-//           {item.title}{" "}
-//           <ExternalLink
-//             size={12}
-//             className="opacity-0 group-hover:opacity-100 transition-opacity"
-//           />
-//         </a>
-//         <span className="text-xs text-gray-500 truncate">{item.url}</span>
-//       </div>
-//     ),
-//     className: "w-[45%]",
-//   },
-//   {
-//     header: "DA",
-//     accessorKey: "da",
-//     render: (item) => (
-//       <span className="font-medium text-gray-700">{item.da}</span>
-//     ),
-//     className: "w-[10%]",
-//   },
-//   {
-//     header: "PA",
-//     accessorKey: "pa",
-//     render: (item) => (
-//       <span className="font-medium text-gray-700">{item.pa}</span>
-//     ),
-//     className: "w-[10%]",
-//   },
-//   {
-//     header: "Spam Score",
-//     accessorKey: "spamScore",
-//     render: (item) => (
-//       <div className="flex items-center gap-1.5">
-//         <div
-//           className={`w-1.5 h-1.5 rounded-full ${
-//             item.spamScore > 10
-//               ? "bg-rose-500"
-//               : item.spamScore > 2
-//                 ? "bg-amber-500"
-//                 : "bg-emerald-500"
-//           }`}
-//         />
-//         <span className="font-medium text-gray-700">{item.spamScore}%</span>
-//       </div>
-//     ),
-//     className: "w-[15%]",
-//   },
-//   {
-//     header: "Links",
-//     accessorKey: "links",
-//     render: (item) => (
-//       <span className="font-semibold text-gray-900">
-//         {item.links.toLocaleString()}
-//       </span>
-//     ),
-//     className: "w-[15%] text-right pr-6",
-//   },
-// ];
-
-function AnimatedNumber({
-  value,
-  prefix = "",
-  suffix = "",
-  decimals = 0,
-}: {
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-}) {
-  const count = useMotionValue(0);
-  const rounded = useTransform(
-    count,
-    (latest: number) => prefix + latest.toFixed(decimals) + suffix,
-  );
-
-  React.useEffect(() => {
-    const controls = animate(count, value, { duration: 2 });
-    return controls.stop;
-  }, [count, value]);
-
-  return <m.span>{rounded}</m.span>;
-}
-
 function SearchVolumeCard() {
   const [timeRange, setTimeRange] = useState<"1y" | "6m">("1y");
 
@@ -505,11 +374,11 @@ function SearchVolumeCard() {
   );
 
   return (
-    <div className="bg-white rounded-4xl p-4 border border-slate-200/60 flex flex-col h-full overflow-hidden">
+    <div className="bg-white rounded-3xl p-4 pt-2 border border-slate-200/60 flex flex-col h-full overflow-hidden">
       {/* Header */}
       <div className="flex justify-between items-center mb-2 shrink-0">
         <div className="flex items-center gap-2">
-          <h2 className="text-lg font-bold text-gray-900">Search Volume</h2>
+          <h2 className="text-md font-bold text-gray-900">Search Volume</h2>
         </div>
         <SegmentedControl
           options={[
@@ -614,24 +483,32 @@ function SearchVolumeCard() {
         </div>
 
         {/* Right Side: Stats Stacked */}
-        <div className="w-1/4 flex flex-col gap-2 shrink-0">
+        <div className="w-1/4 flex flex-col gap-2">
           {/* Peak Volume */}
           <div className="flex-1 bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-center items-start group hover:border-orange-100 hover:bg-orange-50/30 transition-colors">
-            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1 flex items-center gap-1">
+            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider flex items-center gap-1">
               <TrendingUp size={12} /> Peak
             </span>
             <span className="text-xl font-extrabold text-slate-900 tracking-tight truncate w-full">
-              {(peakVolume / 1000000).toFixed(1)}M
+              <AnimatedNumber
+                value={peakVolume / 1000000}
+                suffix="M"
+                decimals={1}
+              />
             </span>
           </div>
 
           {/* Monthly Avg */}
           <div className="flex-1 bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-center items-start group hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
-            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1 flex items-center gap-1">
+            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider flex items-center gap-1">
               <Equal size={12} /> Average
             </span>
             <span className="text-xl font-extrabold text-slate-900 tracking-tight truncate w-full">
-              {(avgVolume / 1000000).toFixed(1)}M
+              <AnimatedNumber
+                value={avgVolume / 1000000}
+                suffix="M"
+                decimals={1}
+              />
             </span>
           </div>
         </div>
@@ -644,22 +521,96 @@ export default function KeywordResearchPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentKeyword, setCurrentKeyword] = useState("seo tools");
   const [selectedCountry, setSelectedCountry] = useState("United States");
+  const [showFilters, setShowFilters] = useState(false);
 
   const [selectedLanguage, setSelectedLanguage] = useState("English");
   const [isIntentRevealed, setIsIntentRevealed] = useState(false);
   const [isIntentLoading, setIsIntentLoading] = useState(false);
 
+  // Initialize related keywords with hidden intent/difficulty
+  const [relatedKeywords, setRelatedKeywords] = useState<RelatedKeywordData[]>(
+    () =>
+      FULL_RELATED_KEYWORDS.map((k) => ({
+        ...k,
+        intent: null,
+        difficulty: null,
+      })),
+  );
+
+  const handleFetchRelatedData = async (
+    id: string,
+    type: "intent" | "difficulty",
+  ) => {
+    // Simulate API delay
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    const fullItem = FULL_RELATED_KEYWORDS.find((k) => k.id === id);
+    if (!fullItem) return;
+
+    setRelatedKeywords((prev) =>
+      prev.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            [type]: fullItem[type],
+          };
+        }
+        return item;
+      }),
+    );
+  };
+
   // Layout State
   const [hasSearched, setHasSearched] = useState(false);
+  const [searchBarDocked, setSearchBarDocked] = useState(false);
+
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportSuccess, setExportSuccess] = useState(false);
+
+  // Dynamic Search Bar Height Logic
+  const searchBarRef = useRef<HTMLDivElement>(null);
+  const [searchBarHeight, setSearchBarHeight] = useState(0);
+
+  useEffect(() => {
+    if (!searchBarRef.current) return;
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setSearchBarHeight(entry.target.getBoundingClientRect().height);
+      }
+    });
+
+    observer.observe(searchBarRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleExport = () => {
+    if (isExporting) return;
+    setIsExporting(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsExporting(false);
+      setExportSuccess(true);
+      setTimeout(() => setExportSuccess(false), 2000);
+    }, 1500);
+  };
+
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const checkTablet = () => setIsTablet(window.innerWidth < 1024);
     checkMobile();
+    checkTablet();
     window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener("resize", checkTablet);
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("resize", checkTablet);
+    };
   }, []);
 
   const handleIntentReveal = () => {
@@ -713,7 +664,11 @@ export default function KeywordResearchPage() {
     setIsIntentRevealed(false);
 
     // Start Analysis Animation
-    setHasSearched(true);
+    // Start Analysis Animation
+    if (!hasSearched) {
+      setHasSearched(true);
+      setTimeout(() => setSearchBarDocked(true), 600);
+    }
     setIsAnalyzing(true);
 
     // Simulate API delay
@@ -726,6 +681,7 @@ export default function KeywordResearchPage() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
+    setShowFilters(false);
     performSearch(searchQuery);
   };
 
@@ -735,9 +691,22 @@ export default function KeywordResearchPage() {
   };
 
   return (
-    <div className="h-screen flex flex-col font-sans text-slate-900 overflow-hidden pt-14">
+    <div className="flex flex-col h-dvh md:h-screen font-sans text-slate-900 overflow-y-auto md:overflow-hidden pt-14 w-full container container-4k">
       {/* Main Content Area */}
-      <main className="flex-1 flex overflow-hidden relative">
+      <main className="flex-1 flex flex-col md:flex-row relative md:overflow-hidden">
+        {/* Backdrop for Filters */}
+        <AnimatePresence>
+          {showFilters && (
+            <m.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/20 backdrop-blur-xs z-40"
+              onClick={() => setShowFilters(false)}
+            />
+          )}
+        </AnimatePresence>
+
         {/* === THE FLYING SEARCH BAR (Always rendered, position changes) === */}
         <m.div
           initial={false}
@@ -746,7 +715,7 @@ export default function KeywordResearchPage() {
             left: hasSearched ? (isMobile ? "50%" : "16px") : "50%",
             x: hasSearched ? (isMobile ? "-50%" : "0%") : "-50%",
             y: hasSearched ? "0%" : "-50%",
-            width: isMobile ? "calc(100% - 32px)" : hasSearched ? "48%" : "60%",
+            width: isMobile ? "95%" : hasSearched ? "48%" : "60%",
           }}
           transition={{
             type: "tween",
@@ -754,6 +723,7 @@ export default function KeywordResearchPage() {
             duration: 0.6,
           }}
           className="absolute z-50"
+          ref={searchBarRef}
         >
           <ModernSearchBar
             searchQuery={searchQuery}
@@ -763,7 +733,10 @@ export default function KeywordResearchPage() {
             selectedLanguage={selectedLanguage}
             setSelectedLanguage={setSelectedLanguage}
             onSearch={handleSearch}
-            className={`w-full ${!hasSearched ? "shadow-xl shadow-black/5 rounded-4xl" : ""}`}
+            className={`w-full ${!hasSearched ? "shadow-xl shadow-black/5 rounded-3xl" : ""}`}
+            hasSearched={searchBarDocked}
+            showFilters={showFilters}
+            setShowFilters={setShowFilters}
           />
         </m.div>
 
@@ -775,12 +748,12 @@ export default function KeywordResearchPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
-              className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none pb-60"
+              className="absolute inset-0 flex flex-col gap-0 items-center justify-center pointer-events-none pb-60 px-2"
             >
-              <m.h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight text-center">
+              <m.h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight text-center">
                 Keyword Research Tool
               </m.h1>
-              <m.p className="text-lg text-slate-500 text-center">
+              <m.p className="text-md sm:text-lg text-slate-500 text-center">
                 Find easy-to-rank keywords with high search volume and low
                 competition.
               </m.p>
@@ -796,34 +769,77 @@ export default function KeywordResearchPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.4 }}
-              className="w-full h-full flex flex-col md:flex-row"
+              className="w-full md:h-full flex flex-col md:flex-row"
             >
               {/* LEFT SIDEBAR (Behind the flying search bar) */}
               <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.4 }}
-                className="w-full md:w-1/2 bg-zinc-200/70 flex flex-col gap-4 shrink-0 z-10 p-4 pt-36" // pt accounts for search bar height
+                className="w-full md:w-1/2 bg-zinc-200/70 flex flex-col gap-4 shrink-0 z-10 p-2 sm:p-4 transition-[padding] duration-300 min-h-[600px] md:min-h-0"
+                style={{
+                  paddingTop: hasSearched
+                    ? `${searchBarHeight + 25}px`
+                    : undefined,
+                }}
               >
                 {/* Related Keywords Table */}
                 <m.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.4 }}
-                  className="flex-1 flex flex-col min-h-0 bg-white rounded-4xl overflow-hidden"
+                  className="flex-1 flex flex-col min-h-0 bg-white rounded-3xl overflow-hidden"
                 >
                   <div className="px-4 py-2 bg-white flex items-center justify-between">
-                    <h3 className="text-sm font-bold text-slate-800">
+                    <h3 className="text-md font-bold text-slate-800">
                       Related Keywords
                     </h3>
                     <div className="flex gap-1">
-                      <button className="p-1.5 rounded-md hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors flex items-center gap-2">
-                        <Download size={12} />
-                        <span className="text-xs">Export</span>
+                      <button
+                        onClick={handleExport}
+                        disabled={isExporting}
+                        className="p-1.5 rounded-md hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors flex items-center gap-2 cursor-pointer justify-center border min-w-20"
+                      >
+                        <AnimatePresence mode="wait" initial={false}>
+                          {isExporting ? (
+                            <m.div
+                              key="exporting"
+                              initial={{ y: -10, opacity: 0 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              exit={{ y: 10, opacity: 0 }}
+                              className="flex items-center gap-2"
+                            >
+                              <Loader2 size={12} className="animate-spin" />
+                              <span className="text-xs">Wait...</span>
+                            </m.div>
+                          ) : exportSuccess ? (
+                            <m.div
+                              key="success"
+                              initial={{ y: -10, opacity: 0 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              exit={{ y: 10, opacity: 0 }}
+                              className="flex items-center gap-2 text-emerald-500"
+                            >
+                              <Check size={12} />
+                              <span className="text-xs">Done</span>
+                            </m.div>
+                          ) : (
+                            <m.div
+                              key="idle"
+                              initial={{ y: -10, opacity: 0 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              exit={{ y: 10, opacity: 0 }}
+                              className="flex items-center gap-2"
+                            >
+                              <Download size={12} />
+                              <span className="text-xs">Export</span>
+                            </m.div>
+                          )}
+                        </AnimatePresence>
                       </button>
                     </div>
                   </div>
-                  <div className="flex-1 overflow-hidden p-2 flex flex-col">
+                  <div className="flex-1 overflow-hidden flex flex-col">
                     {isAnalyzing ? (
                       <div className="space-y-3 p-2">
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
@@ -836,6 +852,7 @@ export default function KeywordResearchPage() {
                     ) : (
                       <RelatedKeywordsTable
                         data={relatedKeywords}
+                        onFetchData={handleFetchRelatedData}
                         onSelectKeyword={(kw) => {
                           setSearchQuery(kw);
                           performSearch(kw);
@@ -851,20 +868,20 @@ export default function KeywordResearchPage() {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
-                className="w-full md:w-1/2 flex flex-col min-h-0 bg-[#f8f9fc] overflow-y-auto md:overflow-hidden"
+                className="w-full md:w-1/2 flex flex-col min-h-[1000px] md:min-h-0 bg-zinc-100/70 overflow-visible md:overflow-hidden"
               >
                 {isAnalyzing ? (
                   <div className="p-6 h-full flex flex-col gap-6 overflow-hidden">
                     <div className="h-[320px] flex gap-6 shrink-0">
-                      <Skeleton className="w-1/3 h-full rounded-4xl" />
-                      <Skeleton className="w-2/3 h-full rounded-4xl" />
+                      <Skeleton className="w-1/3 h-full rounded-3xl" />
+                      <Skeleton className="w-2/3 h-full rounded-3xl" />
                     </div>
-                    <Skeleton className="flex-1 w-full rounded-4xl" />
+                    <Skeleton className="flex-1 w-full rounded-3xl" />
                   </div>
                 ) : (
-                  <div className="flex flex-col h-full gap-2 p-4 md:p-6 overflow-y-auto">
+                  <div className="flex flex-col h-full gap-2 p-4 overflow-y-auto">
                     {/* Header & Metrics */}
-                    <div className="shrink-0 flex flex-col gap-4">
+                    <div className="shrink-0 flex flex-col gap-4 h-auto md:h-1/2">
                       <div className="flex items-start justify-between">
                         <div className="flex flex-col gap-1">
                           <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
@@ -884,23 +901,15 @@ export default function KeywordResearchPage() {
                             </div>
                           </div>
                         </div>
-                        <div className="text-sm font-medium text-slate-400 px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                          Volume:{" "}
-                          <span className="text-slate-900 font-bold">
-                            {formattedVolume.val}
-                            {formattedVolume.suffix}
-                          </span>
-                        </div>
                       </div>
 
                       {/* Metrics Grid */}
-                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 flex-1 min-h-0">
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 flex-1 min-h-[500px] md:min-h-0">
                         {/* Difficulty Card */}
-                        <div className="lg:col-span-1 h-full min-h-0">
-                          <div className="bg-white rounded-4xl p-4 border border-slate-200/60 flex flex-col h-full group relative overflow-hidden">
+                        <div className="lg:col-span-1 h-full min-h-[250px] md:min-h-0">
+                          <div className="bg-white rounded-3xl p-4 pt-3 border border-slate-200/60 flex flex-col h-full group relative overflow-hidden">
                             <div className="text-center w-full mb-2">
-                              <h2 className="text-lg font-bold text-gray-900">
+                              <h2 className="text-md font-bold text-gray-900">
                                 Keyword Difficulty
                               </h2>
                             </div>
@@ -948,7 +957,7 @@ export default function KeywordResearchPage() {
                               </ResponsiveContainer>
                               <div className="absolute top-[65%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
                                 <p className="text-4xl font-extrabold text-slate-900">
-                                  {keywordDifficulty}
+                                  <AnimatedNumber value={keywordDifficulty} />
                                 </p>
                                 <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-4">
                                   /100
@@ -967,17 +976,17 @@ export default function KeywordResearchPage() {
                           </div>
                         </div>
                         {/* Volume Card */}
-                        <div className="lg:col-span-2 h-full min-h-0">
+                        <div className="lg:col-span-2 h-full min-h-[250px] md:min-h-0">
                           <SearchVolumeCard />
                         </div>
                       </div>
                     </div>
 
                     {/* SERP Table Section */}
-                    <div className="flex-1 min-h-0">
-                      <div className="bg-white rounded-4xl border border-slate-200/60 h-full flex flex-col overflow-hidden">
-                        <div className="p-4 border-b border-slate-100 flex items-center justify-between">
-                          <h3 className="text-lg font-bold text-slate-900">
+                    <div className="flex-1 min-h-[500px] md:min-h-0 h-auto md:h-1/2">
+                      <div className="bg-white rounded-3xl border border-slate-200/60 h-full flex flex-col overflow-hidden">
+                        <div className="p-4 py-2 p flex items-center justify-between">
+                          <h3 className="text-md font-bold text-slate-900">
                             SERP Overview
                           </h3>
                         </div>

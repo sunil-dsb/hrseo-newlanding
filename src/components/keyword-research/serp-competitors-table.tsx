@@ -71,18 +71,18 @@ export function SerpCompetitorsTable({ data }: SerpCompetitorsTableProps) {
                         className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
                       />
                     </a>
-                    <span className="text-xs text-gray-500 truncate">
+                    <span className="text-[12px] text-gray-500 truncate">
                       {item.url}
                     </span>
                   </div>
                 </td>
                 <td className="px-5 py-2 align-middle">
-                  <span className="text-sm font-medium text-gray-700 tabular-nums">
+                  <span className="text-xs font-medium text-gray-700 tabular-nums">
                     {item.da}
                   </span>
                 </td>
                 <td className="px-5 py-2 align-middle">
-                  <span className="text-sm font-medium text-gray-700 tabular-nums">
+                  <span className="text-xs font-medium text-gray-700 tabular-nums">
                     {item.pa}
                   </span>
                 </td>
@@ -97,13 +97,13 @@ export function SerpCompetitorsTable({ data }: SerpCompetitorsTableProps) {
                             : "bg-emerald-500"
                       }`}
                     />
-                    <span className="text-sm font-medium text-gray-700 tabular-nums">
+                    <span className="text-xs font-medium text-gray-700 tabular-nums">
                       {item.spamScore}%
                     </span>
                   </div>
                 </td>
                 <td className="px-5 py-2 text-right pr-6 align-middle">
-                  <span className="text-sm font-semibold text-gray-900 tabular-nums">
+                  <span className="text-xs font-semibold text-gray-900 tabular-nums">
                     {item.links.toLocaleString()}
                   </span>
                 </td>
@@ -123,14 +123,14 @@ export function SerpCompetitorsTable({ data }: SerpCompetitorsTableProps) {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="p-1.5 rounded-lg border border-gray-200 bg-white text-gray-500 hover:text-brand-primary hover:border-brand-primary/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="p-1.5 rounded-lg border border-gray-200 bg-white text-gray-500 hover:text-brand-primary hover:border-brand-primary/30 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all"
             >
               <ChevronLeft size={14} />
             </button>
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="p-1.5 rounded-lg border border-gray-200 bg-white text-gray-500 hover:text-brand-primary hover:border-brand-primary/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="p-1.5 rounded-lg border border-gray-200 bg-white text-gray-500 hover:text-brand-primary hover:border-brand-primary/30 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all"
             >
               <ChevronRight size={14} />
             </button>
