@@ -32,6 +32,7 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import useUser from "@/hooks/useUser";
+import { DashboardNavbar2 } from "@/components/layout/authenticated/DashboardNavbar2";
 
 // --- Mock SEO Data ---
 
@@ -193,6 +194,7 @@ export default function Dashboard() {
 
   return (
     <div className="w-full min-h-screen pt-32 sm:pt-40 flex justify-center">
+      <DashboardNavbar2 />
       {/* Main Content */}
       <main className="w-full max-w-[1600px] mx-auto">
         {/* Content Area */}

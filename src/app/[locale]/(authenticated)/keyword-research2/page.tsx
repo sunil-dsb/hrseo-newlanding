@@ -70,6 +70,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
 import { InitialResearchContent } from "@/components/keyword-research/initial-content";
+import { Navbar } from "@/components/layout/authenticated/Navbar";
 
 function ResearchSkeleton() {
   return (
@@ -669,6 +670,7 @@ export default function KeywordResearchPage() {
 
   return (
     <div className="w-full min-h-screen pt-24 sm:pt-32 flex justify-center">
+      <Navbar />
       <main className="w-full max-w-[1600px] mx-auto px-4 sm:px-10 pb-12">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">

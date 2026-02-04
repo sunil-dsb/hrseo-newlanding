@@ -49,6 +49,7 @@ interface ModernSearchBarProps {
   hasSearched?: boolean;
   showFilters: boolean;
   setShowFilters: (show: boolean) => void;
+  measuredRef?: React.Ref<HTMLDivElement>;
 }
 
 export function ModernSearchBar({
@@ -64,6 +65,7 @@ export function ModernSearchBar({
   hasSearched = false,
   showFilters,
   setShowFilters,
+  measuredRef,
 }: ModernSearchBarProps) {
   const [searchMode, setSearchMode] = useState<"research" | "refiner">(
     "research",
@@ -96,307 +98,309 @@ export function ModernSearchBar({
           showFilters ? "shadow-2xl shadow-black/30" : ""
         }`}
       >
-        <form
-          onSubmit={onSearch}
-          className="flex flex-col md:flex-row items-center p-2 pb-1 gap-1.5"
-        >
-          {/* Input Area */}
-          <div className="flex-1 w-full flex items-center bg-slate-50 hover:bg-slate-100/80 focus-within:bg-white rounded-xl px-4 border border-transparent focus-within:border-brand-primary/20 transition-all group">
-            <Search
-              className="text-slate-400 mr-3 group-focus-within:text-brand-primary transition-colors shrink-0"
-              size={20}
-              strokeWidth={2.5}
-            />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Enter keyword..."
-              className="flex-1 bg-transparent border-none text-slate-800 font-semibold placeholder:text-slate-400 focus:ring-0 text-sm md:text-base py-2 w-full min-w-0 outline-0"
-            />
-          </div>
+        <div ref={measuredRef}>
+          <form
+            onSubmit={onSearch}
+            className="flex flex-col md:flex-row items-center gap-1.5 p-1.5"
+          >
+            {/* Input Area */}
+            <div className="flex-1 w-full py-1 flex items-center bg-slate-50 hover:bg-slate-100/80 focus-within:bg-white rounded-xl px-4 border border-transparent focus-within:border-brand-primary/20 transition-all group">
+              <Search
+                className="text-slate-400 mr-3 group-focus-within:text-brand-primary transition-colors shrink-0"
+                size={20}
+                strokeWidth={2.5}
+              />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Enter keyword..."
+                className="flex-1 bg-transparent border-none text-slate-800 font-semibold placeholder:text-slate-400 focus:ring-0 text-sm md:text-base py-2 w-full min-w-0 outline-0"
+              />
+            </div>
 
-          {/* Controls Container */}
-          <div className="flex items-center gap-1.5 w-full md:w-auto">
-            {/* Country Combobox */}
-            <Popover open={openCountry} onOpenChange={setOpenCountry}>
-              <PopoverTrigger asChild>
-                <button
-                  type="button"
-                  role="combobox"
-                  aria-expanded={openCountry}
-                  className="p-2.5 py-2 rounded-3xl hover:bg-slate-50 border border-transparent hover:border-slate-200 flex items-center gap-2 text-slate-700 font-semibold text-xs transition-all whitespace-nowrap min-w-fit justify-center group/country cursor-pointer focus:outline-none w-full lg:w-auto"
-                >
-                  <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 group-hover/country:bg-blue-100 group-hover/country:scale-110 transition-all shrink-0">
-                    <MapPin size={16} strokeWidth={2.5} />
-                  </div>
-                  <span className="uppercase">
-                    {selectedCountry === "United States"
-                      ? "US"
-                      : selectedCountry === "United Kingdom"
-                        ? "UK"
-                        : selectedCountry.slice(0, 2)}
-                  </span>
-                  <ChevronDown size={12} className="opacity-40" />
-                </button>
-              </PopoverTrigger>
-              <PopoverContent
-                className="w-[240px] p-0 rounded-2xl border-none shadow-2xl shadow-black/20"
-                align="start"
-                sideOffset={8}
-              >
-                <Command className="bg-white rounded-2xl">
-                  <div className="border-b border-slate-100 px-3">
-                    <CommandInput
-                      placeholder="Search country..."
-                      className="h-12 text-sm font-medium text-slate-800 placeholder:text-slate-400 border-none focus:ring-0"
-                    />
-                  </div>
-                  <CommandList className="p-1.5 max-h-[280px] overflow-y-auto">
-                    <CommandEmpty className="py-4 text-center text-xs text-slate-400 font-medium">
-                      No country found.
-                    </CommandEmpty>
-                    <CommandGroup>
-                      {[
-                        "United States",
-                        "United Kingdom",
-                        "Canada",
-                        "Australia",
-                        "India",
-                        "Germany",
-                        "France",
-                        "Spain",
-                      ].map((country) => (
-                        <CommandItem
-                          key={country}
-                          value={country}
-                          onSelect={(currentValue) => {
-                            // cmdk returns lowercase value usually, but we want the original casing or specific value
-                            // To be safe, we use the original 'country' variable.
-                            setSelectedCountry(country);
-                            setOpenCountry(false);
-                          }}
-                          className="rounded-xl px-3 py-2.5 cursor-pointer text-slate-600 font-medium text-xs md:text-sm transition-colors data-[selected=true]:bg-orange-50 data-[selected=true]:text-brand-primary flex items-center justify-between group"
-                        >
-                          <span>{country}</span>
-                          {selectedCountry === country && (
-                            <Check className="h-4 w-4 text-brand-primary" />
-                          )}
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-              </PopoverContent>
-            </Popover>
-
-            {/* Language Combobox */}
-            <Popover open={openLanguage} onOpenChange={setOpenLanguage}>
-              <PopoverTrigger asChild>
-                <button
-                  type="button"
-                  role="combobox"
-                  aria-expanded={openLanguage}
-                  className="p-2.5 py-2 rounded-3xl hover:bg-slate-50 border border-transparent hover:border-slate-200 flex items-center gap-2 text-slate-700 font-semibold text-xs transition-all whitespace-nowrap min-w-fit justify-center group/lang cursor-pointer focus:outline-none w-full lg:w-auto"
-                >
-                  <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 group-hover/lang:bg-purple-100 group-hover/lang:scale-110 transition-all shrink-0">
-                    <Globe size={16} strokeWidth={2.5} />
-                  </div>
-                  <span className="uppercase">
-                    {selectedLanguage.slice(0, 2)}
-                  </span>
-                  <ChevronDown size={12} className="opacity-40" />
-                </button>
-              </PopoverTrigger>
-              <PopoverContent
-                className="w-[200px] p-0 rounded-2xl border-none shadow-2xl shadow-black/20"
-                align="start"
-                sideOffset={8}
-              >
-                <Command className="bg-white rounded-2xl">
-                  <div className="border-b border-slate-100 px-3">
-                    <CommandInput
-                      placeholder="Search language..."
-                      className="h-12 text-sm font-medium text-slate-800 placeholder:text-slate-400 border-none focus:ring-0"
-                    />
-                  </div>
-                  <CommandList className="p-1.5 max-h-[280px] overflow-y-auto">
-                    <CommandEmpty className="py-4 text-center text-xs text-slate-400 font-medium">
-                      No language found.
-                    </CommandEmpty>
-                    <CommandGroup>
-                      {[
-                        "English",
-                        "Spanish",
-                        "French",
-                        "German",
-                        "Italian",
-                        "Portuguese",
-                      ].map((language) => (
-                        <CommandItem
-                          key={language}
-                          value={language}
-                          onSelect={(currentValue) => {
-                            setSelectedLanguage(language);
-                            setOpenLanguage(false);
-                          }}
-                          className="rounded-xl px-3 py-2.5 cursor-pointer text-slate-600 font-medium text-xs md:text-sm transition-colors data-[selected=true]:bg-orange-50 data-[selected=true]:text-brand-primary flex items-center justify-between group"
-                        >
-                          <span>{language}</span>
-                          {selectedLanguage === language && (
-                            <Check className="h-4 w-4 text-brand-primary" />
-                          )}
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-              </PopoverContent>
-            </Popover>
-
-            {/* Search Button (Icon Only) */}
-            <button
-              type="submit"
-              className="bg-brand-primary text-white rounded-2xl font-bold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 active:scale-95 transition-all flex items-center justify-center ml-1 cursor-pointer p-3 w-full lg:w-auto"
-            >
-              <Search size={22} strokeWidth={3} />
-            </button>
-          </div>
-        </form>
-
-        {/* Quick Actions & Mode Switch Row (Modified) - Shows only after search */}
-        <AnimatePresence>
-          {hasSearched && (
-            <m.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="p-2 pt-1.5 flex flex-row justify-between items-center gap-3 border-t border-slate-100/50">
-                {/* Left: Sorting & Filter (Moved here) */}
-                <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto no-scrollbar mask-linear-fade">
-                  {/* Sorting Dropdown (Moved & Compacted) */}
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <button
-                        type="button"
-                        className="p-2 px-2 sm:px-3 rounded-lg bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-100 flex items-center gap-2 text-xs font-bold transition-all whitespace-nowrap cursor-pointer"
-                      >
-                        <ArrowUpDown size={14} className="opacity-80" />
-                        <span className="hidden lg:block">
-                          {sortBy === "relevance"
-                            ? "Relevance"
-                            : sortBy === "search_volume"
-                              ? "Volume"
-                              : sortBy === "competition_index"
-                                ? "Competition"
-                                : "Bid"}
-                        </span>
-                        <ChevronDown
-                          size={12}
-                          className="opacity-50 hidden lg:block"
-                        />
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      className="min-w-[180px] p-1.5 rounded-xl shadow-xl shadow-black/10 border-slate-100"
-                      align="start"
-                    >
-                      {[
-                        { label: "Relevance", value: "relevance" },
-                        { label: "Search Volume", value: "search_volume" },
-                        {
-                          label: "Competition Index",
-                          value: "competition_index",
-                        },
-                        {
-                          label: "Low Top of Page Bid",
-                          value: "low_top_of_page_bid",
-                        },
-                        {
-                          label: "High Top of Page Bid",
-                          value: "high_top_of_page_bid",
-                        },
-                      ].map((opt) => (
-                        <DropdownMenuItem
-                          key={opt.value}
-                          onClick={() => setSortBy(opt.value)}
-                          className="rounded-lg py-2 px-2.5 cursor-pointer text-slate-600 font-medium focus:text-brand-primary focus:bg-orange-50 justify-between text-xs transition-colors"
-                        >
-                          {opt.label}
-                          {sortBy === opt.value && (
-                            <Check
-                              size={14}
-                              className="text-brand-primary hidden sm:block"
-                            />
-                          )}
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-
-                  {/* Filter Toggle (Moved & Compacted) */}
+            {/* Controls Container */}
+            <div className="flex items-center gap-1.5 w-full md:w-auto">
+              {/* Country Combobox */}
+              <Popover open={openCountry} onOpenChange={setOpenCountry}>
+                <PopoverTrigger asChild>
                   <button
                     type="button"
-                    onClick={() => setShowFilters(!showFilters)}
-                    className={`p-2 px-2 sm:px-3 rounded-lg border flex items-center gap-2 text-xs font-bold transition-all cursor-pointer ${showFilters ? "bg-slate-800 border-slate-800 text-white" : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"}`}
+                    role="combobox"
+                    aria-expanded={openCountry}
+                    className="p-2.5 py-2 rounded-3xl hover:bg-slate-50 border border-transparent hover:border-slate-200 flex items-center gap-2 text-slate-700 font-semibold text-xs transition-all whitespace-nowrap min-w-fit justify-center group/country cursor-pointer focus:outline-none w-full lg:w-auto"
                   >
-                    <SlidersHorizontal size={14} />
-                    <span className="hidden lg:block">Filters</span>
-                    {showFilters ? (
-                      <ChevronUp
-                        size={14}
-                        className="ml-1 opacity-70 hidden lg:block"
-                      />
-                    ) : (
-                      <ChevronDown
-                        size={14}
-                        className="ml-1 opacity-50 hidden lg:block"
-                      />
-                    )}
+                    <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 group-hover/country:bg-blue-100 group-hover/country:scale-110 transition-all shrink-0">
+                      <MapPin size={16} strokeWidth={2.5} />
+                    </div>
+                    <span className="uppercase">
+                      {selectedCountry === "United States"
+                        ? "US"
+                        : selectedCountry === "United Kingdom"
+                          ? "UK"
+                          : selectedCountry.slice(0, 2)}
+                    </span>
+                    <ChevronDown size={12} className="opacity-40" />
                   </button>
-                </div>
+                </PopoverTrigger>
+                <PopoverContent
+                  className="w-[240px] p-0 rounded-2xl border-none shadow-2xl shadow-black/20"
+                  align="start"
+                  sideOffset={8}
+                >
+                  <Command className="bg-white rounded-2xl">
+                    <div className="border-b border-slate-100 px-3">
+                      <CommandInput
+                        placeholder="Search country..."
+                        className="h-12 text-sm font-medium text-slate-800 placeholder:text-slate-400 border-none focus:ring-0"
+                      />
+                    </div>
+                    <CommandList className="p-1.5 max-h-[280px] overflow-y-auto">
+                      <CommandEmpty className="py-4 text-center text-xs text-slate-400 font-medium">
+                        No country found.
+                      </CommandEmpty>
+                      <CommandGroup>
+                        {[
+                          "United States",
+                          "United Kingdom",
+                          "Canada",
+                          "Australia",
+                          "India",
+                          "Germany",
+                          "France",
+                          "Spain",
+                        ].map((country) => (
+                          <CommandItem
+                            key={country}
+                            value={country}
+                            onSelect={(currentValue) => {
+                              // cmdk returns lowercase value usually, but we want the original casing or specific value
+                              // To be safe, we use the original 'country' variable.
+                              setSelectedCountry(country);
+                              setOpenCountry(false);
+                            }}
+                            className="rounded-xl px-3 py-2.5 cursor-pointer text-slate-600 font-medium text-xs md:text-sm transition-colors data-[selected=true]:bg-orange-50 data-[selected=true]:text-brand-primary flex items-center justify-between group"
+                          >
+                            <span>{country}</span>
+                            {selectedCountry === country && (
+                              <Check className="h-4 w-4 text-brand-primary" />
+                            )}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
 
-                {/* Right: Search Mode Switch */}
-                <div>
-                  <SegmentedControl
-                    options={[
-                      {
-                        label: (
-                          <>
-                            <span className="hidden lg:inline">
-                              Keyword Research
-                            </span>
-                            <span className="lg:hidden">Research</span>
-                          </>
-                        ),
-                        value: "research",
-                      },
-                      {
-                        label: (
-                          <>
-                            <span className="hidden lg:inline">
-                              Keyword Refiner
-                            </span>
-                            <span className="lg:hidden">Refiner</span>
-                          </>
-                        ),
-                        value: "refiner",
-                      },
-                    ]}
-                    value={searchMode}
-                    onChange={(val) =>
-                      setSearchMode(val as "research" | "refiner")
-                    }
-                    size="sm"
-                    className="w-full lg:w-auto text-xs"
-                  />
+              {/* Language Combobox */}
+              <Popover open={openLanguage} onOpenChange={setOpenLanguage}>
+                <PopoverTrigger asChild>
+                  <button
+                    type="button"
+                    role="combobox"
+                    aria-expanded={openLanguage}
+                    className="p-2.5 py-2 rounded-3xl hover:bg-slate-50 border border-transparent hover:border-slate-200 flex items-center gap-2 text-slate-700 font-semibold text-xs transition-all whitespace-nowrap min-w-fit justify-center group/lang cursor-pointer focus:outline-none w-full lg:w-auto"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 group-hover/lang:bg-purple-100 group-hover/lang:scale-110 transition-all shrink-0">
+                      <Globe size={16} strokeWidth={2.5} />
+                    </div>
+                    <span className="uppercase">
+                      {selectedLanguage.slice(0, 2)}
+                    </span>
+                    <ChevronDown size={12} className="opacity-40" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent
+                  className="w-[200px] p-0 rounded-2xl border-none shadow-2xl shadow-black/20"
+                  align="start"
+                  sideOffset={8}
+                >
+                  <Command className="bg-white rounded-2xl">
+                    <div className="border-b border-slate-100 px-3">
+                      <CommandInput
+                        placeholder="Search language..."
+                        className="h-12 text-sm font-medium text-slate-800 placeholder:text-slate-400 border-none focus:ring-0"
+                      />
+                    </div>
+                    <CommandList className="p-1.5 max-h-[280px] overflow-y-auto">
+                      <CommandEmpty className="py-4 text-center text-xs text-slate-400 font-medium">
+                        No language found.
+                      </CommandEmpty>
+                      <CommandGroup>
+                        {[
+                          "English",
+                          "Spanish",
+                          "French",
+                          "German",
+                          "Italian",
+                          "Portuguese",
+                        ].map((language) => (
+                          <CommandItem
+                            key={language}
+                            value={language}
+                            onSelect={(currentValue) => {
+                              setSelectedLanguage(language);
+                              setOpenLanguage(false);
+                            }}
+                            className="rounded-xl px-3 py-2.5 cursor-pointer text-slate-600 font-medium text-xs md:text-sm transition-colors data-[selected=true]:bg-orange-50 data-[selected=true]:text-brand-primary flex items-center justify-between group"
+                          >
+                            <span>{language}</span>
+                            {selectedLanguage === language && (
+                              <Check className="h-4 w-4 text-brand-primary" />
+                            )}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+
+              {/* Search Button (Icon Only) */}
+              <button
+                type="submit"
+                className="bg-brand-primary text-white rounded-2xl font-bold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 active:scale-95 transition-all flex items-center justify-center ml-1 cursor-pointer p-3 w-full lg:w-auto"
+              >
+                <Search size={22} strokeWidth={3} />
+              </button>
+            </div>
+          </form>
+
+          {/* Quick Actions & Mode Switch Row (Modified) - Shows only after search */}
+          <AnimatePresence>
+            {hasSearched && (
+              <m.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="p-2 pt-1.5 flex flex-row justify-between items-center gap-3 border-t border-slate-100/50">
+                  {/* Left: Sorting & Filter (Moved here) */}
+                  <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto no-scrollbar mask-linear-fade">
+                    {/* Sorting Dropdown (Moved & Compacted) */}
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <button
+                          type="button"
+                          className="p-2 px-2 sm:px-3 rounded-lg bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-100 flex items-center gap-2 text-xs font-bold transition-all whitespace-nowrap cursor-pointer"
+                        >
+                          <ArrowUpDown size={14} className="opacity-80" />
+                          <span className="hidden lg:block">
+                            {sortBy === "relevance"
+                              ? "Relevance"
+                              : sortBy === "search_volume"
+                                ? "Volume"
+                                : sortBy === "competition_index"
+                                  ? "Competition"
+                                  : "Bid"}
+                          </span>
+                          <ChevronDown
+                            size={12}
+                            className="opacity-50 hidden lg:block"
+                          />
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        className="min-w-[180px] p-1.5 rounded-xl shadow-xl shadow-black/10 border-slate-100"
+                        align="start"
+                      >
+                        {[
+                          { label: "Relevance", value: "relevance" },
+                          { label: "Search Volume", value: "search_volume" },
+                          {
+                            label: "Competition Index",
+                            value: "competition_index",
+                          },
+                          {
+                            label: "Low Top of Page Bid",
+                            value: "low_top_of_page_bid",
+                          },
+                          {
+                            label: "High Top of Page Bid",
+                            value: "high_top_of_page_bid",
+                          },
+                        ].map((opt) => (
+                          <DropdownMenuItem
+                            key={opt.value}
+                            onClick={() => setSortBy(opt.value)}
+                            className="rounded-lg py-2 px-2.5 cursor-pointer text-slate-600 font-medium focus:text-brand-primary focus:bg-orange-50 justify-between text-xs transition-colors"
+                          >
+                            {opt.label}
+                            {sortBy === opt.value && (
+                              <Check
+                                size={14}
+                                className="text-brand-primary hidden sm:block"
+                              />
+                            )}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+
+                    {/* Filter Toggle (Moved & Compacted) */}
+                    <button
+                      type="button"
+                      onClick={() => setShowFilters(!showFilters)}
+                      className={`p-2 px-2 sm:px-3 rounded-lg border flex items-center gap-2 text-xs font-bold transition-all cursor-pointer ${showFilters ? "bg-slate-800 border-slate-800 text-white" : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"}`}
+                    >
+                      <SlidersHorizontal size={14} />
+                      <span className="hidden lg:block">Filters</span>
+                      {showFilters ? (
+                        <ChevronUp
+                          size={14}
+                          className="ml-1 opacity-70 hidden lg:block"
+                        />
+                      ) : (
+                        <ChevronDown
+                          size={14}
+                          className="ml-1 opacity-50 hidden lg:block"
+                        />
+                      )}
+                    </button>
+                  </div>
+
+                  {/* Right: Search Mode Switch */}
+                  <div>
+                    <SegmentedControl
+                      options={[
+                        {
+                          label: (
+                            <>
+                              <span className="hidden lg:inline">
+                                Keyword Research
+                              </span>
+                              <span className="lg:hidden">Research</span>
+                            </>
+                          ),
+                          value: "research",
+                        },
+                        {
+                          label: (
+                            <>
+                              <span className="hidden lg:inline">
+                                Keyword Refiner
+                              </span>
+                              <span className="lg:hidden">Refiner</span>
+                            </>
+                          ),
+                          value: "refiner",
+                        },
+                      ]}
+                      value={searchMode}
+                      onChange={(val) =>
+                        setSearchMode(val as "research" | "refiner")
+                      }
+                      size="sm"
+                      className="w-full lg:w-auto text-xs"
+                    />
+                  </div>
                 </div>
-              </div>
-            </m.div>
-          )}
-        </AnimatePresence>
+              </m.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/* Filters Section (Collapsible) */}
         <AnimatePresence>

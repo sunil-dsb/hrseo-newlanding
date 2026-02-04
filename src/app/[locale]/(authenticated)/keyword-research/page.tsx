@@ -66,6 +66,8 @@ import {
 import { ModernSearchBar } from "@/components/keyword-research/modern-search-bar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatedNumber } from "@/components/ui/animated-number";
+import { Navbar } from "@/components/layout/authenticated/Navbar";
+import { InitialResearchContent } from "@/components/keyword-research/initial-content";
 
 // --- Mock Data ---
 
@@ -390,9 +392,9 @@ function SearchVolumeCard() {
         />
       </div>
 
-      <div className="flex flex-1 gap-4 min-h-0">
+      <div className="flex flex-col sm:flex-row flex-1 gap-4 min-h-0">
         {/* Left Side: Graph */}
-        <div className="flex-1 min-w-0 h-full w-3/4">
+        <div className="flex-1 min-w-0 h-full w-full sm:w-3/4">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={displayData} barSize={timeRange === "1y" ? 16 : 28}>
               <defs>
@@ -483,9 +485,9 @@ function SearchVolumeCard() {
         </div>
 
         {/* Right Side: Stats Stacked */}
-        <div className="w-1/4 flex flex-col gap-2">
+        <div className="w-full sm:w-1/4 flex flex-row sm:flex-col gap-2">
           {/* Peak Volume */}
-          <div className="flex-1 bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-center items-start group hover:border-orange-100 hover:bg-orange-50/30 transition-colors">
+          <div className="flex-1 bg-slate-50 rounded-2xl p-2 sm:p-3 w-full sm:w-auto border border-slate-100 flex flex-col justify-center items-start group hover:border-orange-100 hover:bg-orange-50/30 transition-colors">
             <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider flex items-center gap-1">
               <TrendingUp size={12} /> Peak
             </span>
@@ -499,7 +501,7 @@ function SearchVolumeCard() {
           </div>
 
           {/* Monthly Avg */}
-          <div className="flex-1 bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-center items-start group hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
+          <div className="flex-1 bg-slate-50 rounded-2xl p-2 sm:p-3 w-full sm:w-auto border border-slate-100 flex flex-col justify-center items-start group hover:border-blue-100 hover:bg-blue-50/30 transition-colors">
             <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider flex items-center gap-1">
               <Equal size={12} /> Average
             </span>
@@ -565,7 +567,6 @@ export default function KeywordResearchPage() {
   const [searchBarDocked, setSearchBarDocked] = useState(false);
 
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [exportSuccess, setExportSuccess] = useState(false);
 
@@ -691,9 +692,10 @@ export default function KeywordResearchPage() {
   };
 
   return (
-    <div className="flex flex-col h-dvh md:h-screen font-sans text-slate-900 overflow-y-auto md:overflow-hidden pt-14 w-full container container-4k">
+    <div className="flex flex-col h-dvh md:h-screen text-slate-900 pt-14 w-full container-4k mx-auto">
+      <Navbar />
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col md:flex-row relative md:overflow-hidden">
+      <main className="flex-1 flex flex-col md:flex-row relative">
         {/* Backdrop for Filters */}
         <AnimatePresence>
           {showFilters && (
@@ -711,7 +713,7 @@ export default function KeywordResearchPage() {
         <m.div
           initial={false}
           animate={{
-            top: hasSearched ? "16px" : "50%",
+            top: hasSearched ? "16px" : "35%",
             left: hasSearched ? (isMobile ? "50%" : "16px") : "50%",
             x: hasSearched ? (isMobile ? "-50%" : "0%") : "-50%",
             y: hasSearched ? "0%" : "-50%",
@@ -723,7 +725,6 @@ export default function KeywordResearchPage() {
             duration: 0.6,
           }}
           className="absolute z-50"
-          ref={searchBarRef}
         >
           <ModernSearchBar
             searchQuery={searchQuery}
@@ -737,6 +738,7 @@ export default function KeywordResearchPage() {
             hasSearched={searchBarDocked}
             showFilters={showFilters}
             setShowFilters={setShowFilters}
+            measuredRef={searchBarRef}
           />
         </m.div>
 
@@ -744,19 +746,29 @@ export default function KeywordResearchPage() {
         <AnimatePresence>
           {!hasSearched && (
             <m.div
-              key="hero-text"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
-              className="absolute inset-0 flex flex-col gap-0 items-center justify-center pointer-events-none pb-60 px-2"
+              className="absolute top-10 sm:top-20 left-1/2 -translate-x-1/2 w-full"
+              exit={{ opacity: 0, transition: { duration: 0.8 } }}
             >
-              <m.h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight text-center">
-                Keyword Research Tool
-              </m.h1>
-              <m.p className="text-md sm:text-lg text-slate-500 text-center">
-                Find easy-to-rank keywords with high search volume and low
-                competition.
-              </m.p>
+              <m.div
+                key="hero-text"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
+                className=" flex flex-col items-center justify-center gap-0 pointer-events-none pb-14 px-2"
+              >
+                <m.h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight text-center">
+                  Keyword Research Tool
+                </m.h1>
+                <m.p className="text-md sm:text-lg text-slate-500 text-center">
+                  Find easy-to-rank keywords with high search volume and low
+                  competition.
+                </m.p>
+              </m.div>
+              <InitialResearchContent
+                key="initial-content"
+                onSearch={handleQuickSearch}
+                className="mt-24 sm:mt-10"
+              />
             </m.div>
           )}
         </AnimatePresence>
@@ -769,7 +781,7 @@ export default function KeywordResearchPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.4 }}
-              className="w-full md:h-full flex flex-col md:flex-row"
+              className="w-full md:h-[calc(100vh-64px)] flex flex-col md:flex-row overflow-hidden"
             >
               {/* LEFT SIDEBAR (Behind the flying search bar) */}
               <m.div
@@ -879,7 +891,7 @@ export default function KeywordResearchPage() {
                     <Skeleton className="flex-1 w-full rounded-3xl" />
                   </div>
                 ) : (
-                  <div className="flex flex-col h-full gap-2 p-4 overflow-y-auto">
+                  <div className="flex flex-col h-full gap-2 p-2 sm:p-4 overflow-y-auto">
                     {/* Header & Metrics */}
                     <div className="shrink-0 flex flex-col gap-4 h-auto md:h-1/2">
                       <div className="flex items-start justify-between">

@@ -12,14 +12,19 @@ import {
   MousePointer2,
   Rocket,
   ArrowRight,
+  Target,
+  PieChart,
+  Layers,
 } from "lucide-react";
 
 interface InitialResearchContentProps {
   onSearch?: (term: string) => void;
+  className?: string;
 }
 
 export function InitialResearchContent({
   onSearch,
+  className,
 }: InitialResearchContentProps) {
   const trendingSearches = [
     "AI Marketing Tools",
@@ -60,109 +65,150 @@ export function InitialResearchContent({
   ];
 
   return (
-    <div className="w-full relative min-h-[600px] flex flex-col items-center justify-start pt-10 pb-20 overflow-hidden">
-      {/* Background Ambient Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <m.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.1, 0.2, 0.1],
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#F15A29]/10 rounded-full blur-[100px]"
-        />
-        <m.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.1, 0.2, 0.1],
-            x: [0, -50, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px]"
-        />
+    <div
+      className={`w-full relative flex flex-col items-center justify-start pt-10 ${className} `}
+    >
+      {/* Hanging Icons Layer - "Attached to Navbar" */}
+      <div className="absolute -top-[300px] left-0 w-full h-[150%] pointer-events-none select-none z-0 overflow-visible">
+        {[
+          {
+            Icon: Rocket,
+            color: "text-[#F15A29]",
+            bg: "bg-orange-50",
+            border: "border-orange-100",
+            left: "10%",
+            h: 360,
+            delay: 0,
+            scale: 1,
+            blur: 0,
+            z: 20,
+            sway: 5,
+          },
+          {
+            Icon: Sparkles,
+            color: "text-amber-500",
+            bg: "bg-amber-50",
+            border: "border-amber-100",
+            left: "25%",
+            h: 150,
+            delay: 1.2,
+            scale: 0.8,
+            blur: "1px",
+            z: 5,
+            sway: 4.5,
+          },
+          {
+            Icon: Search,
+            color: "text-indigo-600",
+            bg: "bg-indigo-50",
+            border: "border-indigo-100",
+            left: "50%",
+            h: 370,
+            delay: 0.8,
+            scale: 1.1,
+            blur: 0,
+            z: 30,
+            sway: 5.5,
+          },
+          {
+            Icon: BarChart3,
+            color: "text-blue-600",
+            bg: "bg-blue-50",
+            border: "border-blue-100",
+            left: "75%",
+            h: 380,
+            delay: 0.5,
+            scale: 0.9,
+            blur: "0.5px",
+            z: 10,
+            sway: 6,
+          },
+          {
+            Icon: Target,
+            color: "text-red-500",
+            bg: "bg-red-50",
+            border: "border-red-100",
+            left: "92%",
+            h: 550,
+            delay: 0.2,
+            scale: 0.85,
+            blur: "0.5px",
+            z: 15,
+            sway: 4,
+          },
+        ].map((item, index) => (
+          <m.div
+            key={index}
+            className="absolute top-0 origin-top"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: item.h }}
+            exit={{
+              opacity: 0,
+              height: 0,
+              transition: { duration: 0.6, ease: "easeInOut" },
+            }}
+            transition={{ duration: 1.5, delay: item.delay, ease: "easeOut" }}
+            style={{
+              left: item.left,
+              zIndex: item.z,
+              filter: `blur(${item.blur})`,
+              transform: `scale(${item.scale})`,
+            }}
+          >
+            {/* String */}
+            <div className="w-px bg-slate-200/80 mx-auto h-full" />
+
+            {/* Icon - Gentle Sway Only */}
+            <m.div
+              animate={{
+                rotate: [-4, 4, -4],
+              }}
+              transition={{
+                duration: item.sway,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full"
+            >
+              <div
+                className={`w-12 h-12 rounded-2xl ${item.bg} ${item.border} border flex items-center justify-center shadow-lg backdrop-blur-sm`}
+              >
+                <item.Icon className={`w-6 h-6 ${item.color}`} />
+              </div>
+            </m.div>
+          </m.div>
+        ))}
       </div>
 
       {/* Main Content Container */}
       <div className="relative z-10 w-full max-w-5xl px-4 flex flex-col items-center">
-        {/* Animated Icon Composition */}
-        <m.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative mb-10"
-        >
-          <div className="w-24 h-24 bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(241,90,41,0.2)] flex items-center justify-center relative z-10 border border-white/50 backdrop-blur-xl">
-            <Rocket className="w-10 h-10 text-[#F15A29]" />
-          </div>
-          {/* Floating Orbiting Elements */}
+        <div className="flex flex-col items-center justify-center w-full text-center">
           <m.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 w-full h-full"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="max-w-3xl mx-auto"
           >
-            <div className="absolute -top-6 -right-6 w-12 h-12 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-slate-100">
-              <BarChart3 className="w-5 h-5 text-blue-500" />
-            </div>
-            <div className="absolute -bottom-4 -left-8 w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center border border-slate-100">
-              <Sparkles className="w-4 h-4 text-amber-500" />
+            {/* Quick Stats */}
+            <div className="flex flex-wrap gap-4 justify-center">
+              <div className="flex items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-sm rounded-full border border-slate-200 shadow-xs">
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-sm font-semibold text-slate-700">
+                  Live SERP Data
+                </span>
+              </div>
+              <div className="flex items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-sm rounded-full border border-slate-200 shadow-xs">
+                <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                <span className="text-sm font-semibold text-slate-700">
+                  Global Coverage
+                </span>
+              </div>
             </div>
           </m.div>
-        </m.div>
-
-        {/* Text Section */}
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center max-w-2xl mx-auto mb-10"
-        >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
-            Unleash the Power of{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#F15A29] to-amber-500">
-              Data-Driven SEO
-            </span>
-          </h2>
-          <p className="text-lg text-slate-500 leading-relaxed font-medium">
-            Stop guessing and start ranking. Enter a keyword to instantly reveal
-            competitor strategies, market gaps, and high-value opportunities.
-          </p>
-        </m.div>
-
-        {/* Quick Search Pills */}
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col items-center gap-3 mb-16"
-        >
-          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
-            Try searching for
-          </span>
-          <div className="flex flex-wrap justify-center gap-3">
-            {trendingSearches.map((term, index) => (
-              <m.button
-                key={term}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => onSearch && onSearch(term)}
-                className="group relative px-5 py-2.5 bg-white/60 hover:bg-white backdrop-blur-md rounded-full border border-slate-200/60 hover:border-[#F15A29]/30 shadow-xs hover:shadow-[0_8px_20px_rgba(241,90,41,0.15)] transition-all duration-300"
-              >
-                <div className="flex items-center gap-2">
-                  <Search className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#F15A29] transition-colors" />
-                  <span className="text-sm font-semibold text-slate-600 group-hover:text-slate-900">
-                    {term}
-                  </span>
-                </div>
-              </m.button>
-            ))}
-          </div>
-        </m.div>
+        </div>
 
         {/* Feature Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-full mt-5">
           {features.map((feature, index) => (
             <m.div
               key={feature.title}
